@@ -1,4 +1,4 @@
-export const dataReducer = (state, {type, payload}) => {
+export const eventReducer = (state, {type, payload}) => {
     switch(type){
         default:
             return state

@@ -1,22 +1,50 @@
-import { loginReducer } from './loginReducer'
-import { dataReducer } from './dataReducer'
+import { loginReducer, dataReducer, signUpReducer, eventReducer } from './index'
 
-export const mainReducer = ({data, login}, action) => ({
+export const mainReducer = ({data, login, signUp, event}, action) => ({
     data: dataReducer(data, action),
-    login: loginReducer(login, action)
+    login: loginReducer(login, action),
+    signUp: signUpReducer(signUp, action),
+    event: eventReducer(event, action),
 })
 
 export const initialState = {
     data: {
-        test: 1234
+        events: [],
+        users: [],
+        error: '',
+        isDataLoading: false,
     },
     login: {
-        isLoggingIn: false,
-        isLoggingOut: false,
+        isLoginLoading: false,
         isLoggedIn: false,
         isLoggedOut: false,
-        isSigningUp: false,
+    },
+    signUp:{
+        isSignUpLoading: false,
         isSignedUp: false,
         errorMessage: ''
+    },
+    event: {
+        id: '',
+        organizerID: '',
+        name: '',
+        date: '',
+        time: '',
+        description: '',
+        address: '',
+        city: '',
+        state: '',
+        food: [{
+            recipe_name: '',
+            guestID: '',
+            guestName: ''
+        }],
+        guests: [{
+            id: '',
+            name: '',
+            isAttending: false
+        }],
+        isEventLoading: false,
+        error: ''
     }
 }
