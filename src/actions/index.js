@@ -1,5 +1,4 @@
 export * from './dataActions'
 export * from './loginActions'
 export * from './eventActions'
-export * from './usersActions'
 export * from './signUpActions'
