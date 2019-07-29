@@ -1,13 +1,26 @@
 import React, { useState } from "react";
-import { login } from "./../actions/loginActions";
+import { login, IS_LOGGING_IN } from "./../actions/loginActions";
+import { useStateValue } from "./../hooks/useStateValue";
 
-const Login = props => {
+const Login = () => {
   const [user, setUser] = useState({
     username: "",
     password: ""
   });
+
+  function handleChange(event) {
+    const updatedUser = { ...user, [event.target.name]: event.target.value };
+    console.log(
+      "handleChange",
+      event.target.name,
+      event.target.value,
+      updatedUser
+    );
+    setUser(updatedUser);
+  }
+
   return (
-    <form onSubmit={login}>
+    <form onSubmit={() => login(IS_LOGGING_IN, user)}>
       <fieldset>
         <legend>Login</legend>
         <div className="form-group row">
@@ -18,6 +31,7 @@ const Login = props => {
               name="username"
               placeholder="Enter your username"
               value={user.username}
+              onChange={handleChange}
             />
           </div>
         </div>
@@ -29,9 +43,11 @@ const Login = props => {
               name="password"
               placeholder="Enter your password"
               value={user.password}
+              onChange={handleChange}
             />
           </div>
         </div>
+        <button type="submit">Submit</button>
       </fieldset>
     </form>
   );
