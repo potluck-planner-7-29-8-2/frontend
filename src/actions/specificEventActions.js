@@ -1,7 +1,7 @@
-// //actions for event
-// export const GETTING_EVENT="GETTING_EVENT"
-// export const GOT_EVENT='GOT_EVENT'
-// export const GOT_EVENT_ERROR='GOT_EVENT_ERROR'
+/*//actions for event
+export const GETTING_EVENT="GETTING_EVENT"
+export const GOT_EVENT='GOT_EVENT'
+export const GOT_EVENT_ERROR='GOT_EVENT_ERROR'
 
 // export const getEvent = (dispatch, id) => {
 
@@ -38,6 +38,7 @@
 
 // }
 
-// export const claimRecipe =(dispatch, recipe) => {
+export const claimRecipe =(dispatch, recipe) => {
 
-// }
+}
+*/

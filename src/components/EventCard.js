@@ -1,11 +1,13 @@
 import React, { useState } from "react";
 import { useStateValue } from "./../hooks/useStateValue";
+import { useLocalStorage } from "./../hooks/useLocalStorage";
 
 const EventCard = props => {
   const { users, organizer_id, event_name, date, time, city, state } = props;
 
-  const [{ event }, dispatch] = useStateValue();
-  console.log(event);
+  const [{ events }, dispatch] = useStateValue();
+  console.log(events);
+  const [user_id] = useLocalStorage("user_id");
 
   return (
     <div className="EventCard">
