@@ -3,7 +3,7 @@ import { useStateValue } from "./hooks/useStateValue"; //must import this custom
 import { PrivateRoute } from "./utils/PrivateRoute"; //import to create a PrivateRoute - user can not get to that path unless logged in
 import TestComponent from "./components/TestComponent";
 import SignUp from "./components/SignUp";
-
+import Login from "./components/Login"
 function App() {
   const [{ login }, dispatch] = useStateValue();
   // In order to access or update the state, use this custom hook. It will return the state and the dispatch function (which sends the action to the reducer to update state)

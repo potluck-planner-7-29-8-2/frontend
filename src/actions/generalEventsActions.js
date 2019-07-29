@@ -12,6 +12,10 @@ export const DELETING_EVENT="DELETING_EVENT"
 export const DELETED_EVENT="DELETED_EVENT"
 export const DELETING_EVENT_ERROR="DELETING_EVENT_ERROR"
 
+export const UPDATING_EVENT="UPDATING_EVENT"
+export const UPDATED_EVENT="UPDATED_EVENT"
+export const UPDATING_EVENT_ERROR="UPDATING_EVENT_ERROR"
+
 //need to pass in the id of the user currently logged in
 export const getEvents = (dispatch, id) => {
     dispatch({type: GETTING_EVENTS})
@@ -50,5 +54,26 @@ export const addEvent = (dispatch, id, event) => {
 }
 
 export const deleteEvent = (dispatch, id) => {
+    dispatch({type: DELETING_EVENT})
+    axiosWithAuth()
+        .delete(`/events/${id}`)
+        .then(res => {
+            dispatch({type: DELETED_EVENT, payload: res.data})
+        })
+        .catch(err => {
+            dispatch({type: DELETING_EVENT_ERROR, payload: err.response.data.message})
+        })
+}
 
+
+export const updateEvent = (dispatch, id, event) => {
+    dispatch({type: UPDATING_EVENT})
+    axiosWithAuth()
+        .put(`/events/${id}`, event)
+        .then(res => {
+            dispatch({type: UPDATED_EVENT, payload: res.data})
+        })
+        .catch(err => {
+            dispatch({type: UPDATING_EVENT_ERROR, payload: err.response.data.message})
+        })
 }
