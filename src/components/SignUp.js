@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { signUpAction } from "../actions";
 import { useStateValue } from "../hooks/useStateValue";
+import { Form, Icon, Input } from "semantic-ui-react";
 
 const SignUp = props => {
   const [user, setUser] = useState({
@@ -19,49 +20,49 @@ const SignUp = props => {
   };
   return (
     <div>
-      <form
+      <Form
         onSubmit={e => {
           e.preventDefault();
           signUpAction(dispatch, user);
         }}
       >
-        <fieldset>
-          <legend>Sign Up</legend>
-          Username:
-          <input
-            name="username"
-            type="text"
-            onChange={event => userInputHandler(event)}
-            value={user.username}
-            placeholder="Username"
-          />
-          Password:
-          <input
-            name="password"
-            type="password"
-            onChange={event => userInputHandler(event)}
-            value={user.password}
-            placeholder="Password"
-          />
-          Full Name:
-          <input
-            name="full_name"
-            type="text"
-            onChange={event => userInputHandler(event)}
-            value={user.full_name}
-            placeholder="Full Name"
-          />
-          E-Mail:
-          <input
-            name="email"
-            type="email"
-            onChange={event => userInputHandler(event)}
-            value={user.email}
-            placeholder="E-Mail"
-          />
-        </fieldset>
+        <Form.Input
+          label="Username"
+          name="username"
+          type="text"
+          onChange={event => userInputHandler(event)}
+          value={user.username}
+          placeholder="Username"
+        />
+
+        <Form.Input
+          label="Enter Password"
+          name="password"
+          type="password"
+          onChange={event => userInputHandler(event)}
+          value={user.password}
+          placeholder="Password"
+        />
+        <Form.Input
+          label="Enter Full Name"
+          name="full_name"
+          type="text"
+          onChange={event => userInputHandler(event)}
+          value={user.full_name}
+          placeholder="Full Name"
+        />
+        <Form.Input
+          iconPosition="left"
+          Icon="at"
+          label="Enter E-Mail"
+          name="email"
+          type="email"
+          onChange={event => userInputHandler(event)}
+          value={user.email}
+          placeholder="E-Mail"
+        />
         <button>Sign Up</button>
-      </form>
+      </Form>
     </div>
   );
 };

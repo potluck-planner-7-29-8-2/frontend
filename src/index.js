@@ -5,6 +5,7 @@ import {BrowserRouter as Router} from 'react-router-dom'
 import App from './App';
 import StateProvider from './utils/StateProvider'
 import { mainReducer, initialState } from './reducers/mainReducer'
+import 'semantic-ui-css/semantic.min.css'
 import './index.css'
 import * as reset from './styles/reset.css'
 import * as global from './styles/global.css'

@@ -2,6 +2,8 @@ import React, {useState} from 'react';
 import { useStateValue } from '../hooks/useStateValue';
 import { addEvent } from '../actions';
 import { useLocalStorage } from '../hooks/useLocalStorage';
+import { Icon, Input } from 'semantic-ui-react'
+
 const AddEvent = (props) => {
     const [event, setEvent] = useState({
         "event_name": "",
@@ -33,13 +35,13 @@ const AddEvent = (props) => {
         }}>
             <fieldset>
                 <legend>Add Event</legend>
-                <input name="event_name" type='text' value={event.event_name} onChange={(event) => eventInputHandler(event)} placeholder='Event Name'/>
-                <input name="date" type='date' value={event.date} onChange={(event) => eventInputHandler(event)}/>
-                <input name="time" type='time' value={event.time} onChange={(event) => eventInputHandler(event)}/>
-                <input name="description" type='text' value={event.description} onChange={(event) => eventInputHandler(event)} placeholder='Description'/>
-                <input name="address" type='text' value={event.address} onChange={(event) => eventInputHandler(event)} placeholder='Street Address'/>
-                <input name="city" type='text' value={event.city} onChange={(event) => eventInputHandler(event)} placeholder='City'/>
-                <input name="state" type='text' value={event.state} onChange={(event) => eventInputHandler(event)} placeholder='State'/>
+                <Input name="event_name" type='text' value={event.event_name} onChange={(event) => eventInputHandler(event)} placeholder='Event Name'/>
+                <Input name="date" type='date' value={event.date} onChange={(event) => eventInputHandler(event)}/>
+                <Input name="time" type='time' value={event.time} onChange={(event) => eventInputHandler(event)}/>
+                <Input name="description" type='text' value={event.description} onChange={(event) => eventInputHandler(event)} placeholder='Description'/>
+                <Input name="address" type='text' value={event.address} onChange={(event) => eventInputHandler(event)} placeholder='Street Address'/>
+                <Input name="city" type='text' value={event.city} onChange={(event) => eventInputHandler(event)} placeholder='City'/>
+                <Input name="state" type='text' value={event.state} onChange={(event) => eventInputHandler(event)} placeholder='State'/>
                 <button>Submit</button>
             </fieldset>
         </form>

@@ -1,7 +1,7 @@
 import React from "react";
 import { useStateValue } from "./hooks/useStateValue"; //must import this custom hook in any component that needs to either 1. access a value from the global state OR 2. dispatch an action to change the global state
 import { PrivateRoute } from "./utils/PrivateRoute"; //import to create a PrivateRoute - user can not get to that path unless logged in
-import TestComponent from "./components/TestComponent";
+
 import SignUp from "./components/SignUp";
 import Login from "./components/Login";
 import EventCard from "./components/EventCard";
@@ -18,7 +18,7 @@ function App() {
       {/* <PrivateRoute path='/test' redirectURL='/home' component={SomeComponent}/>  
                 When using PrivateRoute, you need to give it the protected path, the path 
                 you want the user to be redirected to, and the component you want rendered*/}
-      {/*<TestComponent />*/}
+
       {/* <SignUp />
       <Login />
       <AddEvent /> */}
