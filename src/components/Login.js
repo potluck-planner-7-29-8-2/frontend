@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { login, IS_LOGGING_IN } from "./../actions/loginActions";
+import { loginAction } from "./../actions/loginActions";
 import { useStateValue } from "./../hooks/useStateValue";
 
 const Login = () => {
@@ -7,6 +7,8 @@ const Login = () => {
     username: "",
     password: ""
   });
+
+  const [, dispatch] = useStateValue(); //what comes before the comma is the entire state
 
   function handleChange(event) {
     const updatedUser = { ...user, [event.target.name]: event.target.value };
@@ -20,7 +22,7 @@ const Login = () => {
   }
 
   return (
-    <form onSubmit={() => login(IS_LOGGING_IN, user)}>
+    <form onSubmit={() => loginAction(dispatch, user)}>
       <fieldset>
         <legend>Login</legend>
         <div className="form-group row">
