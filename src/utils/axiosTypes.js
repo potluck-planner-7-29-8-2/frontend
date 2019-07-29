@@ -7,12 +7,15 @@ export const axiosWithAuth = () => {
             'Content-Type': 'application/json',
             'Authorization': token
         },
-        baseURL: ''
+        baseURL: 'https://potluck-planner-bw.herokuapp.com'
     })
 }
 
 export const axiosInstance = () =>{
     return axios.create({
-        baseURL: ''
+        headers:{
+            'Content-Type': 'application/json'
+        },
+        baseURL: 'https://potluck-planner-bw.herokuapp.com'
     })
 }
