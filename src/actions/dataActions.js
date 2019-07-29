@@ -56,7 +56,7 @@ export const getEvents = (dispatch, id) => {
 export const addEvent = (dispatch, id, event) => {
     dispatch({type: CREATING_EVENT})
     axiosWithAuth()
-        .post(`'users/${id}/events`, event)
+        .post(`/users/${id}/events`, event)
         .then(res => {
             dispatch({type: CREATED_EVENT, payload: res.data})
         })

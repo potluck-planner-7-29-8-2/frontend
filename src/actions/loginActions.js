@@ -22,6 +22,7 @@ export const loginAction = (dispatch, user) => {
             dispatch({type: LOGIN_SUCCESS, payload: res.data.message})
             window.localStorage.setItem('token', res.data.token)
             window.localStorage.setItem('user', user.username)
+            window.localStorage.setItem('user_id', res.data.user_id)
             return true
         })
         .catch(err => {
