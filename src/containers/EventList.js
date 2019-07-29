@@ -16,6 +16,7 @@ const EventList = () => {
 
     return (
         <div>
+            <h1>Events</h1>
         {events.map(event => {
            return <Event eventInfo={event} />
         })}

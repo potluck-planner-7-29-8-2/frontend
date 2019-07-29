@@ -1,15 +1,23 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { loginAction } from "./../actions/loginActions";
 import { useStateValue } from "./../hooks/useStateValue";
-
+import { NavLink, Redirect } from 'react-router-dom';
 const Login = () => {
   const [user, setUser] = useState({
     username: "",
     password: ""
   });
 
+
+
   const [{ login }, dispatch] = useStateValue(); //what comes before the comma is the entire state
   console.log(login);
+  useEffect(() => {
+    if(login.isLoggedIn === true) {
+        return <Redirect to='/dashboard' />
+       console.log('we are logged in')
+    }
+  }, [login.isLoggedIn])
 
   function handleChange(event) {
     const updatedUser = { ...user, [event.target.name]: event.target.value };
@@ -55,7 +63,8 @@ const Login = () => {
             />
           </div>
         </div>
-        <button type="submit">Login</button>
+     <button type="submit">Login</button>
+        <NavLink to='/signup'><button>Sign Up</button></NavLink>
       </fieldset>
     </form>
   );
