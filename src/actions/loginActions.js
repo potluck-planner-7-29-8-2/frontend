@@ -14,7 +14,7 @@ user should be of object type {
 }
 */
 
-export const login = (dispatch, user) => {
+export const loginAction = (dispatch, user) => {
     dispatch({type: IS_LOGGING_IN})
     return axiosInstance()
         .post('/users/login', user)
@@ -22,6 +22,7 @@ export const login = (dispatch, user) => {
             dispatch({type: LOGIN_SUCCESS, payload: res.data.message})
             window.localStorage.setItem('token', res.data.token)
             window.localStorage.setItem('user', user.username)
+            window.localStorage.setItem('user_id', res.data.user_id)
             return true
         })
         .catch(err => {
