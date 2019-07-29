@@ -1,4 +1,4 @@
-//actions for event
+/*//actions for event
 export const GETTING_EVENT="GETTING_EVENT"
 export const GOT_EVENT='GOT_EVENT'
 export const GOT_EVENT_ERROR='GOT_EVENT_ERROR'
@@ -41,4 +41,4 @@ export const removeRecipe = (dispatch, recipe) => {
 export const claimRecipe =(dispatch, recipe) => {
 
 }
-
+*/
