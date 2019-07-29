@@ -1,9 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
+import { useStateValue } from "./../hooks/useStateValue";
 
 const EventCard = props => {
-  const { organizer_id, event_name, date, time, city, state } = props;
+  const { users, organizer_id, event_name, date, time, city, state } = props;
 
-  console.log(props);
+  const [{ event }, dispatch] = useStateValue();
+  console.log(event);
+
   return (
     <div className="EventCard">
       <h2>{event_name}</h2>
