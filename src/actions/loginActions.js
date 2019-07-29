@@ -32,4 +32,7 @@ export const loginAction = (dispatch, user) => {
 
 export const logout = (dispatch) => {
     dispatch({type: LOGOUT})
+    window.localStorage.setItem('token', '')
+    window.localStorage.setItem('user', '')
+    window.localStorage.setItem('user_id', '')
 }

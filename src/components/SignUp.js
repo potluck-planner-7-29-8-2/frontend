@@ -53,7 +53,7 @@ const SignUp = props => {
         />
         <Form.Input
           iconPosition="left"
-          icon="at"
+          Icon="at"
           label="Enter E-Mail"
           name="email"
           type="email"
