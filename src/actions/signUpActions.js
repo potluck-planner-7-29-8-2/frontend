@@ -8,11 +8,12 @@ export const SIGNUP_ERROR="SIGNUP_ERROR"
 {
     'username': '',
     'password': '',
-    'full_name': ''
+    'full_name': '',
+    'email': ''
 }
 */
 
-export const signUp = (dispatch, user) => {
+export const signUpAction = (dispatch, user) => {
     dispatch({type: IS_SIGNING_UP})
     axiosInstance()
         .post('/users/register', user)
