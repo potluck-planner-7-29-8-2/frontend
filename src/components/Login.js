@@ -13,12 +13,6 @@ const Login = () => {
 
   function handleChange(event) {
     const updatedUser = { ...user, [event.target.name]: event.target.value };
-    console.log(
-      "handleChange",
-      event.target.name,
-      event.target.value,
-      updatedUser
-    );
     setUser(updatedUser);
   }
 
@@ -27,6 +21,7 @@ const Login = () => {
       onSubmit={e => {
         e.preventDefault();
         loginAction(dispatch, user);
+        setUser({ username: "", password: "" });
       }}
     >
       <fieldset>
