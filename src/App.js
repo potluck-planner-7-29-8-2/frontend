@@ -19,9 +19,9 @@ function App() {
                 When using PrivateRoute, you need to give it the protected path, the path 
                 you want the user to be redirected to, and the component you want rendered*/}
       {/*<TestComponent />*/}
-      <SignUp />
+      {/* <SignUp />
       <Login />
-      <AddEvent />
+      <AddEvent /> */}
       <EventCard />
     </div>
   );
