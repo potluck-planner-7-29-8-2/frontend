@@ -1,41 +1,38 @@
-import { loginReducer, dataReducer, signUpReducer, eventReducer } from './index'
+import { loginReducer, usersReducer, eventsReducer, signUpReducer, eventReducer } from './index'
 
-export const mainReducer = ({data, login, signUp, event}, action) => ({
-    data: dataReducer(data, action),
+export const mainReducer = ({login, signUp, event, users, events}, action) => ({
     login: loginReducer(login, action),
     signUp: signUpReducer(signUp, action),
     event: eventReducer(event, action),
+    users: usersReducer(users, action),
+    events: eventsReducer(events, action)
 })
 
 export const initialState = {
-    data: {
-        currentUser: {
-            username:'',
-            full_name: '',
-            user_id: '', 
-            email: ''
-        },
-        events: [
-            {
-                event_id: '',
-                organizer_id: '',
-                event_name: '',
-                date: '',
-                time: '',
-                description: '',
-                address: '',
-                city: '',
-                state: '',
-            }
-        ],
-        users: [{
+    events: {
+        data: [{
+            event_id: '',
+            organizer_id: '',
+            event_name: '',
+            date: '',
+            time: '',
+            description: '',
+            address: '',
+            city: '',
+            state: '',
+        }],
+        errorMessage: '',
+        isEventsLoading: false
+    },
+    users: {
+        data: [{
             user_id: '',
             username: '',
             full_name:'', 
             email: ''
         }],
         errorMessage: '',
-        isDataLoading: false,
+        isUsersLoading: false,
     },
     login: {
         isLoginLoading: false,

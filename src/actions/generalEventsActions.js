@@ -1,9 +1,5 @@
 import { axiosWithAuth } from '../utils/axiosTypes'
 
-export const GETTING_USERS='GETTING_USERS'
-export const GOT_USERS='GOT_USERS'
-export const USERS_ERROR='USERS_ERROR'
-
 export const GETTING_EVENTS='GETTING_EVENTS'
 export const GOT_EVENTS='GOT_EVENTS'
 export const EVENTS_ERROR="EVENTS_ERROR"
@@ -12,21 +8,9 @@ export const CREATING_EVENT="CREATING_EVENT"
 export const CREATED_EVENT="CREATED_EVENT"
 export const CREATING_EVENT_ERROR="CREATING_EVENT_ERROR"
 
-
-//will return a list of all users. We can then filter this with the 
-//user stored in localStorage to get our needed userID
-export const getUsers = (dispatch) => {
-    dispatch({type: GETTING_USERS})
-    axiosWithAuth()
-        .get('/users')
-        .then(res => {
-            dispatch({type:GOT_USERS, payload: res.data})
-        })
-        .catch(err => {
-            dispatch({type: USERS_ERROR, payload: err.response.data.message})
-        })
-}
-
+export const DELETING_EVENT="DELETING_EVENT"
+export const DELETED_EVENT="DELETED_EVENT"
+export const DELETING_EVENT_ERROR="DELETING_EVENT_ERROR"
 
 //need to pass in the id of the user currently logged in
 export const getEvents = (dispatch, id) => {
@@ -65,3 +49,6 @@ export const addEvent = (dispatch, id, event) => {
         })
 }
 
+export const deleteEvent = (dispatch, id) => {
+
+}

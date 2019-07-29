@@ -20,6 +20,7 @@ function App() {
       <Login />
     </div>
   );
+
 }
 
 export default App;

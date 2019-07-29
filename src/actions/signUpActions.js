@@ -14,6 +14,7 @@ export const SIGNUP_ERROR="SIGNUP_ERROR"
 */
 
 export const signUpAction = (dispatch, user) => {
+    
     dispatch({type: IS_SIGNING_UP})
     axiosInstance()
         .post('/users/register', user)
