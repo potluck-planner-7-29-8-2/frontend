@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
-import { useStateValue } from '../hooks';
+import { useStateValue } from '../hooks/useStateValue';
 import { addEvent } from '../actions';
+import { useLocalStorage } from '../hooks/useLocalStorage';
 const AddEvent = (props) => {
     const [event, setEvent] = useState({
         "event_name": "",
@@ -12,24 +13,37 @@ const AddEvent = (props) => {
         "state": ""
     });
 
-    const [,dispatch] = useStateValue();
+    const [{events},dispatch] = useStateValue();
+    console.log(events)
+    const [user_id,] = useLocalStorage('user_id')
+
+    const eventInputHandler = e => {
+        console.log(typeof user_id)
+        const name = e.target.name;
+        console.log(name)
+        const value = e.target.value;
+        console.log(value)
+        setEvent( {...event, [name]: value } );
+      };
 
     return (
         <form onSubmit={(e) => {
             e.preventDefault()
-            addEvent(event, ,dispatch)
+            addEvent(dispatch, user_id ,event)
         }}>
             <fieldset>
                 <legend>Add Event</legend>
-                <input type='text' value={event.event_name} placeholder='Event Name'/>
-                <input type='date' value={event.date} placeholder='Date'/>
-                <input type='time' value={event.timer} placeholder='Time'/>
-                <input type='text' value={event.description} placeholder='Description'/>
-                <input type='text' value={event.address} placeholder='Street Address'/>
-                <input type='text' value={event.city} placeholder='City'/>
-                <input type='text' value={event.state} placeholder='State'/>
+                <input name="event_name" type='text' value={event.event_name} onChange={(event) => eventInputHandler(event)} placeholder='Event Name'/>
+                <input name="date" type='date' value={event.date} onChange={(event) => eventInputHandler(event)}/>
+                <input name="time" type='time' value={event.time} onChange={(event) => eventInputHandler(event)}/>
+                <input name="description" type='text' value={event.description} onChange={(event) => eventInputHandler(event)} placeholder='Description'/>
+                <input name="address" type='text' value={event.address} onChange={(event) => eventInputHandler(event)} placeholder='Street Address'/>
+                <input name="city" type='text' value={event.city} onChange={(event) => eventInputHandler(event)} placeholder='City'/>
+                <input name="state" type='text' value={event.state} onChange={(event) => eventInputHandler(event)} placeholder='State'/>
                 <button>Submit</button>
             </fieldset>
         </form>
     )
 }
+
+export default AddEvent;
