@@ -4,6 +4,7 @@ import { PrivateRoute } from "./utils/PrivateRoute"; //import to create a Privat
 import TestComponent from "./components/TestComponent";
 import SignUp from "./components/SignUp";
 import Login from "./components/Login";
+import EventCard from "./components/EventCard";
 
 function App() {
   const [{ login }, dispatch] = useStateValue();
@@ -17,8 +18,9 @@ function App() {
                 When using PrivateRoute, you need to give it the protected path, the path 
                 you want the user to be redirected to, and the component you want rendered*/}
       {/* <TestComponent /> */}
-      <SignUp />
-      <Login />
+      {/* <SignUp />
+      <Login /> */}
+      <EventCard />
     </div>
   );
 }

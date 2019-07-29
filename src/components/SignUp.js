@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { signUpAction } from "../actions";
-import { useStateValue } from '../hooks/useStateValue';
+import { useStateValue } from "../hooks/useStateValue";
 
 const SignUp = props => {
   const [user, setUser] = useState({
@@ -10,7 +10,7 @@ const SignUp = props => {
     email: ""
   });
 
-  const [{signUp},dispatch] = useStateValue();
+  const [{ signUp }, dispatch] = useStateValue();
   console.log(signUp);
   const userInputHandler = event => {
     const name = event.target.name;
@@ -19,7 +19,12 @@ const SignUp = props => {
   };
   return (
     <div>
-      <form onSubmit={() => signUpAction(dispatch, user)}>
+      <form
+        onSubmit={e => {
+          e.preventDefault();
+          signUpAction(dispatch, user);
+        }}
+      >
         <fieldset>
           <legend>Sign Up</legend>
           Username:
