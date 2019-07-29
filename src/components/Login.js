@@ -24,7 +24,7 @@ const Login = () => {
       <fieldset>
         <legend>Login</legend>
         <div className="form-group row">
-          Username
+          Username:
           <div>
             <input
               type="text"
@@ -36,7 +36,7 @@ const Login = () => {
           </div>
         </div>
         <div className="form-group row">
-          Password
+          Password:
           <div>
             <input
               type="password"
