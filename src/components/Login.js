@@ -22,7 +22,12 @@ const Login = () => {
   }
 
   return (
-    <form onSubmit={() => loginAction(dispatch, user)}>
+    <form
+      onSubmit={e => {
+        e.preventDefault();
+        loginAction(dispatch, user);
+      }}
+    >
       <fieldset>
         <legend>Login</legend>
         <div className="form-group row">
