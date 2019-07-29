@@ -49,7 +49,8 @@ export const addEvent = (dispatch, id, event) => {
             dispatch({type: CREATED_EVENT, payload: res.data})
         })
         .catch(err => {
-            dispatch({type: CREATING_EVENT_ERROR, payload: err.response.data.message})
+            console.log(err)
+           // dispatch({type: CREATING_EVENT_ERROR, payload: err.response.data.message})
         })
 }
 

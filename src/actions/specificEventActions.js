@@ -1,6 +1,7 @@
 import { axiosWithAuth } from '../utils/axiosTypes'
 
 //actions for event
+
 export const GETTING_EVENT="GETTING_EVENT"
 export const GOT_EVENT='GOT_EVENT'
 export const GOT_EVENT_ERROR='GOT_EVENT_ERROR'
@@ -121,4 +122,4 @@ export const claimRecipe =(dispatch, id, recipe) => {
             dispatch({type: UPDATE_RECIPE_ERROR, payload: err.response.data.message})
         })
 }
-
+*/
