@@ -8,8 +8,9 @@ const Login = () => {
     password: ""
   });
 
-  const [{login}, dispatch] = useStateValue(); //what comes before the comma is the entire state
-  console.log(login)
+  const [{ login }, dispatch] = useStateValue(); //what comes before the comma is the entire state
+  console.log(login);
+
   function handleChange(event) {
     const updatedUser = { ...user, [event.target.name]: event.target.value };
     console.log(
@@ -54,7 +55,7 @@ const Login = () => {
             />
           </div>
         </div>
-        <button type="submit">Submit</button>
+        <button type="submit">Login</button>
       </fieldset>
     </form>
   );

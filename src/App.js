@@ -3,8 +3,9 @@ import { useStateValue } from "./hooks/useStateValue"; //must import this custom
 import { PrivateRoute } from "./utils/PrivateRoute"; //import to create a PrivateRoute - user can not get to that path unless logged in
 import TestComponent from "./components/TestComponent";
 import SignUp from "./components/SignUp";
-import Login from './components/Login';
-import AddEvent from './components/AddEvent';
+import Login from "./components/Login";
+import EventCard from "./components/EventCard";
+import AddEvent from "./components/AddEvent";
 
 function App() {
   const [{ login }, dispatch] = useStateValue();
@@ -17,12 +18,13 @@ function App() {
       {/* <PrivateRoute path='/test' redirectURL='/home' component={SomeComponent}/>  
                 When using PrivateRoute, you need to give it the protected path, the path 
                 you want the user to be redirected to, and the component you want rendered*/}
-                {/*<TestComponent />*/}
-                <SignUp />
-                <Login />
-                <AddEvent />
-        </div>
-    );
+      {/*<TestComponent />*/}
+      {/* <SignUp />
+      <Login />
+      <AddEvent /> */}
+      <EventCard />
+    </div>
+  );
 }
 
 export default App;
