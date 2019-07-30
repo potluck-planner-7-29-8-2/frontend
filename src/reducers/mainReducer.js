@@ -10,27 +10,12 @@ export const mainReducer = ({login, signUp, event, users, events}, action) => ({
 
 export const initialState = {
     events: {
-        data: [{
-            event_id: '',
-            organizer_id: '',
-            event_name: '',
-            date: '',
-            time: '',
-            description: '',
-            address: '',
-            city: '',
-            state: '',
-        }],
+        data: [],
         errorMessage: '',
         isEventsLoading: false
     },
     users: {
-        data: [{
-            user_id: '',
-            username: '',
-            full_name:'', 
-            email: ''
-        }],
+        data: [],
         errorMessage: '',
         isUsersLoading: false,
     },
