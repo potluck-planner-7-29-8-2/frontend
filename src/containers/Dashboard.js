@@ -18,7 +18,6 @@ const Dashboard = (props) => {
             <PrivateRoute exact path={`${path}`} component={EventList} redirectURL='/' />
             <PrivateRoute exact path={`${path}/addEvent`} component={AddEventForm} redirectURL='/' />
             <PrivateRoute path={`${path}/event/:eventID`} component={EventPage} redirectURL='/' />
-            <Guests />
         </>
     )
 }

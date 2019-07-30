@@ -6,13 +6,15 @@ import { useLocalStorage } from "../hooks/useLocalStorage";
 import { addRecipe } from "../actions/specificEventActions";
 import { claimRecipe } from "../actions/specificEventActions";
 import { removeRecipe } from "../actions/specificEventActions";
-import { updateEvent } from "../actions/generalEventsActions";
+import UpdateEventForm from "../components/UpdateEventForm";
+import Guests from "../components/Guests";
 
 const EventPage = ({ match }) => {
   let eventID = match.params.eventID;
   const [{ event }, dispatch] = useStateValue();
   const [user_id] = useLocalStorage("user_id");
   const [createRecipe, setRecipe] = useState({ recipe_name: "" });
+  const [active, setActive] = useState(false);
 
   useEffect(() => {
     getEvent(dispatch, eventID);
@@ -20,6 +22,11 @@ const EventPage = ({ match }) => {
 
   const recipeChangeHandler = e => {
     setRecipe({ recipe_name: e.target.value });
+  };
+
+  const toggleForm = e => {
+    setActive(!active);
+    console.log(active);
   };
 
   if (user_id === event.data.organizer_id) {
@@ -36,17 +43,8 @@ const EventPage = ({ match }) => {
           <li>
             Description: <p>{event.data.description}</p>
           </li>
-          <button
-            onClick={e => {
-              e.preventDefault();
-              console.log(event.data);
-              updateEvent(dispatch, parseInt(eventID), {
-                event_name: event.data.event_name
-              });
-            }}
-          >
-            Edit Event
-          </button>
+          <button onClick={toggleForm}>Edit Event</button>
+          {active && <UpdateEventForm />}
           <li>
             Guests:{" "}
             <ul>
@@ -121,6 +119,7 @@ const EventPage = ({ match }) => {
             </ul>
           </li>
         </ul>
+        <Guests eventID={eventID} />
       </div>
     );
   } else {

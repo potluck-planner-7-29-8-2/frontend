@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useStateValue } from "../hooks/useStateValue";
-import { addEvent } from "../actions";
+import { updateEvent } from "../actions";
 import { useLocalStorage } from "../hooks/useLocalStorage";
 import { Icon, Input } from "semantic-ui-react";
 
@@ -28,7 +28,7 @@ const UpdateEventForm = props => {
     <form
       onSubmit={e => {
         e.preventDefault();
-        addEvent(dispatch, user_id, event);
+        updateEvent(dispatch, user_id, event);
         setEvent({
           event_name: "",
           date: "",
