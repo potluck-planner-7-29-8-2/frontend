@@ -8,6 +8,7 @@ export const StyledSignUpForm = styled.form`
         color: #222;
         font-family: ${({theme}) => theme.poppinsFont};
         font-size: ${({theme}) => theme.hugeFont};
+        color: ${({theme}) => theme.blue};
     }
     display: flex;
     flex-direction: column;
@@ -28,6 +29,7 @@ export const StyledSignUpForm = styled.form`
 
             .icon{
                 font-size: 1.5rem;
+                color: ${({theme}) => theme.blue};
             }
         }
     }
@@ -60,4 +62,15 @@ export const SignUpInput = styled.input`
     font-family: ${({theme}) => theme.poppinsFont};
     outline: none;
     font-size: ${({theme}) => theme.smallFont};
+
+    ::placeholder{
+        color: #adadad
+    }
+    &:focus {
+        color: ${({theme}) => theme.blue};
+
+        ::placeholder{
+            opacity: 0;
+        }
+    }
 `
