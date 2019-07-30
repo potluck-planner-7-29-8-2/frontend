@@ -34,7 +34,7 @@ const SignUpForm = () => {
         >
             <h1>Sign up</h1>
             <div className='signup_input_and_label'>
-                <label htmlFor="username"><i class="user icon"></i></label>
+                <label htmlFor="username"><i className="user icon"></i></label>
                 <SignUpInput
                     name="username"
                     type="text"
@@ -44,7 +44,7 @@ const SignUpForm = () => {
                 />
             </div>
             <div className='signup_input_and_label'>
-                <label htmlFor='password'><i class="lock icon"></i></label>
+                <label htmlFor='password'><i className="lock icon"></i></label>
                 <SignUpInput
                     name="password"
                     type="password"
@@ -54,7 +54,7 @@ const SignUpForm = () => {
                 />
             </div>
             <div className='signup_input_and_label'>
-                <label htmlFor="full_name"><i class="id card outline icon"></i></label>
+                <label htmlFor="full_name"><i className="id card outline icon"></i></label>
                 <SignUpInput
                     name="full_name"
                     type="text"
@@ -64,7 +64,7 @@ const SignUpForm = () => {
                 />
             </div>
             <div className='signup_input_and_label'>
-                <label htmlFor="email"><i class="envelope icon"></i></label>
+                <label htmlFor="email"><i className="envelope icon"></i></label>
                 <SignUpInput
                     name="email"
                     type="email"
@@ -73,7 +73,7 @@ const SignUpForm = () => {
                     placeholder="E-Mail"
                 />
             </div>
-            <button disabled={signUp.isSignUpLoading} type="submit">Sign Up</button>
+            <button disabled={signUp.isSignUpLoading} type="submit">Register</button>
         </StyledSignUpForm>
     );
 };

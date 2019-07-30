@@ -14,6 +14,40 @@ export const StyledSignUpForm = styled.form`
     justify-content: space-evenly;
     width: 100%;
     height: 100%;
+
+    .signup_input_and_label{
+        position: relative;
+        margin-bottom: 25px;
+
+        label{
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #222;
+
+            .icon{
+                font-size: 1.5rem;
+            }
+        }
+    }
+
+    button{
+        background: ${({theme}) => theme.blue};
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        margin-top: 25px;
+        padding: 15px 40px;
+        width: fit-content;
+        cursor: pointer;
+        font-family: ${({theme}) => theme.poppinsFont};
+        font-size: ${({theme}) => theme.smallFont};
+
+        &:hover{
+            background: ${({theme}) => theme.darkBlue};
+        }
+    }
 `
 
 
