@@ -16,11 +16,12 @@ const EventPage = ({ match }) => {
   useEffect(() => {
     getEvent(dispatch, eventID);
   }, [dispatch, eventID]);
-  console.log(event);
 
   const recipeChangeHandler = e => {
     setRecipe({ recipe_name: e.target.value });
   };
+
+  let claimText;
 
   // //need it to be {'recipe_name': ''}
   //  export const removeRecipe = (dispatch, id, recipe) => {
@@ -93,10 +94,13 @@ const EventPage = ({ match }) => {
                               });
                         }}
                       >
-                        Claim Recipe
+                        {recipe.full_name
+                          ? (claimText = "Unclaim Recipe")
+                          : (claimText = "Claim Recipe")}
                       </button>
                       <button
                         onClick={event => {
+                          console.log("recipe to delete", recipe.recipe_name);
                           removeRecipe(dispatch, eventID, {
                             recipe_name: recipe.recipe_name
                           });
