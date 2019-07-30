@@ -14,15 +14,6 @@ import * as global from './styles/global.css'
 const GlobalStyle = createGlobalStyle`
     ${reset} 
     ${global}
-    h1 {
-        font-size: ${({theme}) => theme.hugeFont}
-    }
-    h2, h3 {
-        font-size: ${({theme}) => theme.largeFont}
-    }
-    h4, h5 {
-        font-size: ${({theme}) => theme.mediumFont}
-    }
     body{
         font-family: ${({theme}) => theme.loraFont}
     }
