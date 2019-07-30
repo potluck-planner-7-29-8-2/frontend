@@ -6,6 +6,7 @@ import { useLocalStorage } from "../hooks/useLocalStorage";
 import { addRecipe } from "../actions/specificEventActions";
 import { claimRecipe } from "../actions/specificEventActions";
 import { removeRecipe } from "../actions/specificEventActions";
+import { deleteEvent } from "../actions/generalEventsActions";
 import UpdateEventForm from "../components/UpdateEventForm";
 import Guests from "../components/Guests";
 import { NavLink } from "react-router-dom";
@@ -26,7 +27,6 @@ const EventPage = ({ match }) => {
     setRecipe({ recipe_name: e.target.value });
   };
 
-
   if (user_id === event.data.organizer_id) {
     //First case if for organizer, Second case is for guest
     return (
@@ -44,6 +44,14 @@ const EventPage = ({ match }) => {
           <NavLink to={`${url}/update`}>
             <button>Edit Event</button>
           </NavLink>
+          <button
+            onClick={e => {
+              e.preventDefault();
+              deleteEvent(dispatch, eventID);
+            }}
+          >
+            Delete Event
+          </button>
           <li>
             Guests:{" "}
             <ul>
