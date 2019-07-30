@@ -1,35 +1,18 @@
 import React from "react";
-import { useStateValue } from "./hooks/useStateValue"; //must import this custom hook in any component that needs to either 1. access a value from the global state OR 2. dispatch an action to change the global state
-import { PrivateRoute } from "./utils/PrivateRoute"; //import to create a PrivateRoute - user can not get to that path unless logged in
-import { BrowserRouter as Router, Route } from "react-router-dom";
-import SignUp from "./components/SignUp";
-import Login from "./components/Login";
-import EventCard from "./components/EventCard";
-import AddEvent from "./components/AddEvent";
-import EventList from "./containers/EventList";
+import { Route } from "react-router-dom";
+import { PrivateRoute } from "./utils/PrivateRoute";
+
+import SignUpPage from "./containers/SignUpPage";
+import LoginPage from "./containers/LoginPage";
+import Dashboard from "./containers/Dashboard";
 
 function App() {
-  const [{ login }, dispatch] = useStateValue();
-  // In order to access or update the state, use this custom hook. It will return the state and the dispatch function (which sends the action to the reducer to update state)
-  //You can destructure the state so you only get the parts you need. Currently I have two states, login and data. This will change as we go. So you can just do this:
-  //              const[{login}, dispatch] = useStateValue()
-
   return (
-    <div className="App">
-      <Router>
-        {/* <PrivateRoute path='/test' redirectURL='/home' component={SomeComponent}/>  
-                When using PrivateRoute, you need to give it the protected path, the path 
-                you want the user to be redirected to, and the component you want rendered*/}
-
-        <Route path="/" exact component={Login} />
-        <Route path="/signup" component={SignUp} />
-        <PrivateRoute path="/dashboard" component={EventList} redirectURL="/" />
-        {/*<Login />
-        <AddEvent />
-        <EventCard />
-        */}
-      </Router>
-    </div>
+    <>
+      <Route path="/" exact component={LoginPage} />
+      <Route path="/signup" component={SignUpPage} />
+      <PrivateRoute path="/dashboard" component={Dashboard} redirectURL="/" />
+    </>
   );
 }
 
