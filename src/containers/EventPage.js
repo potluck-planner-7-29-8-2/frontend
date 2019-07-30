@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 import React, { useEffect, useState } from "react";
 import { withRouter } from "react-router-dom";
 import { getEvent } from "../actions";
@@ -6,11 +5,13 @@ import { useStateValue } from "../hooks/useStateValue";
 import { useLocalStorage } from "../hooks/useLocalStorage";
 import { addRecipe } from "../actions/specificEventActions";
 import { claimRecipe } from "../actions/specificEventActions";
+
 const EventPage = ({ match }) => {
   let eventID = match.params.eventID;
   const [{ event }, dispatch] = useStateValue();
   const [user_id] = useLocalStorage("user_id");
   const [createRecipe, setRecipe] = useState({ recipe_name: "" });
+
   useEffect(() => {
     getEvent(dispatch, eventID);
   }, [dispatch, eventID]);
@@ -34,7 +35,7 @@ const EventPage = ({ match }) => {
         <li>
           Guests:{" "}
           <ul>
-            {event.data.guests.map(guest => {
+            {event.data.guests.map(guest => { //Mapping over guests to display
               if (guest.attending) {
                 return <li>{guest.full_name} </li>;
               } else {
@@ -46,24 +47,27 @@ const EventPage = ({ match }) => {
         <li>
           <ul>
             {" "}
-            {event.data.recipes.map(recipe => {
+            {typeof event.data.recipes === 'string' ? <li>{event.data.recipes}</li> : event.data.recipes.map(recipe => { //Determine if Recipes is an array or string and return value
               return (
                 <li
                   onClick={e => {
                     e.preventDefault();
-                    claimRecipe(dispatch, eventID, {
+                    recipe.full_name ? claimRecipe(dispatch, eventID, { //Determine if a full_name is associated with recipe and return value, toggle between null and name to claim
                       recipe_name: recipe.recipe_name,
-                      user_id: user_id
-                    });
+                      user_id: null
+                    }) : claimRecipe(dispatch, eventID, {
+                        recipe_name: recipe.recipe_name,
+                        user_id: user_id
+                      });
                   }}
                 >
-                  {recipe.recipe_name}
+                  {recipe.recipe_name} : {recipe.full_name ? recipe.full_name : 'unclaimed'} {/* Toggling between the name and unclaimed */}
                 </li>
               );
             })}
             <form
               onSubmit={e => {
-                addRecipe(dispatch, eventID, createRecipe);
+                addRecipe(dispatch, eventID, createRecipe);  //Creates recipe
                 e.preventDefault();
               }}
             >
@@ -82,27 +86,4 @@ const EventPage = ({ match }) => {
   );
 };
 
-=======
-import React, { useEffect } from "react";
-import { withRouter } from "react-router-dom";
-import { getEvent } from "../actions";
-import { useStateValue } from "../hooks/useStateValue";
-
-const EventPage = ({ match }) => {
-  let eventID = match.params.eventID;
-  const [{ event }, dispatch] = useStateValue();
-
-  useEffect(() => {
-    getEvent(dispatch, eventID);
-  }, [dispatch, eventID]);
-
-  return (
-    <div>
-      Event Page
-      <h2>Event Name: {event.data.event_name}</h2>
-    </div>
-  );
-};
-
->>>>>>> cc1258a95b678e33e06b57ea937a3dc90180d76c
 export default withRouter(EventPage);
