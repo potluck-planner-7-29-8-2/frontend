@@ -6,37 +6,32 @@ import { useLocalStorage } from "../hooks/useLocalStorage";
 import { addRecipe } from "../actions/specificEventActions";
 import { claimRecipe } from "../actions/specificEventActions";
 import { removeRecipe } from "../actions/specificEventActions";
-import Guests from '../components/Guests';
+import UpdateEventForm from "../components/UpdateEventForm";
+import Guests from "../components/Guests";
 
 const EventPage = ({ match }) => {
   let eventID = match.params.eventID;
   const [{ event }, dispatch] = useStateValue();
   const [user_id] = useLocalStorage("user_id");
   const [createRecipe, setRecipe] = useState({ recipe_name: "" });
+  const [active, setActive] = useState(false);
 
   useEffect(() => {
     getEvent(dispatch, eventID);
   }, [dispatch, eventID]);
 
+  useEffect(() => {
+    getEvent(dispatch, eventID);
+  }, []);
+
   const recipeChangeHandler = e => {
     setRecipe({ recipe_name: e.target.value });
   };
 
-  // //need it to be {'recipe_name': ''}
-  //  export const removeRecipe = (dispatch, id, recipe) => {
-  //     dispatch({ type: REMOVING_RECIPE });
-  //     axiosWithAuth()
-  //       .delete(`/events/${id}/recipes`, recipe)
-  //       .then(res => {
-  //         dispatch({ type: REMOVED_RECIPE, payload: res.data });
-  //       })
-  //       .catch(err => {
-  //         dispatch({
-  //           type: REMOVE_RECIPE_ERROR,
-  //           payload: err.response.data.message
-  //         });
-  //       });
-  //   };
+  const toggleForm = e => {
+    setActive(!active);
+    console.log(active);
+  };
 
   if (user_id === event.data.organizer_id) {
     //First case if for organizer, Second case is for guest
@@ -52,6 +47,8 @@ const EventPage = ({ match }) => {
           <li>
             Description: <p>{event.data.description}</p>
           </li>
+          <button onClick={toggleForm}>Edit Event</button>
+          {active && <UpdateEventForm eventToEdit={event.data} />}
           <li>
             Guests:{" "}
             <ul>

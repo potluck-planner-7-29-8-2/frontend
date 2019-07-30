@@ -1,0 +1,103 @@
+import React, { useState } from "react";
+import { useStateValue } from "../hooks/useStateValue";
+import { updateEvent } from "../actions";
+import { useLocalStorage } from "../hooks/useLocalStorage";
+import { Icon, Input } from "semantic-ui-react";
+
+const UpdateEventForm = props => {
+  const { eventToEdit } = props;
+  console.log(eventToEdit);
+  const [event, setEvent] = useState({
+    ...eventToEdit
+  });
+
+  const [, dispatch] = useStateValue();
+  const [user_id] = useLocalStorage("user_id");
+  console.log(event);
+
+  const eventInputHandler = e => {
+    const name = e.target.name;
+    const value = e.target.value;
+    setEvent({ ...event, [name]: value });
+  };
+
+  return (
+    <form
+      onSubmit={e => {
+        e.preventDefault();
+        updateEvent(dispatch, event.event_id, {
+          event_name: event.event_name,
+          date: event.date,
+          time: event.time,
+          description: event.description,
+          address: event.address,
+          city: event.city,
+          state: event.state
+        });
+        setEvent({
+          event_name: "",
+          date: "",
+          time: "",
+          description: "",
+          address: "",
+          city: "",
+          state: ""
+        });
+      }}
+    >
+      <fieldset>
+        <legend>Update Event</legend>
+        <Input
+          name="event_name"
+          type="text"
+          value={event.event_name}
+          onChange={event => eventInputHandler(event)}
+          placeholder="Event Name"
+        />
+        <Input
+          name="date"
+          type="date"
+          value={event.date}
+          onChange={event => eventInputHandler(event)}
+        />
+        <Input
+          name="time"
+          type="time"
+          value={event.time}
+          onChange={event => eventInputHandler(event)}
+        />
+        <Input
+          name="description"
+          type="text"
+          value={event.description}
+          onChange={event => eventInputHandler(event)}
+          placeholder="Description"
+        />
+        <Input
+          name="address"
+          type="text"
+          value={event.address}
+          onChange={event => eventInputHandler(event)}
+          placeholder="Street Address"
+        />
+        <Input
+          name="city"
+          type="text"
+          value={event.city}
+          onChange={event => eventInputHandler(event)}
+          placeholder="City"
+        />
+        <Input
+          name="state"
+          type="text"
+          value={event.state}
+          onChange={event => eventInputHandler(event)}
+          placeholder="State"
+        />
+        <button type="submit">Submit</button>
+      </fieldset>
+    </form>
+  );
+};
+
+export default UpdateEventForm;
