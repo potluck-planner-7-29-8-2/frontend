@@ -60,19 +60,19 @@ export const eventReducer = (state, {type, payload}) => {
     case GOT_EVENT:
         return {
             ...state,
-            data: payload
+            data: payload,
+            isEventLoading: false
         }
     case GOT_EVENT_ERROR:
         return {
             ...state,
-            isErrorLoading: false,
+            isEventLoading: false,
             errorMessage: payload
         }
     case ADDING_GUESTS:
         return {
             ...state,
             isEventLoading: true,
-
         }
     case ADDED_GUESTS:
         return {
@@ -86,7 +86,7 @@ export const eventReducer = (state, {type, payload}) => {
     case ADD_GUESTS_ERROR:
         return {
             ...state,
-            isErrorLoading: false,
+            isEventLoading: false,
             errorMessage: payload
         }
     case REMOVING_GUEST:
@@ -106,7 +106,7 @@ export const eventReducer = (state, {type, payload}) => {
     case REMOVE_GUEST_ERROR:
         return {
             ...state,
-            isErrorLoading: false,
+            isEventLoading: false,
             errorMessage: payload
         }
     case UPDATING_GUEST:
@@ -126,7 +126,7 @@ export const eventReducer = (state, {type, payload}) => {
     case UPDATE_GUEST_ERROR:
         return {
             ...state,
-            isErrorLoading: false,
+            isEventLoading: false,
             errorMessage: payload
         }
     case ADDING_RECIPES:
@@ -146,7 +146,7 @@ export const eventReducer = (state, {type, payload}) => {
     case ADD_RECIPES_ERROR:
         return {
             ...state,
-            isErrorLoading: false,
+            isEventLoading: false,
             errorMessage: payload
         }
     case REMOVING_RECIPE:
@@ -166,7 +166,7 @@ export const eventReducer = (state, {type, payload}) => {
     case REMOVE_RECIPE_ERROR:
         return {
             ...state,
-            isErrorLoading: false,
+            isEventLoading: false,
             errorMessage: payload
         }
     case UPDATING_RECIPE:
@@ -186,7 +186,7 @@ export const eventReducer = (state, {type, payload}) => {
     case UPDATE_RECIPE_ERROR:
         return {
             ...state,
-            isErrorLoading: false,
+            isEventLoading: false,
             errorMessage: payload
         }
         default:
