@@ -89,6 +89,53 @@
 // export const UPDATED_RECIPE = "UPDATED_RECIPE";
 // export const UPDATE_RECIPE_ERROR = "UPDATE_RECIPE_ERROR";
 
+<<<<<<< HEAD
+//need it to be {'recipe_name': ''}
+export const addRecipe = (dispatch, id, recipe) => {
+  dispatch({ type: ADDING_RECIPES });
+  axiosWithAuth()
+    .post(`/events/${id}/recipes`, recipe)
+    .then(res => {
+      console.log(res)
+      dispatch({ type: ADDED_RECIPES, payload: res.data });
+    })
+    .catch(err => {
+      dispatch({ type: ADD_RECIPES_ERROR, payload: err.response.data.message });
+    });
+};
+
+//need it to be {'recipe_name': ''}
+export const removeRecipe = (dispatch, id, recipe) => {
+  dispatch({ type: REMOVING_RECIPE });
+  axiosWithAuth()
+    .delete(`/events/${id}/recipes`, recipe)
+    .then(res => {
+      dispatch({ type: REMOVED_RECIPE, payload: res.data });
+    })
+    .catch(err => {
+      dispatch({
+        type: REMOVE_RECIPE_ERROR,
+        payload: err.response.data.message
+      });
+    });
+};
+
+//need it to be {'recipe_name': '', 'user_id': ''}
+export const claimRecipe = (dispatch, id, recipe) => {
+  dispatch({ type: UPDATING_RECIPE });
+  axiosWithAuth()
+    .put(`/events/${id}/recipes`, recipe)
+    .then(res => {
+      dispatch({ type: UPDATED_RECIPE, payload: res.data });
+    })
+    .catch(err => {
+      dispatch({
+        type: UPDATE_RECIPE_ERROR,
+        payload: err.response.data.message
+      });
+    });
+};
+=======
 // //need it to be {'recipe_name': ''}
 // export const addRecipe = (dispatch, id, recipe) => {
 //   dispatch({ type: ADDING_RECIPES });
@@ -133,3 +180,4 @@
 //       });
 //     });
 // };
+>>>>>>> cc1258a95b678e33e06b57ea937a3dc90180d76c

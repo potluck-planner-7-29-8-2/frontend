@@ -1,9 +1,25 @@
+<<<<<<< HEAD
+import React, { useEffect } from "react";
+=======
 import React, { useState, useEffect } from "react";
 import Event from "../components/Event";
+>>>>>>> cc1258a95b678e33e06b57ea937a3dc90180d76c
 import AddEvent from "../components/AddEvent";
 import { getEvents } from "../actions/generalEventsActions";
 import { useStateValue } from "../hooks/useStateValue";
 import { useLocalStorage } from "../hooks/useLocalStorage";
+<<<<<<< HEAD
+
+const EventList = () => {
+  const [{ events }, dispatch] = useStateValue();
+  const [user_id] = useLocalStorage("user_id");
+
+  console.log('events', events);
+  useEffect(() => {
+    console.log('events', events);
+    getEvents(dispatch, user_id);
+  }, [dispatch]);
+=======
 /*{
     "event_name": "",
     "date": "",
@@ -36,6 +52,7 @@ const EventList = () => {
   useEffect(() => {
     setEventList(events.data);
   }, [events]);
+>>>>>>> cc1258a95b678e33e06b57ea937a3dc90180d76c
 
   return (
     <div>
