@@ -2,7 +2,7 @@ import {
     GETTING_EVENTS, GOT_EVENTS, EVENTS_ERROR, 
     CREATED_EVENT, CREATING_EVENT, CREATING_EVENT_ERROR,
     DELETING_EVENT, DELETED_EVENT, DELETING_EVENT_ERROR,
-    UPDATING_EVENT, UPDATED_EVENT, UPDATING_EVENT_ERROR
+    UPDATING_EVENT, UPDATED_EVENT, UPDATING_EVENT_ERROR, LOGOUT
 } from '../actions'
 
 
@@ -94,6 +94,11 @@ export const eventsReducer = (state, {type, payload}) => {
                 ...state,
                 isEventsLoading: false,
                 errorMessage: payload
+            }
+        case LOGOUT:
+            return{
+                ...state,
+                data: []
             }
         default:
             return state
