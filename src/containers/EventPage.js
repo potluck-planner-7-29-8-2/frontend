@@ -82,7 +82,7 @@ const EventPage = ({ match }) => {
                       });
                   }}>Claim Recipe</button>
                   <button onClick={(event) => {
-                      removeRecipe(dispatch, eventID, {'recipe_name' : recipe.recipe_name});
+                      removeRecipe(dispatch, eventID, {'recipe_name' : `${recipe.recipe_name}`});
                       event.preventDefault()
                   }}>Delete Recipe</button>
                 </li>

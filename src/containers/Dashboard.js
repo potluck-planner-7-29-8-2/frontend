@@ -7,6 +7,7 @@ import Header from '../components/Header'
 import EventPage from '../containers/EventPage'
 import AddEventForm from '../components/AddEventForm'
 import EventList from '../components/EventList'
+import Guests from '../components/Guests';
 
 const Dashboard = (props) => {
     const {path} = props.match
@@ -17,6 +18,7 @@ const Dashboard = (props) => {
             <PrivateRoute exact path={`${path}`} component={EventList} redirectURL='/' />
             <PrivateRoute exact path={`${path}/addEvent`} component={AddEventForm} redirectURL='/' />
             <PrivateRoute path={`${path}/event/:eventID`} component={EventPage} redirectURL='/' />
+            <Guests />
         </>
     )
 }
