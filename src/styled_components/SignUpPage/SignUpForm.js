@@ -29,7 +29,7 @@ export const StyledSignUpForm = styled.form`
 
             .icon{
                 font-size: 1.5rem;
-                color: ${({theme}) => theme.blue};
+                color: #708090;
             }
         }
     }

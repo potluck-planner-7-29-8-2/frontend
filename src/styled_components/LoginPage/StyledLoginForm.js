@@ -32,9 +32,5 @@ export const StyledLoginForm = styled.form`
             }
         }
 
-        &:valid{
-            color: ${({theme}) => theme.blue};
-            border: none;
-        }
     }
 `
