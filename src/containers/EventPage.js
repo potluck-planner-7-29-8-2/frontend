@@ -6,6 +6,7 @@ import { useLocalStorage } from "../hooks/useLocalStorage";
 import { addRecipe } from "../actions/specificEventActions";
 import { claimRecipe } from "../actions/specificEventActions";
 import { removeRecipe } from "../actions/specificEventActions";
+import { updateEvent } from "../actions/generalEventsActions";
 
 const EventPage = ({ match }) => {
   let eventID = match.params.eventID;
@@ -21,22 +22,6 @@ const EventPage = ({ match }) => {
     setRecipe({ recipe_name: e.target.value });
   };
 
-  // //need it to be {'recipe_name': ''}
-  //  export const removeRecipe = (dispatch, id, recipe) => {
-  //     dispatch({ type: REMOVING_RECIPE });
-  //     axiosWithAuth()
-  //       .delete(`/events/${id}/recipes`, recipe)
-  //       .then(res => {
-  //         dispatch({ type: REMOVED_RECIPE, payload: res.data });
-  //       })
-  //       .catch(err => {
-  //         dispatch({
-  //           type: REMOVE_RECIPE_ERROR,
-  //           payload: err.response.data.message
-  //         });
-  //       });
-  //   };
-
   if (user_id === event.data.organizer_id) {
     //First case if for organizer, Second case is for guest
     return (
@@ -51,6 +36,17 @@ const EventPage = ({ match }) => {
           <li>
             Description: <p>{event.data.description}</p>
           </li>
+          <button
+            onClick={e => {
+              e.preventDefault();
+              console.log(event.data);
+              updateEvent(dispatch, parseInt(eventID), {
+                event_name: event.data.event_name
+              });
+            }}
+          >
+            Edit Event
+          </button>
           <li>
             Guests:{" "}
             <ul>
