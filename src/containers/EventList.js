@@ -27,15 +27,14 @@ import { useLocalStorage } from '../hooks/useLocalStorage';
 }*/
 
 const EventList = () => {
-    const [eventList, setEventList] = useState([]);
     const [{ events }, dispatch] = useStateValue();
     const [user_id] = useLocalStorage("user_id");
-    console.log(eventList)
+  
     //console.log(getEvents(dispatch, user_id))
-
+    console.log(events);
     useEffect(() => {
-        setEventList(events.data);
-    },[events])
+        getEvents(dispatch, user_id);
+    },[dispatch])
 
 
     return (
