@@ -20,6 +20,10 @@ const EventPage = ({ match }) => {
     getEvent(dispatch, eventID);
   }, [dispatch, eventID]);
 
+  useEffect(() => {
+    getEvent(dispatch, eventID);
+  }, []);
+
   const recipeChangeHandler = e => {
     setRecipe({ recipe_name: e.target.value });
   };
@@ -44,7 +48,7 @@ const EventPage = ({ match }) => {
             Description: <p>{event.data.description}</p>
           </li>
           <button onClick={toggleForm}>Edit Event</button>
-          {active && <UpdateEventForm />}
+          {active && <UpdateEventForm eventToEdit={event.data} />}
           <li>
             Guests:{" "}
             <ul>

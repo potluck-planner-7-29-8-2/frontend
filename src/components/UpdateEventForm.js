@@ -5,18 +5,15 @@ import { useLocalStorage } from "../hooks/useLocalStorage";
 import { Icon, Input } from "semantic-ui-react";
 
 const UpdateEventForm = props => {
+  const { eventToEdit } = props;
+  console.log(eventToEdit);
   const [event, setEvent] = useState({
-    event_name: "",
-    date: "",
-    time: "",
-    description: "",
-    address: "",
-    city: "",
-    state: ""
+    ...eventToEdit
   });
 
   const [, dispatch] = useStateValue();
   const [user_id] = useLocalStorage("user_id");
+  console.log(event);
 
   const eventInputHandler = e => {
     const name = e.target.name;
@@ -28,7 +25,15 @@ const UpdateEventForm = props => {
     <form
       onSubmit={e => {
         e.preventDefault();
-        updateEvent(dispatch, user_id, event);
+        updateEvent(dispatch, event.event_id, {
+          event_name: event.event_name,
+          date: event.date,
+          time: event.time,
+          description: event.description,
+          address: event.address,
+          city: event.city,
+          state: event.state
+        });
         setEvent({
           event_name: "",
           date: "",
