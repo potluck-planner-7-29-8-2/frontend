@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { loginAction } from "./../actions/loginActions";
 import { useStateValue } from "./../hooks/useStateValue";
-import { NavLink, Redirect } from 'react-router-dom';
-const Login = () => {
+import { NavLink } from 'react-router-dom';
+const Login = (props) => {
   const [user, setUser] = useState({
     username: "",
     password: ""
@@ -11,22 +11,14 @@ const Login = () => {
 
 
   const [{ login }, dispatch] = useStateValue(); //what comes before the comma is the entire state
-  console.log(login);
   useEffect(() => {
-    if(login.isLoggedIn === true) {
-        return <Redirect to='/dashboard' />
-       console.log('we are logged in')
+    if(login.isLoggedIn) {
+        props.history.push('/dashboard');
     }
-  }, [login.isLoggedIn])
+  }, [login, props.history])
 
   function handleChange(event) {
     const updatedUser = { ...user, [event.target.name]: event.target.value };
-    console.log(
-      "handleChange",
-      event.target.name,
-      event.target.value,
-      updatedUser
-    );
     setUser(updatedUser);
   }
 
