@@ -96,11 +96,10 @@ const EventPage = ({ match }) => {
                       </button>
                       <button
                         onClick={event => {
-                          console.log("recipe to delete", recipe.recipe_name);
-                          removeRecipe(dispatch, eventID, {
-                            recipe_name: recipe.recipe_name
-                          });
                           event.preventDefault();
+                          removeRecipe(dispatch, parseInt(eventID), {
+                            data: { recipe_name: recipe.recipe_name }
+                          });
                         }}
                       >
                         Delete Recipe
