@@ -15,17 +15,14 @@ const EventCard = props => {
   } = props.event;
   const { url } = props.match;
   const [{ users }, dispatch] = useStateValue();
-  console.log("organizer id", organizer_id);
 
   useEffect(() => {
     getUsers(dispatch);
   }, [dispatch]);
-  console.log("users", users.data);
 
   let username;
   users.data.forEach(user => {
     if (user.user_id === organizer_id) {
-      console.log(user.username);
       username = user.username;
     }
   });
