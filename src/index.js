@@ -27,7 +27,8 @@ const theme = {
     hugeFont: '4.0rem',
     poppinsFont: `"Poppins", sans-serif`,
     loraFont: `"Lora", serif`,
-    blue: `#66afe0`
+    blue: `#66afe0`,
+    darkBlue: `#247DB7`
 }
 
 ReactDOM.render(

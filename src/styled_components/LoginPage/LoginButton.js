@@ -15,8 +15,6 @@ export const LoginButton = styled.button`
     cursor: pointer;
 
     &:hover{
-        border: 2px solid ${({theme}) => theme.blue};
-        color: ${({theme}) => theme.blue};
-        background: #fff;
+        background: ${({theme}) => theme.darkBlue};
     }
 `
