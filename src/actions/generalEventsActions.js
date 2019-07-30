@@ -42,6 +42,7 @@ export const getEvents = (dispatch, id) => {
     }
 */
 export const addEvent = (dispatch, id, event) => {
+    console.log(id);
     dispatch({type: CREATING_EVENT})
     axiosWithAuth()
         .post(`/users/${id}/events`, event)
@@ -50,7 +51,7 @@ export const addEvent = (dispatch, id, event) => {
         })
         .catch(err => {
             console.log(err)
-           // dispatch({type: CREATING_EVENT_ERROR, payload: err.response.data.message})
+            dispatch({type: CREATING_EVENT_ERROR, payload: err.response.data.message})
         })
 }
 

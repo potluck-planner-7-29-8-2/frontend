@@ -76,10 +76,10 @@
 //     });
 // };
 
-// // //actions for recipes
-// // export const ADDING_RECIPES="ADDING_RECIPES"
-// // export const ADDED_RECIPES="ADDED_RECIPES"
-// // export const ADD_RECIPES_ERROR="ADD_RECIPES_ERROR"
+//actions for recipes
+//export const ADDING_RECIPES="ADDING_RECIPES"
+//export const ADDED_RECIPES="ADDED_RECIPES"
+//export const ADD_RECIPES_ERROR="ADD_RECIPES_ERROR"
 
 // export const REMOVING_RECIPE = "REMOVING_RECIPE";
 // export const REMOVED_RECIPE = "REMOVED_RECIPE";

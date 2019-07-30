@@ -1,15 +1,20 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { loginAction } from "./../actions/loginActions";
 import { useStateValue } from "./../hooks/useStateValue";
-
-const Login = () => {
+import { NavLink } from "react-router-dom";
+const Login = props => {
   const [user, setUser] = useState({
     username: "",
     password: ""
   });
 
   const [{ login }, dispatch] = useStateValue(); //what comes before the comma is the entire state
-  console.log(login);
+
+  useEffect(() => {
+    if (login.isLoggedIn) {
+      props.history.push("/dashboard");
+    }
+  }, [login, props.history]);
 
   function handleChange(event) {
     const updatedUser = { ...user, [event.target.name]: event.target.value };
@@ -51,6 +56,9 @@ const Login = () => {
           </div>
         </div>
         <button type="submit">Login</button>
+        <NavLink to="/signup">
+          <button>Sign Up</button>
+        </NavLink>
       </fieldset>
     </form>
   );

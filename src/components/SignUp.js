@@ -24,6 +24,12 @@ const SignUp = props => {
         onSubmit={e => {
           e.preventDefault();
           signUpAction(dispatch, user);
+          setUser({
+            username: "",
+            password: "",
+            full_name: "",
+            email: ""
+          })
         }}
       >
         <Form.Input
@@ -53,7 +59,7 @@ const SignUp = props => {
         />
         <Form.Input
           iconPosition="left"
-          Icon="at"
+          icon="at"
           label="Enter E-Mail"
           name="email"
           type="email"
