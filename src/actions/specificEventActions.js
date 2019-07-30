@@ -1,6 +1,6 @@
 import { axiosWithAuth } from "../utils/axiosTypes";
 
-//actions for event
+// //actions for event
 
 export const GETTING_EVENT = "GETTING_EVENT";
 export const GOT_EVENT = "GOT_EVENT";
@@ -18,7 +18,7 @@ export const getEvent = (dispatch, id) => {
     });
 };
 
-//actions for guests
+// //actions for guests
 export const ADDING_GUESTS = "ADDING_GUESTS";
 export const ADDED_GUESTS = "ADDED_GUESTS";
 export const ADD_GUESTS_ERROR = "ADD_GUESTS_ERROR";
@@ -31,7 +31,7 @@ export const UPDATING_GUEST = "UPDATING_GUEST";
 export const UPDATED_GUEST = "UPDATED_GUEST";
 export const UPDATE_GUEST_ERROR = "UPDATE_GUEST_ERROR";
 
-//guest needs to be of shape {"user_id": '', 'attending': true||false}
+// //guest needs to be of shape {"user_id": '', 'attending': true||false}
 export const addGuest = (dispatch, id, guest) => {
   dispatch({ type: ADDING_GUESTS });
   axiosWithAuth()
@@ -44,7 +44,7 @@ export const addGuest = (dispatch, id, guest) => {
     });
 };
 
-//just need {'user_id': ''}
+// //just need {'user_id': ''}
 export const removeGuest = (dispatch, id, guest) => {
   dispatch({ type: REMOVING_GUEST });
   axiosWithAuth()
@@ -60,7 +60,7 @@ export const removeGuest = (dispatch, id, guest) => {
     });
 };
 
-//just pass {'attending' : true||false}
+// //just pass {'attending' : true||false}
 export const changeAttendance = (dispatch, id, user_id, isAttending) => {
   dispatch({ type: UPDATING_GUEST });
   axiosWithAuth()
@@ -76,7 +76,7 @@ export const changeAttendance = (dispatch, id, user_id, isAttending) => {
     });
 };
 
-// actions for recipes
+//actions for recipes
 export const ADDING_RECIPES = "ADDING_RECIPES";
 export const ADDED_RECIPES = "ADDED_RECIPES";
 export const ADD_RECIPES_ERROR = "ADD_RECIPES_ERROR";
@@ -89,13 +89,12 @@ export const UPDATING_RECIPE = "UPDATING_RECIPE";
 export const UPDATED_RECIPE = "UPDATED_RECIPE";
 export const UPDATE_RECIPE_ERROR = "UPDATE_RECIPE_ERROR";
 
-// need it to be {'recipe_name': ''}
+// //need it to be {'recipe_name': ''}
 export const addRecipe = (dispatch, id, recipe) => {
   dispatch({ type: ADDING_RECIPES });
   axiosWithAuth()
     .post(`/events/${id}/recipes`, recipe)
     .then(res => {
-      console.log(res);
       dispatch({ type: ADDED_RECIPES, payload: res.data });
     })
     .catch(err => {
@@ -103,7 +102,23 @@ export const addRecipe = (dispatch, id, recipe) => {
     });
 };
 
-//need it to be {'recipe_name': '', 'user_id': ''}
+// //need it to be {'recipe_name': ''}
+export const removeRecipe = (dispatch, id, recipe) => {
+  dispatch({ type: REMOVING_RECIPE });
+  axiosWithAuth()
+    .delete(`/events/${id}/recipes`, recipe)
+    .then(res => {
+      dispatch({ type: REMOVED_RECIPE, payload: res.data });
+    })
+    .catch(err => {
+      dispatch({
+        type: REMOVE_RECIPE_ERROR,
+        payload: err.response.data.message
+      });
+    });
+};
+
+// //need it to be {'recipe_name': '', 'user_id': ''}
 export const claimRecipe = (dispatch, id, recipe) => {
   dispatch({ type: UPDATING_RECIPE });
   axiosWithAuth()
