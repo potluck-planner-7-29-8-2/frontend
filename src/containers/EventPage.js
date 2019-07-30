@@ -6,6 +6,7 @@ import { useLocalStorage } from "../hooks/useLocalStorage";
 import { addRecipe } from "../actions/specificEventActions";
 import { claimRecipe } from "../actions/specificEventActions";
 import { removeRecipe } from "../actions/specificEventActions";
+import Guests from '../components/Guests';
 
 const EventPage = ({ match }) => {
   let eventID = match.params.eventID;
@@ -125,6 +126,7 @@ const EventPage = ({ match }) => {
             </ul>
           </li>
         </ul>
+        <Guests eventID={eventID} />
       </div>
     );
   } else {
