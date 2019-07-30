@@ -103,22 +103,6 @@ export const addRecipe = (dispatch, id, recipe) => {
     });
 };
 
-//need it to be {'recipe_name': ''}
-export const removeRecipe = (dispatch, id, recipe) => {
-  dispatch({ type: REMOVING_RECIPE });
-  axiosWithAuth()
-    .delete(`/events/${id}/recipes`, recipe)
-    .then(res => {
-      dispatch({ type: REMOVED_RECIPE, payload: res.data });
-    })
-    .catch(err => {
-      dispatch({
-        type: REMOVE_RECIPE_ERROR,
-        payload: err.response.data.message
-      });
-    });
-};
-
 //need it to be {'recipe_name': '', 'user_id': ''}
 export const claimRecipe = (dispatch, id, recipe) => {
   dispatch({ type: UPDATING_RECIPE });

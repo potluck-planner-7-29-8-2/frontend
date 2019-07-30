@@ -5,13 +5,17 @@ import { useStateValue } from "../hooks/useStateValue";
 import { useLocalStorage } from "../hooks/useLocalStorage";
 import { addRecipe } from "../actions/specificEventActions";
 import { claimRecipe } from "../actions/specificEventActions";
+<<<<<<< HEAD
 import { removeRecipe } from "../actions/specificEventActions";
+=======
+>>>>>>> 5b57f8c87ecf7dd49cb3408f54780672e0a944ba
 
 const EventPage = ({ match }) => {
   let eventID = match.params.eventID;
   const [{ event }, dispatch] = useStateValue();
   const [user_id] = useLocalStorage("user_id");
   const [createRecipe, setRecipe] = useState({ recipe_name: "" });
+
   useEffect(() => {
     getEvent(dispatch, eventID);
   }, [dispatch, eventID]);
@@ -52,7 +56,7 @@ export const removeRecipe = (dispatch, id, recipe) => {
         <li>
           Guests:{" "}
           <ul>
-            {event.data.guests.map(guest => {
+            {event.data.guests.map(guest => { //Mapping over guests to display
               if (guest.attending) {
                 return <li>{guest.full_name} </li>;
               } else {
@@ -64,6 +68,7 @@ export const removeRecipe = (dispatch, id, recipe) => {
         <li>
           <ul>
             {" "}
+<<<<<<< HEAD
             {typeof event.data.recipes === "string" ? (
               <li>{event.data.recipes}</li>
             ) : (
@@ -83,9 +88,29 @@ export const removeRecipe = (dispatch, id, recipe) => {
                 );
               })
             )}
+=======
+            {typeof event.data.recipes === 'string' ? <li>{event.data.recipes}</li> : event.data.recipes.map(recipe => { //Determine if Recipes is an array or string and return value
+              return (
+                <li
+                  onClick={e => {
+                    e.preventDefault();
+                    recipe.full_name ? claimRecipe(dispatch, eventID, { //Determine if a full_name is associated with recipe and return value, toggle between null and name to claim
+                      recipe_name: recipe.recipe_name,
+                      user_id: null
+                    }) : claimRecipe(dispatch, eventID, {
+                        recipe_name: recipe.recipe_name,
+                        user_id: user_id
+                      });
+                  }}
+                >
+                  {recipe.recipe_name} : {recipe.full_name ? recipe.full_name : 'unclaimed'} {/* Toggling between the name and unclaimed */}
+                </li>
+              );
+            })}
+>>>>>>> 5b57f8c87ecf7dd49cb3408f54780672e0a944ba
             <form
               onSubmit={e => {
-                addRecipe(dispatch, eventID, createRecipe);
+                addRecipe(dispatch, eventID, createRecipe);  //Creates recipe
                 e.preventDefault();
               }}
             >
