@@ -18,6 +18,23 @@ export const StyledLoginForm = styled.form`
         padding: 0 5px;
         outline: none;
         border: none;
+        width: 100%;
+
+        ::placeholder{
+            color: ${({theme}) => theme.blue};
+        }
+
+        &:focus {
+            color: ${({theme}) => theme.blue};
+
+            ::placeholder{
+                opacity: 0;
+            }
+        }
+
+        &:valid{
+            color: ${({theme}) => theme.blue};
+            border: none;
+        }
     }
-    
 `

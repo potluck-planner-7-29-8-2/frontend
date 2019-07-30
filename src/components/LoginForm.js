@@ -37,6 +37,7 @@ const LoginForm = (props) => {
                         name="username"
                         required
                         placeholder="Username"
+                        autocomplete='off'
                         value={user.username}
                         onChange={handleChange}
                     />  
