@@ -1,48 +1,25 @@
-import React, { useState, useEffect } from 'react';
-import Event from '../components/Event';
-import AddEvent from '../components/AddEvent';
-import { getEvents } from '../actions/generalEventsActions';
-import { useStateValue } from '../hooks/useStateValue';
-import { useLocalStorage } from '../hooks/useLocalStorage';
-/*{
-    "event_name": "",
-    "date": "",
-    "time": "",
-    "description": "",
-    "address": "",
-    "city": "",
-    "state": ""
-}*/
-
-/*export const getEvents = (dispatch, id) => {
-    dispatch({type: GETTING_EVENTS})
-    axiosWithAuth()
-        .get(`/users/${id}/events`)
-        .then(res => {
-            dispatch({type: GOT_EVENTS, payload: res.data})
-        })
-        .catch(err => {
-            dispatch({type: EVENTS_ERROR, payload: err.response.data.message})
-        })
-}*/
+import React, { useEffect } from "react";
+import AddEvent from "../components/AddEvent";
+import { getEvents } from "../actions/generalEventsActions";
+import { useStateValue } from "../hooks/useStateValue";
+import { useLocalStorage } from "../hooks/useLocalStorage";
 
 const EventList = () => {
-    const [{ events }, dispatch] = useStateValue();
-    const [user_id] = useLocalStorage("user_id");
-  
-    //console.log(getEvents(dispatch, user_id))
-    console.log(events);
-    useEffect(() => {
-        getEvents(dispatch, user_id);
-    },[dispatch])
+  const [{ events }, dispatch] = useStateValue();
+  const [user_id] = useLocalStorage("user_id");
 
+  console.log('events', events);
+  useEffect(() => {
+    console.log('events', events);
+    getEvents(dispatch, user_id);
+  }, [dispatch]);
 
-    return (
-        <div>
-            <h1>Events</h1>
-            <AddEvent />
-        </div>
-    )
-}
+  return (
+    <div>
+      <h1>Events</h1>
+      <AddEvent />
+    </div>
+  );
+};
 
 export default EventList;

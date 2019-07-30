@@ -93,8 +93,9 @@ export const UPDATE_RECIPE_ERROR = "UPDATE_RECIPE_ERROR";
 export const addRecipe = (dispatch, id, recipe) => {
   dispatch({ type: ADDING_RECIPES });
   axiosWithAuth()
-    .post(`/events/${id}/recipe`, recipe)
+    .post(`/events/${id}/recipes`, recipe)
     .then(res => {
+      console.log(res)
       dispatch({ type: ADDED_RECIPES, payload: res.data });
     })
     .catch(err => {
@@ -106,7 +107,7 @@ export const addRecipe = (dispatch, id, recipe) => {
 export const removeRecipe = (dispatch, id, recipe) => {
   dispatch({ type: REMOVING_RECIPE });
   axiosWithAuth()
-    .delete(`/events/${id}/recipe`, recipe)
+    .delete(`/events/${id}/recipes`, recipe)
     .then(res => {
       dispatch({ type: REMOVED_RECIPE, payload: res.data });
     })
@@ -122,7 +123,7 @@ export const removeRecipe = (dispatch, id, recipe) => {
 export const claimRecipe = (dispatch, id, recipe) => {
   dispatch({ type: UPDATING_RECIPE });
   axiosWithAuth()
-    .delete(`/events/${id}/recipe`, recipe)
+    .put(`/events/${id}/recipes`, recipe)
     .then(res => {
       dispatch({ type: UPDATED_RECIPE, payload: res.data });
     })
