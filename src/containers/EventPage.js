@@ -15,14 +15,10 @@ const EventPage = ({ match }) => {
   const [user_id] = useLocalStorage("user_id");
   const [createRecipe, setRecipe] = useState({ recipe_name: "" });
   const [active, setActive] = useState(false);
-
+  console.log("event page", event.data);
   useEffect(() => {
     getEvent(dispatch, eventID);
   }, [dispatch, eventID]);
-
-  useEffect(() => {
-    getEvent(dispatch, eventID);
-  }, []);
 
   const recipeChangeHandler = e => {
     setRecipe({ recipe_name: e.target.value });
