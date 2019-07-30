@@ -13,23 +13,33 @@ import * as global from './styles/global.css'
 
 const GlobalStyle = createGlobalStyle`
     ${reset} 
-    ${global} 
+    ${global}
+    body{
+        font-family: ${({theme}) => theme.loraFont}
+    }
 `
 
 const theme = {
-
+    tinyFont: '1.2rem',
+    smallFont: '1.8rem',
+    mediumFont: '2.4rem',
+    largeFont: '3.0rem',
+    hugeFont: '4.0rem',
+    poppinsFont: `"Poppins", sans-serif`,
+    loraFont: `"Lora", serif`,
+    blue: `#66afe0`
 }
 
 ReactDOM.render(
-    <>
-        <GlobalStyle />
         <ThemeProvider theme={theme}>
+        <>
+            <GlobalStyle />
             <Router>
                 <StateProvider initialState={initialState} reducer={mainReducer}> 
                     <App />
                 </StateProvider>
             </Router>
-        </ThemeProvider>
-    </>, 
+        </>
+        </ThemeProvider>, 
 document.getElementById('root'));
 

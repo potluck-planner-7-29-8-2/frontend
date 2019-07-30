@@ -3,6 +3,8 @@ import { NavLink, withRouter } from 'react-router-dom'
 import { useLocalStorage } from '../hooks/useLocalStorage'
 
 import LoginForm from '../components/LoginForm'
+import { LoginContainer, WelcomeDiv, SignUpDiv } from '../styled_components'
+
 
 const LoginPage = (props) => {
     const [token, ] = useLocalStorage('token')
@@ -13,11 +15,24 @@ const LoginPage = (props) => {
     }, [token, props.history]);
 
     return (
-        <>
+        <LoginContainer>
+            <WelcomeDiv>
+                <img src='./PP_logo.png' />
+                <span>Potluck Planner</span>
+            </WelcomeDiv>
             <LoginForm />
-            <NavLink to='/signup'>Sign Up</NavLink>
-        </>
+            <SignUpDiv>
+                <span>Don't have an account?</span>
+                <NavLink to='/signup'>Sign Up</NavLink>
+            </SignUpDiv>
+        </LoginContainer>
     )
 }
 
 export default withRouter(LoginPage)
+
+
+
+
+
+
