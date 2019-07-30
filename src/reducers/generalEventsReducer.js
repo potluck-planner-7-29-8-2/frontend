@@ -30,6 +30,8 @@ export const eventsReducer = (state, {type, payload}) => {
         case GETTING_EVENTS:
             return {
                 ...state,
+                data: [],
+                errorMessage: '',
                 isEventsLoading: true
             }
         case GOT_EVENTS:
@@ -94,11 +96,6 @@ export const eventsReducer = (state, {type, payload}) => {
                 ...state,
                 isEventsLoading: false,
                 errorMessage: payload
-            }
-        case LOGOUT:
-            return{
-                ...state,
-                data: []
             }
         default:
             return state

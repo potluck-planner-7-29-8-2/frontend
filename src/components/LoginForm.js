@@ -4,6 +4,8 @@ import { withRouter } from 'react-router-dom'
 import { loginAction } from "../actions/loginActions";
 import { useStateValue } from "../hooks/useStateValue";
 
+import { StyledLoginForm, LoginButton } from '../styled_components'
+
 const LoginForm = (props) => {
     const [user, setUser] = useState({
         username: "",
@@ -23,38 +25,40 @@ const LoginForm = (props) => {
     }
 
     return (
-        <form
+        <StyledLoginForm
             onSubmit={e => {
                 e.preventDefault();
                 loginAction(dispatch, user)
             }}
         >
-            <fieldset>
-                <legend>Login</legend>
                 <div className="form-group row">
-                    Username:
                     <input
                         type="text"
                         name="username"
-                        placeholder="Enter your username"
+                        required
+                        placeholder="Username"
+                        autocomplete='off'
                         value={user.username}
                         onChange={handleChange}
                     />  
+                    <span data-placeholder="Username"></span>
                 </div>
                 <div className="form-group row">
-                    Password:
                     <input
                         type="password"
                         name="password"
-                        placeholder="Enter your password"
+                        required
+                        placeholder="Password"
                         value={user.password}
                         onChange={handleChange}
                     />
+                    <span data-placeholder="Password"></span>
                 </div>
-                <button disabled={login.isLoginLoading} type="submit">Login</button> 
-            </fieldset>
-        </form>
+                <LoginButton disabled={login.isLoginLoading} type="submit">Login</LoginButton> 
+        </StyledLoginForm>
     );
 };
 
 export default withRouter(LoginForm)
+
+
