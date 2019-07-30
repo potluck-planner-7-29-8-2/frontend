@@ -8,9 +8,11 @@ import { claimRecipe } from "../actions/specificEventActions";
 import { removeRecipe } from "../actions/specificEventActions";
 import UpdateEventForm from "../components/UpdateEventForm";
 import Guests from "../components/Guests";
+import { NavLink } from "react-router-dom";
 
 const EventPage = ({ match }) => {
   let eventID = match.params.eventID;
+  const { url } = match;
   const [{ event }, dispatch] = useStateValue();
   const [user_id] = useLocalStorage("user_id");
   const [createRecipe, setRecipe] = useState({ recipe_name: "" });
@@ -20,18 +22,10 @@ const EventPage = ({ match }) => {
     getEvent(dispatch, eventID);
   }, [dispatch, eventID]);
 
-  useEffect(() => {
-    getEvent(dispatch, eventID);
-  }, []);
-
   const recipeChangeHandler = e => {
     setRecipe({ recipe_name: e.target.value });
   };
 
-  const toggleForm = e => {
-    setActive(!active);
-    console.log(active);
-  };
 
   if (user_id === event.data.organizer_id) {
     //First case if for organizer, Second case is for guest
@@ -47,8 +41,9 @@ const EventPage = ({ match }) => {
           <li>
             Description: <p>{event.data.description}</p>
           </li>
-          <button onClick={toggleForm}>Edit Event</button>
-          {active && <UpdateEventForm eventToEdit={event.data} />}
+          <NavLink to={`${url}/update`}>
+            <button>Edit Event</button>
+          </NavLink>
           <li>
             Guests:{" "}
             <ul>
