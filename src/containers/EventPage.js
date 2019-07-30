@@ -146,11 +146,9 @@ const EventPage = ({ match }) => {
               {event.data.guests.map(guest => {
                 //Mapping over guests to display
                 if (guest.attending) {
-                  let key = guest.full_name;
-                  return <li>{guest.full_name} </li>;
+                  return <li key={guest.full_name}>{guest.full_name} </li>;
                 } else {
-                  let key = event.data.id;
-                  return <li>No guests attending</li>;
+                  return <li key={event.data.event_id}>No guests attending</li>;
                 }
               })}
             </ul>
