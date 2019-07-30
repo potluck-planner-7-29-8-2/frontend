@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 import React, { useEffect, useState } from "react";
 import { withRouter } from "react-router-dom";
 import { getEvent } from "../actions";
@@ -6,6 +5,8 @@ import { useStateValue } from "../hooks/useStateValue";
 import { useLocalStorage } from "../hooks/useLocalStorage";
 import { addRecipe } from "../actions/specificEventActions";
 import { claimRecipe } from "../actions/specificEventActions";
+import { removeRecipe } from "../actions/specificEventActions";
+
 const EventPage = ({ match }) => {
   let eventID = match.params.eventID;
   const [{ event }, dispatch] = useStateValue();
@@ -15,6 +16,23 @@ const EventPage = ({ match }) => {
     getEvent(dispatch, eventID);
   }, [dispatch, eventID]);
   console.log(event);
+
+  /*
+  //need it to be {'recipe_name': ''}
+export const removeRecipe = (dispatch, id, recipe) => {
+  dispatch({ type: REMOVING_RECIPE });
+  axiosWithAuth()
+    .delete(`/events/${id}/recipes`, recipe)
+    .then(res => {
+      dispatch({ type: REMOVED_RECIPE, payload: res.data });
+    })
+    .catch(err => {
+      dispatch({
+        type: REMOVE_RECIPE_ERROR,
+        payload: err.response.data.message
+      });
+    });
+};*/
 
   const recipeChangeHandler = e => {
     setRecipe({ recipe_name: e.target.value });
@@ -46,21 +64,25 @@ const EventPage = ({ match }) => {
         <li>
           <ul>
             {" "}
-            {event.data.recipes.map(recipe => {
-              return (
-                <li
-                  onClick={e => {
-                    e.preventDefault();
-                    claimRecipe(dispatch, eventID, {
-                      recipe_name: recipe.recipe_name,
-                      user_id: user_id
-                    });
-                  }}
-                >
-                  {recipe.recipe_name}
-                </li>
-              );
-            })}
+            {typeof event.data.recipes === "string" ? (
+              <li>{event.data.recipes}</li>
+            ) : (
+              event.data.recipes.map(recipe => {
+                return (
+                  <li
+                    onClick={e => {
+                      e.preventDefault();
+                      claimRecipe(dispatch, eventID, {
+                        recipe_name: recipe.recipe_name,
+                        user_id: user_id
+                      });
+                    }}
+                  >
+                    {recipe.recipe_name}
+                  </li>
+                );
+              })
+            )}
             <form
               onSubmit={e => {
                 addRecipe(dispatch, eventID, createRecipe);
@@ -82,27 +104,4 @@ const EventPage = ({ match }) => {
   );
 };
 
-=======
-import React, { useEffect } from "react";
-import { withRouter } from "react-router-dom";
-import { getEvent } from "../actions";
-import { useStateValue } from "../hooks/useStateValue";
-
-const EventPage = ({ match }) => {
-  let eventID = match.params.eventID;
-  const [{ event }, dispatch] = useStateValue();
-
-  useEffect(() => {
-    getEvent(dispatch, eventID);
-  }, [dispatch, eventID]);
-
-  return (
-    <div>
-      Event Page
-      <h2>Event Name: {event.data.event_name}</h2>
-    </div>
-  );
-};
-
->>>>>>> cc1258a95b678e33e06b57ea937a3dc90180d76c
 export default withRouter(EventPage);
