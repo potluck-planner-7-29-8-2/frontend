@@ -21,8 +21,6 @@ const EventPage = ({ match }) => {
     setRecipe({ recipe_name: e.target.value });
   };
 
-  let claimText;
-
   // //need it to be {'recipe_name': ''}
   //  export const removeRecipe = (dispatch, id, recipe) => {
   //     dispatch({ type: REMOVING_RECIPE });
@@ -94,9 +92,7 @@ const EventPage = ({ match }) => {
                               });
                         }}
                       >
-                        {recipe.full_name
-                          ? (claimText = "Unclaim Recipe")
-                          : (claimText = "Claim Recipe")}
+                        {recipe.full_name ? "Unclaim Recipe" : "Claim Recipe"}
                       </button>
                       <button
                         onClick={event => {
