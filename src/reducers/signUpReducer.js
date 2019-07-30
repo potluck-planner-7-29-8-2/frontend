@@ -1,4 +1,4 @@
-import {IS_SIGNING_UP, SIGNUP_SUCCESS, SIGNUP_ERROR} from '../actions'
+import {IS_SIGNING_UP, SIGNUP_SUCCESS, SIGNUP_ERROR, SIGNUP_OVER} from '../actions'
 
 /*
 State shape:
@@ -28,6 +28,11 @@ export const signUpReducer = (state, {type, payload}) => {
                 ...state,
                 isSignUpLoading: false,
                 errorMessage: payload
+            }
+        case SIGNUP_OVER:
+            return {
+                ...state,
+                isSignedUp:false
             }
         default:
             return state

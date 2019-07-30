@@ -21,7 +21,7 @@ export const StyledLoginForm = styled.form`
         width: 100%;
 
         ::placeholder{
-            color: ${({theme}) => theme.blue};
+            color: #adadad
         }
 
         &:focus {
@@ -32,9 +32,5 @@ export const StyledLoginForm = styled.form`
             }
         }
 
-        &:valid{
-            color: ${({theme}) => theme.blue};
-            border: none;
-        }
     }
 `
