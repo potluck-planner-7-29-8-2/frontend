@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { NavLink, withRouter } from "react-router-dom";
 import { useStateValue } from "../hooks/useStateValue";
 import { getUsers } from "./../actions/usersActions";
+import moment from "moment";
 
 const EventCard = props => {
   const {
@@ -34,7 +35,7 @@ const EventCard = props => {
       </NavLink>
       <div className="card-organizer">Organized By: {username}</div>
       <div className="card-date">
-        Date: {date} Time: {time}
+        Date: {moment(date).format("LL")} Time: {time}
       </div>
       <div className="card-location">
         Location: {city}, {state}
