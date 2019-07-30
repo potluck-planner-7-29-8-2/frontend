@@ -14,10 +14,12 @@ const Guests = props => {
   const userCompare = toCompare => {
     let searchGuests = users.data;
     searchGuests = searchGuests.filter(
-      user => user.full_name.toLowerCase() === toCompare.toLowerCase()
+      user => user.full_name.toLowerCase().includes(toCompare.toLowerCase())
     );
     setDisplayedUsers(searchGuests);
   };
+
+
 
   return (
     <div>
@@ -44,7 +46,7 @@ const Guests = props => {
                   e.preventDefault();
                   addGuest(dispatch, props.eventID, {
                     user_id: user.user_id,
-                    attending: true
+                    attending: false
                   });
                 }}
               >
