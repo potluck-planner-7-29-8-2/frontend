@@ -23,7 +23,7 @@ const EventPage = ({ match, history }) => {
   const recipeChangeHandler = e => {
     setRecipe({ recipe_name: e.target.value });
   };
-  console.log(event);
+
   useEffect(() => {
     const guests = event.data.guests;
     if (typeof event.data.recipes !== "string") {
@@ -214,23 +214,27 @@ const EventPage = ({ match, history }) => {
                 event.data.recipes.map(recipe => {
                   //Determine if Recipes is an array or string and return value
                   return (
-                    <li
-                      onClick={e => {
-                        e.preventDefault();
-                        recipe.full_name
-                          ? claimRecipe(dispatch, eventID, {
-                              //Determine if a full_name is associated with recipe and return value, toggle between null and name to claim
-                              recipe_name: recipe.recipe_name,
-                              user_id: null
-                            })
-                          : claimRecipe(dispatch, eventID, {
-                              recipe_name: recipe.recipe_name,
-                              user_id: user_id
-                            });
-                      }}
-                    >
+                    <li>
                       {recipe.recipe_name} :{" "}
-                      {recipe.full_name ? recipe.full_name : "unclaimed"}{" "}
+                      {recipe.full_name ? recipe.full_name : ""}{" "}
+                      {/* Toggling between the name and unclaimed */}
+                      {!recipe.full_name || recipe.user_id === user_id ? <button
+                        onClick={e => {
+                          e.preventDefault();
+                          recipe.full_name && recipe.user_id === user_id
+                            ? claimRecipe(dispatch, eventID, {
+                                //Determine if a full_name is associated with recipe and return value, toggle between null and name to claim
+                                recipe_name: recipe.recipe_name,
+                                user_id: null
+                              })
+                            : claimRecipe(dispatch, eventID, {
+                                recipe_name: recipe.recipe_name,
+                                user_id: user_id
+                              });
+                        }}
+                      >
+                        {recipe.full_name && recipe.user_id === user_id ? "Unclaim Recipe" : "Claim Recipe"}
+                      </button> : null}
                       {/* Toggling between the name and unclaimed */}
                     </li>
                   );
