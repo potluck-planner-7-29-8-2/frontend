@@ -3,7 +3,7 @@ import { useStateValue } from "../hooks/useStateValue";
 import { addEvent } from "../actions";
 import { useLocalStorage } from "../hooks/useLocalStorage";
 import { Input } from "semantic-ui-react";
-
+import moment from 'moment';
 
 const AddEventForm = props => {
   const [event, setEvent] = useState({
@@ -24,6 +24,7 @@ const AddEventForm = props => {
     setEvent({ ...event, [name]: value });
   };
 
+  const today = moment(new Date()).format('YYYY-MM-DD')
   return (
     <form
       onSubmit={e => {
@@ -53,6 +54,7 @@ const AddEventForm = props => {
         <Input
           name="date"
           type="date"
+          min={today}
           value={event.date}
           onChange={event => eventInputHandler(event)}
         />

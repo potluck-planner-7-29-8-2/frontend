@@ -10,7 +10,6 @@ import { deleteEvent } from "../actions/generalEventsActions";
 import Guests from "../components/Guests";
 import { NavLink } from "react-router-dom";
 
-
 const EventPage = ({ match, history }) => {
   let eventID = match.params.eventID;
   const { url } = match;
@@ -27,20 +26,24 @@ const EventPage = ({ match, history }) => {
 
   useEffect(() => {
     const guests = event.data.guests;
-    if(typeof event.data.recipes !== 'string'){
+    if (typeof event.data.recipes !== "string") {
       event.data.recipes.forEach(recipe => {
-      let includes = false;
-      guests.forEach(guest => {
-        if (guest.user_id === recipe.user_id) {
-          includes = true;
+        let includes = false;
+        guests.forEach(guest => {
+          if (guest.user_id === recipe.user_id) {
+            includes = true;
+          }
+        });
+        if (includes === false) {
+          claimRecipe(dispatch, eventID, {
+            recipe_name: recipe.recipe_name,
+            user_id: null
+          });
         }
       });
-      if (includes === false) {
-        claimRecipe(dispatch, eventID, { recipe_name: recipe.recipe_name, user_id: null });
-      }
-    })};
+    }
   }, [event.data.guests]);
-  
+
   if (user_id === event.data.organizer_id) {
     //First case if for organizer, Second case is for guest
     return (
@@ -72,11 +75,28 @@ const EventPage = ({ match, history }) => {
             <ul>
               {event.data.guests.map(guest => {
                 //Mapping over guests to display
-                
+
                 if (guest.attending) {
                   return (
-                    <li>
+                    <li key={guest.user_id}>
                       Attending: {guest.full_name}{" "}
+                      {guest.user_id === event.data.organizer_id ? null : (
+                        <button
+                          onClick={() =>
+                            removeGuest(dispatch, eventID, {
+                              data: { user_id: guest.user_id }
+                            })
+                          }
+                        >
+                          Remove Guest
+                        </button>
+                      )}
+                    </li>
+                  );
+                } else {
+                  return (
+                    <li key={guest.user_id}>
+                      Invited: {guest.full_name}
                       <button
                         onClick={() =>
                           removeGuest(dispatch, eventID, {
@@ -84,12 +104,10 @@ const EventPage = ({ match, history }) => {
                           })
                         }
                       >
-                        Remove Guest
+                        Uninvite
                       </button>
                     </li>
                   );
-                } else {
-                  return <li>Invited: {guest.full_name}</li>;
                 }
               })}
             </ul>
@@ -103,7 +121,7 @@ const EventPage = ({ match, history }) => {
                 event.data.recipes.map(recipe => {
                   //Determine if Recipes is an array or string and return value
                   return (
-                    <li>
+                    <li key={recipe.recipe_name}>
                       {recipe.recipe_name} :{" "}
                       {recipe.full_name ? recipe.full_name : ""}{" "}
                       {/* Toggling between the name and unclaimed */}
@@ -179,10 +197,10 @@ const EventPage = ({ match, history }) => {
                 //Mapping over guests to display
                 if (guest.attending) {
                   return (
-                    <li key={guest.full_name}>Attending: {guest.full_name} </li>
+                    <li key={guest.user_id}>Attending: {guest.full_name} </li>
                   );
                 } else {
-                  return <li>Invited: {guest.full_name}</li>;
+                  return <li key={guest.user_id}>Invited: {guest.full_name}</li>;
                 }
               })}
             </ul>
@@ -196,23 +214,27 @@ const EventPage = ({ match, history }) => {
                 event.data.recipes.map(recipe => {
                   //Determine if Recipes is an array or string and return value
                   return (
-                    <li
-                      onClick={e => {
-                        e.preventDefault();
-                        recipe.full_name
-                          ? claimRecipe(dispatch, eventID, {
-                              //Determine if a full_name is associated with recipe and return value, toggle between null and name to claim
-                              recipe_name: recipe.recipe_name,
-                              user_id: null
-                            })
-                          : claimRecipe(dispatch, eventID, {
-                              recipe_name: recipe.recipe_name,
-                              user_id: user_id
-                            });
-                      }}
-                    >
+                    <li key={recipe.recipe_name}>
                       {recipe.recipe_name} :{" "}
-                      {recipe.full_name ? recipe.full_name : "unclaimed"}{" "}
+                      {recipe.full_name ? recipe.full_name : ""}{" "}
+                      {/* Toggling between the name and unclaimed */}
+                      {!recipe.full_name || recipe.user_id === user_id ? <button
+                        onClick={e => {
+                          e.preventDefault();
+                          recipe.full_name && recipe.user_id === user_id
+                            ? claimRecipe(dispatch, eventID, {
+                                //Determine if a full_name is associated with recipe and return value, toggle between null and name to claim
+                                recipe_name: recipe.recipe_name,
+                                user_id: null
+                              })
+                            : claimRecipe(dispatch, eventID, {
+                                recipe_name: recipe.recipe_name,
+                                user_id: user_id
+                              });
+                        }}
+                      >
+                        {recipe.full_name && recipe.user_id === user_id ? "Unclaim Recipe" : "Claim Recipe"}
+                      </button> : null}
                       {/* Toggling between the name and unclaimed */}
                     </li>
                   );
