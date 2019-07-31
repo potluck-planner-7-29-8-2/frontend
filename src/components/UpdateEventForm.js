@@ -22,7 +22,7 @@ const UpdateEventForm = props => {
 
   useEffect(() => {
     getEvent(dispatch, eventID);
-    const date = moment().format('MM/DD/YYYY', event.data.date);
+    const date = moment(event.data.date).format('YYYY-MM-DD');
     setEvent({...event.data, date: date});
   }, [dispatch, eventID]);
 

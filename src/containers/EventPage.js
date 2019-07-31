@@ -10,7 +10,6 @@ import { deleteEvent } from "../actions/generalEventsActions";
 import Guests from "../components/Guests";
 import { NavLink } from "react-router-dom";
 
-
 const EventPage = ({ match, history }) => {
   let eventID = match.params.eventID;
   const { url } = match;
@@ -24,23 +23,27 @@ const EventPage = ({ match, history }) => {
   const recipeChangeHandler = e => {
     setRecipe({ recipe_name: e.target.value });
   };
-
+  console.log(event);
   useEffect(() => {
     const guests = event.data.guests;
-    if(typeof event.data.recipes !== 'string'){
+    if (typeof event.data.recipes !== "string") {
       event.data.recipes.forEach(recipe => {
-      let includes = false;
-      guests.forEach(guest => {
-        if (guest.user_id === recipe.user_id) {
-          includes = true;
+        let includes = false;
+        guests.forEach(guest => {
+          if (guest.user_id === recipe.user_id) {
+            includes = true;
+          }
+        });
+        if (includes === false) {
+          claimRecipe(dispatch, eventID, {
+            recipe_name: recipe.recipe_name,
+            user_id: null
+          });
         }
       });
-      if (includes === false) {
-        claimRecipe(dispatch, eventID, { recipe_name: recipe.recipe_name, user_id: null });
-      }
-    })};
+    }
   }, [event.data.guests]);
-  
+
   if (user_id === event.data.organizer_id) {
     //First case if for organizer, Second case is for guest
     return (
@@ -72,11 +75,28 @@ const EventPage = ({ match, history }) => {
             <ul>
               {event.data.guests.map(guest => {
                 //Mapping over guests to display
-                
+
                 if (guest.attending) {
                   return (
                     <li>
                       Attending: {guest.full_name}{" "}
+                      {guest.user_id === event.data.organizer_id ? null : (
+                        <button
+                          onClick={() =>
+                            removeGuest(dispatch, eventID, {
+                              data: { user_id: guest.user_id }
+                            })
+                          }
+                        >
+                          Remove Guest
+                        </button>
+                      )}
+                    </li>
+                  );
+                } else {
+                  return (
+                    <li>
+                      Invited: {guest.full_name}
                       <button
                         onClick={() =>
                           removeGuest(dispatch, eventID, {
@@ -84,12 +104,10 @@ const EventPage = ({ match, history }) => {
                           })
                         }
                       >
-                        Remove Guest
+                        Uninvite
                       </button>
                     </li>
                   );
-                } else {
-                  return <li>Invited: {guest.full_name}</li>;
                 }
               })}
             </ul>
