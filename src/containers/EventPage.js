@@ -11,14 +11,7 @@ import Guests from "../components/Guests";
 import { NavLink } from "react-router-dom";
 import moment from "moment";
 
-import {
-  Header,
-  Icon,
-  Container,
-  Button,
-  List,
-  Card,
-} from "semantic-ui-react";
+import { Header, Icon, Container, Button, List, Card } from "semantic-ui-react";
 
 const EventPage = ({ match, history }) => {
   let eventID = match.params.eventID;
@@ -98,71 +91,82 @@ const EventPage = ({ match, history }) => {
             </Button>
           </List>
         </Container>
-        <div style={{ margin: 'auto', display: "flex", justifyContent: "space-between", width: '75%' }}>
-          <div style={{display: 'flex', justifyContent: 'space-around', width: '50%'}}>
-           
-                <List>
-                  {event.data.guests.map(guest => {
-                    //Mapping over guests to display
+        <div
+          style={{
+            margin: "auto",
+            display: "flex",
+            justifyContent: "space-between",
+            width: "75%"
+          }}
+        >
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "space-around",
+              width: "50%"
+            }}
+          >
+            <List>
+              {event.data.guests.map(guest => {
+                //Mapping over guests to display
 
-                    if (guest.attending) {
-                      return (
-                        <List.Item key={guest.user_id} size='tiny'>
-                          
-                           {guest.full_name} - Attending{" "} 
-                          {guest.user_id === event.data.organizer_id ? null : (
-                            <Icon name='trash alternate' onClick={() =>
-                              removeGuest(dispatch, eventID, {
-                                data: { user_id: guest.user_id }
-                              })
-                            } ></Icon>)}
-                            
-                        </List.Item>
-                   
-                       
-                      );
-                    } else {
-                      return (
-                        <List.Item key={guest.user_id}>
-                           {guest.full_name} - Invited
-                        
-                          <Button
-                            size="mini"
-                            secondary
-                            onClick={() =>
-                              removeGuest(dispatch, eventID, {
-                                data: { user_id: guest.user_id }
-                              })
-                            }
-                          >
-                            <i className="trash alternate icon" />
-                          </Button>
-                          </List.Item>
-                        
-                      );
-                    }
-                  })}
-               </List>
+                if (guest.attending) {
+                  return (
+                    <List.Item key={guest.user_id} size="tiny">
+                      {guest.full_name} - Attending{" "}
+                      {guest.user_id === event.data.organizer_id ? null : (
+                        <Icon
+                          name="trash alternate"
+                          onClick={() =>
+                            removeGuest(dispatch, eventID, {
+                              data: { user_id: guest.user_id }
+                            })
+                          }
+                        />
+                      )}
+                    </List.Item>
+                  );
+                } else {
+                  return (
+                    <List.Item key={guest.user_id}>
+                      {guest.full_name} - Invited
+                      <Icon
+                        name="trash alternate"
+                        onClick={() =>
+                          removeGuest(dispatch, eventID, {
+                            data: { user_id: guest.user_id }
+                          })
+                        }
+                      />
+                      ) } >
+                    </List.Item>
+                  );
+                }
+              })}
+            </List>
           </div>
-          <div style={{display: 'flex', justifyContent: 'space-around', width: '50%'}}>
-            <ul>
-              <li>
-                <ul>
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "space-around",
+              width: "50%"
+            }}
+          >
+            <List>
+              
                   {" "}
                   <h2>Food to bring:</h2>
                   {typeof event.data.recipes === "string" ? (
-                    <li>{event.data.recipes}</li>
+                    <List.Item>{event.data.recipes}</List.Item>
                   ) : (
                     event.data.recipes.map(recipe => {
                       //Determine if Recipes is an array or string and return value
                       return (
-                        <li key={recipe.recipe_name}>
-                          <h3>{recipe.recipe_name} :{" "}</h3>
-                          <div>{recipe.full_name ? recipe.full_name : ""}{" "}</div>
+                        <List.Item key={recipe.recipe_name}>
+                          <div><h3>{recipe.recipe_name} - {recipe.full_name ? recipe.full_name : ""}</h3>
+                           </div>
                           {/* Toggling between the name and unclaimed */}
-                          <Button
-                            size="mini"
-                            primary
+                          <Icon size='large' name={recipe.full_name ? 'times' : 'check'}
                             onClick={e => {
                               e.preventDefault();
                               recipe.full_name
@@ -177,13 +181,9 @@ const EventPage = ({ match, history }) => {
                                   });
                             }}
                           >
-                            {recipe.full_name
-                              ? "Unclaim Recipe"
-                              : "Claim Recipe"}
-                          </Button>
-                          <Button
-                            secondary
-                            size="mini"
+                          </Icon>
+                          <Icon name='trash alternate'
+                          size='large'
                             onClick={event => {
                               event.preventDefault();
                               removeRecipe(dispatch, parseInt(eventID), {
@@ -191,9 +191,8 @@ const EventPage = ({ match, history }) => {
                               });
                             }}
                           >
-                            Delete Recipe
-                          </Button>
-                        </li>
+                          </Icon>
+                        </List.Item>
                       );
                     })
                   )}
@@ -214,9 +213,8 @@ const EventPage = ({ match, history }) => {
                       Add Recipe
                     </Button>
                   </form>
-                </ul>
-              </li>
-            </ul>
+                
+                  </List>
           </div>
         </div>
 
