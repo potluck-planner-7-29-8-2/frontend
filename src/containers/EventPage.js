@@ -28,7 +28,8 @@ const EventPage = ({ match, history }) => {
 
   useEffect(() => {
     const guests = event.data.guests;
-    event.data.recipes.forEach(recipe => {
+    if(typeof event.data.recipes !== 'string'){
+      event.data.recipes.forEach(recipe => {
       let includes = false;
       guests.forEach(guest => {
         if (guest.user_id === recipe.user_id) {
@@ -38,7 +39,7 @@ const EventPage = ({ match, history }) => {
       if (includes === false) {
         claimRecipe(dispatch, eventID, { recipe_name: recipe.recipe_name, user_id: null });
       }
-    });
+    })};
   }, [event.data.guests]);
   console.log(event);
   if (user_id === event.data.organizer_id) {
