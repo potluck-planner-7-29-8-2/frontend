@@ -13,7 +13,13 @@ export const StyledEventCard = styled.div`
     font-family: ${({ theme }) => theme.poppinsFont};
     color: #555
     background-color: #E6EBEE;
-    margin: 10px auto;`;
+    margin: 10px auto;
+
+    .card-field {
+      font-weight: 900;
+    }
+    
+    `;
 
 export const CardTop = styled.div`
   display: flex;

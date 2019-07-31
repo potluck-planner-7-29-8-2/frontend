@@ -6,6 +6,7 @@ import { getUsers } from "./../actions/usersActions";
 import { deleteEvent, getEvents } from "../actions/generalEventsActions";
 import { changeAttendance, removeGuest } from "../actions/specificEventActions";
 import moment from "moment";
+import { Popup } from "semantic-ui-react";
 import {
   StyledEventCard,
   StyledCardHeader,
@@ -57,7 +58,11 @@ const EventCard = props => {
               }}
               alt="Delete"
             >
-              <i className="trash alternate icon" />
+              <Popup
+                content="Delete Event"
+                trigger={<i className="trash alternate icon" />}
+                size="large"
+              />
             </button>
           )}
 
@@ -84,7 +89,11 @@ const EventCard = props => {
                   }}
                   alt="Accept"
                 >
-                  <i className="check icon" />
+                  <Popup
+                    content="Accept"
+                    trigger={<i className="check icon" />}
+                    size="large"
+                  />
                 </button>
                 <button
                   onClick={() =>
@@ -94,7 +103,11 @@ const EventCard = props => {
                   }
                   alt="Decline"
                 >
-                  <i class="close icon" />
+                  <Popup
+                    content="Decline"
+                    trigger={<i className="close icon" />}
+                    size="large"
+                  />
                 </button>
               </div>
             )
@@ -103,7 +116,9 @@ const EventCard = props => {
       </CardTop>
       <CardDetails>
         <CardCol>
-          <div className="card-organizer">Organized By: {username}</div>
+          <div className="card-organizer">
+            <span className="card-field">Organized By:</span> {username}
+          </div>
           <div className="card-location">
             Location: {city}, {state}
           </div>
