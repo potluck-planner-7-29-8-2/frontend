@@ -46,6 +46,7 @@ export const addEvent = (dispatch, id, event) => {
   axiosWithAuth()
     .post(`/users/${id}/events`, event)
     .then(res => {
+        console.log(res)
       dispatch({ type: CREATED_EVENT, payload: res.data });
     })
     .catch(err => {
@@ -61,7 +62,7 @@ export const deleteEvent = (dispatch, id) => {
   axiosWithAuth()
     .delete(`/events/${id}`)
     .then(res => {
-      dispatch({ type: DELETED_EVENT, payload: res.data });
+      dispatch({ type: DELETED_EVENT, payload: id });
     })
     .catch(err => {
       dispatch({
