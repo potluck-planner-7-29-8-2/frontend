@@ -10,8 +10,9 @@ import { deleteEvent } from "../actions/generalEventsActions";
 import UpdateEventForm from "../components/UpdateEventForm";
 import Guests from "../components/Guests";
 import { NavLink } from "react-router-dom";
+import { OmitProps } from "antd/lib/transfer/renderListBody";
 
-const EventPage = ({ match }) => {
+const EventPage = ({ match, history }) => {
   let eventID = match.params.eventID;
   const { url } = match;
   const [{ event }, dispatch] = useStateValue();
@@ -48,6 +49,7 @@ const EventPage = ({ match }) => {
             onClick={e => {
               e.preventDefault();
               deleteEvent(dispatch, eventID);
+              history.push("/dashboard");
             }}
           >
             Delete Event
