@@ -7,13 +7,14 @@ import {
   HeaderTitle,
   HeaderNavLinks
 } from "../styled_components/Dashboard/Header";
+import logo from "../PP_logo.png";
 
 const Header = () => {
   const [, dispatch] = useStateValue();
   return (
     <HeaderDiv>
       <HeaderTitle>
-        <img src="./PP_logo.png" alt="logo" /> Potluck Planner
+        <img src={logo} alt="logo" /> Potluck Planner
       </HeaderTitle>
       <HeaderNavLinks>
         <NavLink to="/dashboard/addEvent">Add New Event</NavLink>

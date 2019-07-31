@@ -2,13 +2,16 @@ import React, { useState } from "react";
 import { useStateValue } from "../hooks/useStateValue";
 import { addEvent } from "../actions";
 import { useLocalStorage } from "../hooks/useLocalStorage";
-import { Icon, Input } from "semantic-ui-react";
+import { StyledInput } from "../styled_components";
+import moment from "moment";
+import { StyledEventForm } from "../styled_components";
 
 const AddEventForm = props => {
+  const today = moment(new Date()).format("YYYY-MM-DD");
   const [event, setEvent] = useState({
     event_name: "",
-    date: "",
-    time: "",
+    date: today,
+    time: "20:00",
     description: "",
     address: "",
     city: "",
@@ -24,7 +27,7 @@ const AddEventForm = props => {
   };
 
   return (
-    <form
+    <StyledEventForm
       onSubmit={e => {
         e.preventDefault();
         addEvent(dispatch, user_id, event);
@@ -40,58 +43,64 @@ const AddEventForm = props => {
         props.history.push("/dashboard");
       }}
     >
-      <fieldset>
-        <legend>Add Event</legend>
-        <Input
-          name="event_name"
-          type="text"
-          value={event.event_name}
-          onChange={event => eventInputHandler(event)}
-          placeholder="Event Name"
-        />
-        <Input
-          name="date"
-          type="date"
-          value={event.date}
-          onChange={event => eventInputHandler(event)}
-        />
-        <Input
-          name="time"
-          type="time"
-          value={event.time}
-          onChange={event => eventInputHandler(event)}
-        />
-        <Input
-          name="description"
-          type="text"
-          value={event.description}
-          onChange={event => eventInputHandler(event)}
-          placeholder="Description"
-        />
-        <Input
-          name="address"
-          type="text"
-          value={event.address}
-          onChange={event => eventInputHandler(event)}
-          placeholder="Street Address"
-        />
-        <Input
-          name="city"
-          type="text"
-          value={event.city}
-          onChange={event => eventInputHandler(event)}
-          placeholder="City"
-        />
-        <Input
-          name="state"
-          type="text"
-          value={event.state}
-          onChange={event => eventInputHandler(event)}
-          placeholder="State"
-        />
-        <button type="submit">Submit</button>
-      </fieldset>
-    </form>
+      <legend>Add Event</legend>
+      <StyledInput
+        name="event_name"
+        type="text"
+        required
+        value={event.event_name}
+        onChange={event => eventInputHandler(event)}
+        placeholder="Event Name"
+      />
+      <StyledInput
+        name="date"
+        type="date"
+        required
+        min={today}
+        value={event.date}
+        onChange={event => eventInputHandler(event)}
+      />
+      <StyledInput
+        name="time"
+        type="time"
+        required
+        value={event.time}
+        onChange={event => eventInputHandler(event)}
+      />
+      <StyledInput
+        name="description"
+        type="text"
+        required
+        value={event.description}
+        onChange={event => eventInputHandler(event)}
+        placeholder="Description"
+      />
+      <StyledInput
+        name="address"
+        type="text"
+        required
+        value={event.address}
+        onChange={event => eventInputHandler(event)}
+        placeholder="Street Address"
+      />
+      <StyledInput
+        name="city"
+        type="text"
+        required
+        value={event.city}
+        onChange={event => eventInputHandler(event)}
+        placeholder="City"
+      />
+      <StyledInput
+        name="state"
+        type="text"
+        required
+        value={event.state}
+        onChange={event => eventInputHandler(event)}
+        placeholder="State"
+      />
+      <button type="submit">Submit</button>
+    </StyledEventForm>
   );
 };
 
