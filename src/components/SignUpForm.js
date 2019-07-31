@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { signUpAction } from "../actions";
 import { useStateValue } from "../hooks/useStateValue";
+import { StyledSignUpForm, SignUpInput } from '../styled_components'
 import { Form, Icon, Input } from "semantic-ui-react";
 
 const SignUpForm = () => {
@@ -19,7 +20,7 @@ const SignUpForm = () => {
     };
 
     return (
-        <Form
+        <StyledSignUpForm
             onSubmit={e => {
                 e.preventDefault();
                 signUpAction(dispatch, user);
@@ -31,42 +32,49 @@ const SignUpForm = () => {
                 })
             }}
         >
-            <Form.Input
-                label="Username"
-                name="username"
-                type="text"
-                onChange={event => userInputHandler(event)}
-                value={user.username}
-                placeholder="Username"
-            />
-            <Form.Input
-                label="Enter Password"
-                name="password"
-                type="password"
-                onChange={event => userInputHandler(event)}
-                value={user.password}
-                placeholder="Password"
-            />
-            <Form.Input
-                label="Enter Full Name"
-                name="full_name"
-                type="text"
-                onChange={event => userInputHandler(event)}
-                value={user.full_name}
-                placeholder="Full Name"
-            />
-            <Form.Input
-                iconPosition="left"
-                icon="at"
-                label="Enter E-Mail"
-                name="email"
-                type="email"
-                onChange={event => userInputHandler(event)}
-                value={user.email}
-                placeholder="E-Mail"
-            />
-            <button disabled={signUp.isSignUpLoading} type="submit">Sign Up</button>
-        </Form>
+            <h1>Sign up</h1>
+            <div className='signup_input_and_label'>
+                <label htmlFor="username"><i className="user icon"></i></label>
+                <SignUpInput
+                    name="username"
+                    type="text"
+                    onChange={event => userInputHandler(event)}
+                    value={user.username}
+                    placeholder="Username"
+                />
+            </div>
+            <div className='signup_input_and_label'>
+                <label htmlFor='password'><i className="lock icon"></i></label>
+                <SignUpInput
+                    name="password"
+                    type="password"
+                    onChange={event => userInputHandler(event)}
+                    value={user.password}
+                    placeholder="Password"
+                />
+            </div>
+            <div className='signup_input_and_label'>
+                <label htmlFor="full_name"><i className="id card outline icon"></i></label>
+                <SignUpInput
+                    name="full_name"
+                    type="text"
+                    onChange={event => userInputHandler(event)}
+                    value={user.full_name}
+                    placeholder="Full Name"
+                />
+            </div>
+            <div className='signup_input_and_label'>
+                <label htmlFor="email"><i className="envelope icon"></i></label>
+                <SignUpInput
+                    name="email"
+                    type="email"
+                    onChange={event => userInputHandler(event)}
+                    value={user.email}
+                    placeholder="E-Mail"
+                />
+            </div>
+            <button disabled={signUp.isSignUpLoading} type="submit">Register</button>
+        </StyledSignUpForm>
     );
 };
 

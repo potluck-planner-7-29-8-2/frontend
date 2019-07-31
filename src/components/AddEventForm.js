@@ -38,6 +38,7 @@ const AddEventForm = props => {
           city: "",
           state: ""
         });
+        props.history.push('/dashboard');
       }}
     >
       <fieldset>

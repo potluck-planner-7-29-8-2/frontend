@@ -3,7 +3,7 @@ import { withRouter } from "react-router-dom";
 import { getEvent } from "../actions";
 import { useStateValue } from "../hooks/useStateValue";
 import { useLocalStorage } from "../hooks/useLocalStorage";
-import { addRecipe } from "../actions/specificEventActions";
+import { addRecipe, removeGuest } from "../actions/specificEventActions";
 import { claimRecipe } from "../actions/specificEventActions";
 import { removeRecipe } from "../actions/specificEventActions";
 import { deleteEvent } from "../actions/generalEventsActions";
@@ -18,8 +18,6 @@ const EventPage = ({ match, history }) => {
   const [{ event }, dispatch] = useStateValue();
   const [user_id] = useLocalStorage("user_id");
   const [createRecipe, setRecipe] = useState({ recipe_name: "" });
-  const [active, setActive] = useState(false);
-  console.log("event page", event.data);
   useEffect(() => {
     getEvent(dispatch, eventID);
   }, [dispatch, eventID]);
@@ -59,8 +57,22 @@ const EventPage = ({ match, history }) => {
             <ul>
               {event.data.guests.map(guest => {
                 //Mapping over guests to display
+                console.log(guest);
                 if (guest.attending) {
-                  return <li>{guest.full_name} </li>;
+                  return (
+                    <li>
+                      {guest.full_name}{" "}
+                      <button
+                        onClick={() =>
+                          removeGuest(dispatch, eventID, {
+                            data: { user_id: guest.user_id }
+                          })
+                        }
+                      >
+                        Remove Guest
+                      </button>
+                    </li>
+                  );
                 } else {
                   return <li>No guests attending</li>;
                 }
