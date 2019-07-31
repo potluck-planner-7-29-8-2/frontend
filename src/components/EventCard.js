@@ -32,7 +32,7 @@ const EventCard = props => {
   useEffect(() => {
     getUsers(dispatch);
   }, [props.event, dispatch]);
-
+  
   let username;
   users.data.forEach(user => {
     if (user.user_id === organizer_id) {
