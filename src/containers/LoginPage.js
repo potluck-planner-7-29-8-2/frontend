@@ -4,7 +4,7 @@ import { useLocalStorage } from '../hooks/useLocalStorage'
 
 import LoginForm from '../components/LoginForm'
 import { LoginContainer, WelcomeDiv, SignUpDiv } from '../styled_components'
-
+import logo from '../PP_logo.png'
 
 const LoginPage = (props) => {
     const [token, ] = useLocalStorage('token')
@@ -17,7 +17,7 @@ const LoginPage = (props) => {
     return (
         <LoginContainer>
             <WelcomeDiv>
-                <img src='./PP_logo.png' alt="logo" />
+                <img src={logo} alt="logo" />
                 <span>Potluck Planner</span>
             </WelcomeDiv>
             <LoginForm />
