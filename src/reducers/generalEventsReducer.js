@@ -93,10 +93,11 @@ export const eventsReducer = (state, { type, payload }) => {
         isEventsLoading: true
       };
     case UPDATED_EVENT:
+        let sameEvents = state.data.filter(event => event.event_id!==Number(payload.id))
       return {
         ...state,
         isEventsLoading: false,
-        data: payload
+        data: [...sameEvents, payload.event]
       };
     case UPDATING_EVENT_ERROR:
       return {
