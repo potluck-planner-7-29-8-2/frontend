@@ -94,7 +94,7 @@ const EventCard = props => {
                   }
                   alt="Decline"
                 >
-                  <i class="close icon" />
+                  <i className="close icon" />
                 </button>
               </div>
             )

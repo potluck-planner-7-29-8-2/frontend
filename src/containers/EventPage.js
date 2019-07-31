@@ -9,6 +9,9 @@ import { removeRecipe } from "../actions/specificEventActions";
 import { deleteEvent } from "../actions/generalEventsActions";
 import Guests from "../components/Guests";
 import { NavLink } from "react-router-dom";
+import moment from 'moment';
+
+import { Header, Icon, Container, Divider, Grid, Button, List } from 'semantic-ui-react'
 
 const EventPage = ({ match, history }) => {
   let eventID = match.params.eventID;
@@ -48,20 +51,25 @@ const EventPage = ({ match, history }) => {
     //First case if for organizer, Second case is for guest
     return (
       <div>
-        Event Page
-        <h2>Event Name: {event.data.event_name}</h2>
-        <ul>
-          <li>Address: {event.data.address}</li>
-          <li>City: {event.data.city}</li>
-          <li>State: {event.data.state}</li>
-          <li>Time: {event.data.time}</li>
-          <li>
-            Description: <p>{event.data.description}</p>
-          </li>
+        <Container textAlign='center'>
+        <Header as='h2' icon textAlign='center'>
+          <Icon name='calendar check' />
+          {event.data.event_name}
+        </Header>
+        </Container>
+        <Container textAlign='left'>
+        <List>
+          <List.Item><List.Icon name='calendar' />{moment(event.data.date).format('LL')}</List.Item>
+          <List.Item><List.Icon name='map marker' />{event.data.address},  {event.data.city}, {event.data.state} </List.Item>
+          <List.Item ><List.Icon name='outline clock' />{event.data.time}</List.Item>
+          <List.Item>
+            <List.Icon name='newspaper outline' />{event.data.description}
+          </List.Item>
           <NavLink to={`${url}/update`}>
-            <button>Edit Event</button>
+            <Button primary>Edit Event</Button>
           </NavLink>
-          <button
+          <Button
+            secondary
             onClick={e => {
               e.preventDefault();
               deleteEvent(dispatch, eventID);
@@ -69,7 +77,15 @@ const EventPage = ({ match, history }) => {
             }}
           >
             Delete Event
-          </button>
+          </Button>
+        </List>
+        </Container>
+        <Grid>
+          <Grid.Row columns='2'>
+            <Grid.Column width='8'>
+        <Container textAlign='center'>
+        <ul>
+          
           <li>
             Guests:{" "}
             <ul>
@@ -81,7 +97,9 @@ const EventPage = ({ match, history }) => {
                     <li key={guest.user_id}>
                       Attending: {guest.full_name}{" "}
                       {guest.user_id === event.data.organizer_id ? null : (
-                        <button
+                        <Button
+                        size='mini'
+                        secondary
                           onClick={() =>
                             removeGuest(dispatch, eventID, {
                               data: { user_id: guest.user_id }
@@ -89,7 +107,7 @@ const EventPage = ({ match, history }) => {
                           }
                         >
                           Remove Guest
-                        </button>
+                        </Button>
                       )}
                     </li>
                   );
@@ -97,7 +115,9 @@ const EventPage = ({ match, history }) => {
                   return (
                     <li key={guest.user_id}>
                       Invited: {guest.full_name}
-                      <button
+                      <Button
+                      size='mini'
+                      secondary
                         onClick={() =>
                           removeGuest(dispatch, eventID, {
                             data: { user_id: guest.user_id }
@@ -105,13 +125,19 @@ const EventPage = ({ match, history }) => {
                         }
                       >
                         Uninvite
-                      </button>
+                      </Button>
                     </li>
                   );
                 }
               })}
             </ul>
           </li>
+          </ul>
+          </Container>
+          </Grid.Column>
+          <Grid.Column width='8'>
+          <Container textAlign='center'>
+          <ul>
           <li>
             <ul>
               {" "}
@@ -125,7 +151,9 @@ const EventPage = ({ match, history }) => {
                       {recipe.recipe_name} :{" "}
                       {recipe.full_name ? recipe.full_name : ""}{" "}
                       {/* Toggling between the name and unclaimed */}
-                      <button
+                      <Button
+                      size='mini'
+                      primary
                         onClick={e => {
                           e.preventDefault();
                           recipe.full_name
@@ -141,8 +169,10 @@ const EventPage = ({ match, history }) => {
                         }}
                       >
                         {recipe.full_name ? "Unclaim Recipe" : "Claim Recipe"}
-                      </button>
-                      <button
+                      </Button>
+                      <Button
+                      secondary
+                      size='mini'
                         onClick={event => {
                           event.preventDefault();
                           removeRecipe(dispatch, parseInt(eventID), {
@@ -151,7 +181,7 @@ const EventPage = ({ match, history }) => {
                         }}
                       >
                         Delete Recipe
-                      </button>
+                      </Button>
                     </li>
                   );
                 })
@@ -169,12 +199,18 @@ const EventPage = ({ match, history }) => {
                   placeholder="Recipe"
                   onChange={e => recipeChangeHandler(e)}
                 />
-                <button>Add Recipe</button>
+                <Button size='mini' primary>Add Recipe</Button>
               </form>
             </ul>
           </li>
         </ul>
+        </Container>
+        </Grid.Column>
+        </Grid.Row>
+        </Grid>
+        <Container textAlign='center'>
         <Guests eventID={eventID} />
+        </Container>
       </div>
     );
   } else {
@@ -218,7 +254,7 @@ const EventPage = ({ match, history }) => {
                       {recipe.recipe_name} :{" "}
                       {recipe.full_name ? recipe.full_name : ""}{" "}
                       {/* Toggling between the name and unclaimed */}
-                      {!recipe.full_name || recipe.user_id === user_id ? <button
+                      {!recipe.full_name || recipe.user_id === user_id ? <Button
                         onClick={e => {
                           e.preventDefault();
                           recipe.full_name && recipe.user_id === user_id
@@ -234,7 +270,7 @@ const EventPage = ({ match, history }) => {
                         }}
                       >
                         {recipe.full_name && recipe.user_id === user_id ? "Unclaim Recipe" : "Claim Recipe"}
-                      </button> : null}
+                      </Button> : null}
                       {/* Toggling between the name and unclaimed */}
                     </li>
                   );
