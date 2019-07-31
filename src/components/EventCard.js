@@ -59,28 +59,30 @@ const EventCard = props => {
               <i className="trash alternate icon" />
             </button>
           )}
-
-          {props.event.attending ? (
-            <button
-              onClick={() =>
-                removeGuest(dispatch, event_id, { data: { user_id: user_id } })
-              }
-            >
-              Leave Event
-            </button>
-          ) : (
-            <button
-              onClick={() => {
-                changeAttendance(dispatch, event_id, user_id, {
-                  attending: true
-                });
-                console.log(event_id);
-              }}
-            >
-              Accept Invite
-            </button>
-          )}
-          {props.event.attending ? null : (
+          {user_id !== organizer_id ? (
+            props.event.attending ? (
+              <button
+                onClick={() =>
+                  removeGuest(dispatch, event_id, {
+                    data: { user_id: user_id }
+                  })
+                }
+              >
+                Leave Event
+              </button>
+            ) : (
+              <button
+                onClick={() => {
+                  changeAttendance(dispatch, event_id, user_id, {
+                    attending: true
+                  });
+                  console.log(event_id);
+                }}
+              >
+                Accept Invite
+              </button>
+            )
+          ) : props.event.attending ? null : (
             <button
               onClick={() =>
                 removeGuest(dispatch, event_id, { data: { user_id: user_id } })
