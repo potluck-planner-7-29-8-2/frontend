@@ -83,7 +83,7 @@ const EventCard = props => {
                     console.log(event_id);
                   }}
                 >
-                  Accept Invite
+                  <i class="check icon" />
                 </button>
                 <button
                   onClick={() =>
@@ -96,15 +96,7 @@ const EventCard = props => {
                 </button>
               </div>
             )
-          ) : props.event.attending ? null : (
-            <button
-              onClick={() =>
-                removeGuest(dispatch, event_id, { data: { user_id: user_id } })
-              }
-            >
-              Decline
-            </button>
-          )}
+          ) : null}
         </CardButtons>
       </CardTop>
       <CardDetails>
