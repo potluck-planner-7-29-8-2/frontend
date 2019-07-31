@@ -2,7 +2,13 @@ import React, { useEffect } from "react";
 import { NavLink, withRouter } from "react-router-dom";
 import { useStateValue } from "../hooks/useStateValue";
 import { getUsers } from "./../actions/usersActions";
+import { deleteEvent } from "../actions/generalEventsActions";
+import { Icon } from "semantic-ui-react";
 import moment from "moment";
+import {
+  StyledEventCard,
+  StyledCardHeader
+} from "../styled_components/Dashboard/EventCard";
 
 const EventCard = props => {
   const {
@@ -12,7 +18,8 @@ const EventCard = props => {
     time,
     city,
     state,
-    event_id
+    event_id,
+    history
   } = props.event;
   const { url } = props.match;
   const [{ users }, dispatch] = useStateValue();
@@ -29,9 +36,9 @@ const EventCard = props => {
   });
 
   return (
-    <div className="EventCard">
+    <StyledEventCard>
       <NavLink to={`${url}/event/${event_id}`}>
-        <h2>{event_name}</h2>
+        <StyledCardHeader>{event_name}</StyledCardHeader>{" "}
       </NavLink>
       <div className="card-organizer">Organized By: {username}</div>
       <div className="card-date">
@@ -40,7 +47,17 @@ const EventCard = props => {
       <div className="card-location">
         Location: {city}, {state}
       </div>
-    </div>
+      <div className="card-buttons">
+        <button
+          onClick={e => {
+            e.preventDefault();
+            deleteEvent(dispatch, event_id);
+          }}
+        >
+          <i class="trash alternate icon" />
+        </button>
+      </div>
+    </StyledEventCard>
   );
 };
 
