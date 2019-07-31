@@ -8,10 +8,11 @@ export const GOT_EVENT_ERROR = "GOT_EVENT_ERROR";
 
 export const getEvent = (dispatch, id) => {
   dispatch({ type: GETTING_EVENT });
-  axiosWithAuth()
+  return axiosWithAuth()
     .get(`/events/${id}`)
     .then(res => {
       dispatch({ type: GOT_EVENT, payload: res.data });
+      return res
     })
     .catch(err => {
       dispatch({ type: GOT_EVENT_ERROR, payload: err.response.data.message });

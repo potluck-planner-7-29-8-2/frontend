@@ -4,7 +4,7 @@ import { updateEvent } from "../actions";
 import { Input } from "semantic-ui-react";
 import { getEvent } from "../actions";
 import moment from "moment";
-
+import { StyledEventForm, StyledInput, UpdateContainer, UpdateLeftColumn } from '../styled_components'
 
 const UpdateEventForm = props => {
   const [editEvent, setEvent] = useState({
@@ -21,9 +21,11 @@ const UpdateEventForm = props => {
   let eventID = props.match.params.eventID;
 
   useEffect(() => {
-    getEvent(dispatch, eventID);
-    const date = moment(event.data.date).format('YYYY-MM-DD');
-    setEvent({...event.data, date: date});
+    getEvent(dispatch, eventID)
+        .then(res => {
+            const date = moment(res.data.date).format('YYYY-MM-DD');
+            setEvent({...res.data, date: date});
+        })
   }, [dispatch, eventID]);
 
   const eventInputHandler = e => {
@@ -33,19 +35,19 @@ const UpdateEventForm = props => {
   };
 
   return (
-    <div>
-      <h2>Event Name: {editEvent.event_name}</h2>
-      <ul>
-        <li>Date: {editEvent.date}</li>
-        <li>Address: {editEvent.address}</li>
-        <li>City: {editEvent.city}</li>
-        <li>State: {editEvent.state}</li>
-        <li>Time: {editEvent.time}</li>
-        <li>
-          Description: <p>{editEvent.description}</p>
-        </li>
-      </ul>
-      <form
+    <UpdateContainer>
+        <UpdateLeftColumn>
+            <h2><span>Event Name:</span> {editEvent.event_name}</h2>
+                <li><span>Date:</span> {editEvent.date}</li>
+                <li><span>Address:</span> {editEvent.address}</li>
+                <li><span>City:</span> {editEvent.city}</li>
+                <li><span>State:</span> {editEvent.state}</li>
+                <li><span>Time:</span> {editEvent.time}</li>
+                <li><span>
+                Description:</span> {editEvent.description}
+                </li>
+        </UpdateLeftColumn>
+      <StyledEventForm style={{width: '550px', margin: '0px'}}
         onSubmit={e => {
           e.preventDefault();
           updateEvent(dispatch, eventID, {
@@ -69,49 +71,55 @@ const UpdateEventForm = props => {
           props.history.push(`/dashboard/event/${eventID}`);
         }}
       >
-        <fieldset>
           <legend>Update Event</legend>
-          <Input
+          <StyledInput
+            required
             name="event_name"
             type="text"
             value={editEvent.event_name}
             onChange={event => eventInputHandler(event)}
             placeholder="Event Name"
           />
-          <Input
+          <StyledInput
+            required
             name="date"
             type="date"
             value={editEvent.date}
             onChange={event => eventInputHandler(event)}
           />
-          <Input
+          <StyledInput
+            required
             name="time"
             type="time"
             value={editEvent.time}
             onChange={event => eventInputHandler(event)}
           />
-          <Input
+          <StyledInput
+            required
             name="description"
             type="text"
             value={editEvent.description}
             onChange={event => eventInputHandler(event)}
             placeholder="Description"
           />
-          <Input
+          <StyledInput
+            required
             name="address"
             type="text"
             value={editEvent.address}
             onChange={event => eventInputHandler(event)}
             placeholder="Street Address"
           />
-          <Input
+          <StyledInput
+            required
             name="city"
             type="text"
             value={editEvent.city}
             onChange={event => eventInputHandler(event)}
             placeholder="City"
           />
-          <Input
+          <StyledInput
+            required
             name="state"
             type="text"
             value={editEvent.state}
@@ -119,9 +127,8 @@ const UpdateEventForm = props => {
             placeholder="State"
           />
           <button type="submit">Submit</button>
-        </fieldset>
-      </form>
-    </div>
+      </StyledEventForm>
+    </UpdateContainer>
   );
 };
 
