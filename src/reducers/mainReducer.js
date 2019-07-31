@@ -12,7 +12,8 @@ export const initialState = {
     events: {
         data: [],
         errorMessage: '',
-        isEventsLoading: false
+        isEventsLoading: false,
+        searchTerm: ''
     },
     users: {
         data: [],

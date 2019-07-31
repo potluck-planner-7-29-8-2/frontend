@@ -14,7 +14,6 @@ const Dashboard = (props) => {
     return (
         <>
             <Header /><br></br>
-            DASHBOARD
             <PrivateRoute exact path={`${path}`} component={EventList} redirectURL='/' />
             <PrivateRoute exact path={`${path}/addEvent`} component={AddEventForm} redirectURL='/' />
             <PrivateRoute exact path={`${path}/event/:eventID`} component={EventPage} redirectURL='/' />
