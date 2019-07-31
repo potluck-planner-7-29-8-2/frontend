@@ -11,7 +11,6 @@ import {
   UPDATING_EVENT,
   UPDATED_EVENT,
   UPDATING_EVENT_ERROR,
-  LOGOUT
 } from "../actions";
 
 /*
@@ -38,7 +37,6 @@ export const eventsReducer = (state, { type, payload }) => {
     case GETTING_EVENTS:
       return {
         ...state,
-        data: [],
         errorMessage: "",
         isEventsLoading: true
       };
@@ -62,7 +60,7 @@ export const eventsReducer = (state, { type, payload }) => {
     case CREATED_EVENT:
       return {
         ...state,
-        data: payload,
+        data: [...state.data, payload],
         isEventsLoading: false
       };
     case CREATING_EVENT_ERROR:
@@ -77,10 +75,11 @@ export const eventsReducer = (state, { type, payload }) => {
         isEventsLoading: true
       };
     case DELETED_EVENT:
+        let remainingEvents = state.data.filter(event => event.event_id!==Number(payload))
       return {
         ...state,
         isEventsLoading: false,
-        data: payload
+        data: remainingEvents
       };
     case DELETING_EVENT_ERROR:
       return {
