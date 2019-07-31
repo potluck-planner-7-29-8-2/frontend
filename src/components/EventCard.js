@@ -8,7 +8,11 @@ import { Icon } from "semantic-ui-react";
 import moment from "moment";
 import {
   StyledEventCard,
-  StyledCardHeader
+  StyledCardHeader,
+  CardTop,
+  CardDetails,
+  CardCol,
+  CardButtons
 } from "../styled_components/Dashboard/EventCard";
 
 const EventCard = props => {
@@ -37,30 +41,36 @@ const EventCard = props => {
 
   return (
     <StyledEventCard>
-      <div className="card-information">
+      <CardTop>
         <NavLink to={`${url}/event/${event_id}`}>
           <StyledCardHeader>{event_name}</StyledCardHeader>{" "}
         </NavLink>
-        <div className="card-organizer">Organized By: {username}</div>
-        <div className="card-date">
-          Date: {moment(date).format("LL")} Time: {time}
-        </div>
-        <div className="card-location">
-          Location: {city}, {state}
-        </div>
-      </div>
-      <div className="card-buttons">
-        {user_id === organizer_id && (
-          <button
-            onClick={e => {
-              e.preventDefault();
-              deleteEvent(dispatch, event_id);
-            }}
-          >
-            <i className="trash alternate icon" />
-          </button>
-        )}
-      </div>
+
+        <CardButtons>
+          {user_id === organizer_id && (
+            <button
+              onClick={e => {
+                e.preventDefault();
+                deleteEvent(dispatch, event_id);
+              }}
+            >
+              <i className="trash alternate icon" />
+            </button>
+          )}
+        </CardButtons>
+      </CardTop>
+      <CardDetails>
+        <CardCol>
+          <div className="card-organizer">Organized By: {username}</div>
+          <div className="card-location">
+            Location: {city}, {state}
+          </div>
+        </CardCol>
+        <CardCol>
+          <div className="card-date">Date: {moment(date).format("LL")}</div>
+          <div className="card-time">Time: {time}</div>
+        </CardCol>
+      </CardDetails>
     </StyledEventCard>
   );
 };
