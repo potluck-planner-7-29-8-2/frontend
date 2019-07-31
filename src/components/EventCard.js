@@ -49,6 +49,7 @@ const EventCard = props => {
         </NavLink>
 
         <CardButtons>
+          {/*if a user is the organizer, only show delete button*/}
           {user_id === organizer_id && (
             <button
               onClick={e => {
@@ -59,6 +60,8 @@ const EventCard = props => {
               <i className="trash alternate icon" />
             </button>
           )}
+
+          {/*if a user isnt the organizer, show option to accept/decline. If accept, show option to leave */}
           {user_id !== organizer_id ? (
             props.event.attending ? (
               <button
@@ -71,16 +74,27 @@ const EventCard = props => {
                 Leave Event
               </button>
             ) : (
-              <button
-                onClick={() => {
-                  changeAttendance(dispatch, event_id, user_id, {
-                    attending: true
-                  });
-                  console.log(event_id);
-                }}
-              >
-                Accept Invite
-              </button>
+              <div>
+                <button
+                  onClick={() => {
+                    changeAttendance(dispatch, event_id, user_id, {
+                      attending: true
+                    });
+                    console.log(event_id);
+                  }}
+                >
+                  Accept Invite
+                </button>
+                <button
+                  onClick={() =>
+                    removeGuest(dispatch, event_id, {
+                      data: { user_id: user_id }
+                    })
+                  }
+                >
+                  Decline
+                </button>
+              </div>
             )
           ) : props.event.attending ? null : (
             <button
