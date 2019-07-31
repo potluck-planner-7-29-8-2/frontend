@@ -33,8 +33,11 @@ export const CardCol = styled.div`
 `;
 
 export const CardButtons = styled.div`
-  outline: none;
   background-color: transparent;
+
+  button {
+    outline: none;
+  }
 `;
 
 export const StyledCardHeader = styled.div`

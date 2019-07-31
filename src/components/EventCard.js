@@ -55,6 +55,7 @@ const EventCard = props => {
                 e.preventDefault();
                 deleteEvent(dispatch, event_id);
               }}
+              alt="Delete"
             >
               <i className="trash alternate icon" />
             </button>
@@ -69,6 +70,7 @@ const EventCard = props => {
                     data: { user_id: user_id }
                   }).then(res => getEvents(dispatch, user_id))
                 }
+                alt="Leave"
               >
                 Leave Event
               </button>
@@ -78,8 +80,9 @@ const EventCard = props => {
                   onClick={() => {
                     changeAttendance(dispatch, event_id, user_id, {
                       attending: true
-                    }).then(res => getEvents(dispatch, user_id))
+                    }).then(res => getEvents(dispatch, user_id));
                   }}
+                  alt="Accept"
                 >
                   <i className="check icon" />
                 </button>
@@ -89,8 +92,9 @@ const EventCard = props => {
                       data: { user_id: user_id }
                     }).then(res => getEvents(dispatch, user_id))
                   }
+                  alt="Decline"
                 >
-                  Decline
+                  <i class="close icon" />
                 </button>
               </div>
             )
