@@ -47,14 +47,19 @@ export const eventsReducer = (state, { type, payload }) => {
         data: payload
       };
     case EVENTS_ERROR:
+        let data = state.data
+        if(payload==="There are no events listed for this user.")
+            data=[]
       return {
         ...state,
         isEventsLoading: false,
+        data:data,
         errorMessage: payload
       };
     case CREATING_EVENT:
       return {
         ...state,
+        errorMessage: "",
         isEventsLoading: true
       };
     case CREATED_EVENT:
@@ -72,6 +77,7 @@ export const eventsReducer = (state, { type, payload }) => {
     case DELETING_EVENT:
       return {
         ...state,
+        errorMessage: "",
         isEventsLoading: true
       };
     case DELETED_EVENT:
@@ -90,6 +96,7 @@ export const eventsReducer = (state, { type, payload }) => {
     case UPDATING_EVENT:
       return {
         ...state,
+        errorMessage: "",
         isEventsLoading: true
       };
     case UPDATED_EVENT:

@@ -55,6 +55,7 @@ export const eventReducer = (state, {type, payload}) => {
     case GETTING_EVENT:
         return {
             ...state,
+            errorMessage: '',
             isEventLoading: true,
         }
     case GOT_EVENT:
@@ -72,6 +73,7 @@ export const eventReducer = (state, {type, payload}) => {
     case ADDING_GUESTS:
         return {
             ...state,
+            errorMessage: '',
             isEventLoading: true,
         }
     case ADDED_GUESTS:
@@ -92,6 +94,7 @@ export const eventReducer = (state, {type, payload}) => {
     case REMOVING_GUEST:
         return {
             ...state,
+            errorMessage: '',
             isEventLoading: true,
         }
     case REMOVED_GUEST:
@@ -112,6 +115,7 @@ export const eventReducer = (state, {type, payload}) => {
     case UPDATING_GUEST:
         return {
             ...state,
+            errorMessage: '',
             isEventLoading: true,
         }
     case UPDATED_GUEST:
@@ -132,6 +136,7 @@ export const eventReducer = (state, {type, payload}) => {
     case ADDING_RECIPES:
         return {
             ...state,
+            errorMessage: '',
             isEventLoading: true,
         }
     case ADDED_RECIPES:
@@ -152,6 +157,7 @@ export const eventReducer = (state, {type, payload}) => {
     case REMOVING_RECIPE:
         return {
             ...state,
+            errorMessage: '',
             isEventLoading: true,
         }
     case REMOVED_RECIPE:
@@ -172,6 +178,7 @@ export const eventReducer = (state, {type, payload}) => {
     case UPDATING_RECIPE:
         return {
             ...state,
+            errorMessage: '',
             isEventLoading: true,
         }
     case UPDATED_RECIPE:

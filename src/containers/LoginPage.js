@@ -17,7 +17,7 @@ const LoginPage = (props) => {
     return (
         <LoginContainer>
             <WelcomeDiv>
-                <img src='./PP_logo.png' />
+                <img src='./PP_logo.png' alt="logo" />
                 <span>Potluck Planner</span>
             </WelcomeDiv>
             <LoginForm />

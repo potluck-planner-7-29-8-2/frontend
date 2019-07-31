@@ -46,7 +46,6 @@ export const addEvent = (dispatch, id, event) => {
   axiosWithAuth()
     .post(`/users/${id}/events`, event)
     .then(res => {
-        console.log(res)
       dispatch({ type: CREATED_EVENT, payload: res.data });
     })
     .catch(err => {

@@ -27,7 +27,6 @@ const Guests = props => {
         onSubmit={e => {
           e.preventDefault();
           userCompare(userSearch);
-          console.log(displayedUsers);
         }}
       >
         <input

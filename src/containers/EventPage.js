@@ -7,10 +7,9 @@ import { addRecipe, removeGuest } from "../actions/specificEventActions";
 import { claimRecipe } from "../actions/specificEventActions";
 import { removeRecipe } from "../actions/specificEventActions";
 import { deleteEvent } from "../actions/generalEventsActions";
-import UpdateEventForm from "../components/UpdateEventForm";
 import Guests from "../components/Guests";
 import { NavLink } from "react-router-dom";
-import { OmitProps } from "antd/lib/transfer/renderListBody";
+
 
 const EventPage = ({ match, history }) => {
   let eventID = match.params.eventID;
@@ -41,7 +40,7 @@ const EventPage = ({ match, history }) => {
       }
     })};
   }, [event.data.guests]);
-  console.log(event);
+  
   if (user_id === event.data.organizer_id) {
     //First case if for organizer, Second case is for guest
     return (
@@ -73,7 +72,7 @@ const EventPage = ({ match, history }) => {
             <ul>
               {event.data.guests.map(guest => {
                 //Mapping over guests to display
-                console.log(guest);
+                
                 if (guest.attending) {
                   return (
                     <li>

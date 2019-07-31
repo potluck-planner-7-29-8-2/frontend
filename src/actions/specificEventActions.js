@@ -47,10 +47,11 @@ export const addGuest = (dispatch, id, guest) => {
 // //just need {'user_id': ''}
 export const removeGuest = (dispatch, id, guest) => {
   dispatch({ type: REMOVING_GUEST });
-  axiosWithAuth()
+  return axiosWithAuth()
     .delete(`/events/${id}/guests`, guest)
     .then(res => {
       dispatch({ type: REMOVED_GUEST, payload: res.data });
+      return true
     })
     .catch(err => {
       dispatch({
@@ -63,10 +64,11 @@ export const removeGuest = (dispatch, id, guest) => {
 // //just pass {'attending' : true||false}
 export const changeAttendance = (dispatch, id, user_id, isAttending) => {
   dispatch({ type: UPDATING_GUEST });
-  axiosWithAuth()
+  return axiosWithAuth()
     .put(`/events/${id}/guests/${user_id}`, isAttending)
     .then(res => {
       dispatch({ type: UPDATED_GUEST, payload: res.data });
+      return true
     })
     .catch(err => {
       dispatch({

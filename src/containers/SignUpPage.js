@@ -11,7 +11,7 @@ const SignUpPage = () => {
     return (
         <SignUpContainer>
             <div className="form sign_up_inner">
-                {signUp.errorMessage ? <h2 className='sign_up_error'>{signUp.errorMessage}</h2> : <h2></h2>}
+                {signUp.errorMessage ? <h2 className='sign_up_error'>{signUp.errorMessage}</h2> : <h2>{" "}</h2>}
             {!signUp.isSignedUp 
                 ? <SignUpForm />
                 : <PostSignUpDiv>
@@ -21,7 +21,7 @@ const SignUpPage = () => {
             }
             </div>
             <div className="image sign_up_inner">
-                <img src='./undraw_having_fun_iais.svg' />
+                <img src='./undraw_having_fun_iais.svg' alt="family fun" />
                 <NavLink to='/'>I am already a member</NavLink>
             </div>
         </SignUpContainer>

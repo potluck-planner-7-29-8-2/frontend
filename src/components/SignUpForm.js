@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { signUpAction } from "../actions";
 import { useStateValue } from "../hooks/useStateValue";
 import { StyledSignUpForm, SignUpInput } from '../styled_components'
-import { Form, Icon, Input } from "semantic-ui-react";
+
 
 const SignUpForm = () => {
     const [user, setUser] = useState({
