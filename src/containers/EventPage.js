@@ -61,11 +61,11 @@ console.log(event)
                 if (guest.attending) {
                   return (
                     <li>
-                      {guest.full_name}{" "}
+                      Attending: {guest.full_name}{" "}
                       <button
                         onClick={() =>
                           removeGuest(dispatch, eventID, {
-                            data: { user_id: guest.user_id }
+                            data:{ user_id: guest.user_id }
                           })
                         }
                       >
@@ -74,7 +74,7 @@ console.log(event)
                     </li>
                   );
                 } else {
-                  return <li>No guests attending</li>;
+                  return <li>Invited: {guest.full_name}</li>;
                 }
               })}
             </ul>
@@ -162,9 +162,9 @@ console.log(event)
               {event.data.guests.map(guest => {
                 //Mapping over guests to display
                 if (guest.attending) {
-                  return <li key={guest.full_name}>{guest.full_name} </li>;
+                  return <li key={guest.full_name}>Attending: {guest.full_name} </li>;
                 } else {
-                  return <li key={event.data.event_id}>No guests attending</li>;
+                  return <li>Invited: {guest.full_name}</li>;;
                 }
               })}
             </ul>

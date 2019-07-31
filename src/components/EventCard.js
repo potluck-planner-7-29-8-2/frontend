@@ -3,7 +3,7 @@ import { NavLink, withRouter } from "react-router-dom";
 import { useStateValue } from "../hooks/useStateValue";
 import { useLocalStorage } from '../hooks/useLocalStorage';
 import { getUsers } from "./../actions/usersActions";
-import { changeAttendance } from '../actions/specificEventActions';
+import { changeAttendance, removeGuest } from '../actions/specificEventActions';
 import moment from "moment";
 
 const EventCard = props => {
@@ -22,7 +22,7 @@ const EventCard = props => {
 
   useEffect(() => {
     getUsers(dispatch);
-  }, [dispatch]);
+  }, [props.event, dispatch]);
 
   let username;
   users.data.forEach(user => {
@@ -43,28 +43,27 @@ const EventCard = props => {
       <div className="card-location">
         Location: {city}, {state}
       </div>
-      {props.event.attending ? <button>Leave Event</button> : <button onClick={() => {
-        changeAttendance(dispatch, event_id, user_id, {data : {'attending' : true}})
+      {props.event.attending ? <button onClick={() => removeGuest(dispatch, event_id, {data:{'user_id' : user_id}})}>Leave Event</button> : <button onClick={() => {
+        changeAttendance(dispatch, event_id, user_id, {'attending' : true})
         console.log(event_id)
         }}>Accept Invite</button>}
-      <button></button>
+      {props.event.attending ? null : <button onClick={() => removeGuest(dispatch, event_id, {data: {'user_id' : user_id}})}>Decline</button>}
     </div>
   );
 };
 
 export default withRouter(EventCard);
 
-// // //just pass {'attending' : true||false}
-// export const changeAttendance = (dispatch, id, user_id, isAttending) => {
-//   dispatch({ type: UPDATING_GUEST });
+// export const removeGuest = (dispatch, id, guest) => {
+//   dispatch({ type: REMOVING_GUEST });
 //   axiosWithAuth()
-//     .put(`/events/${id}/guests/${user_id}`, isAttending)
+//     .delete(`/events/${id}/guests`, guest)
 //     .then(res => {
-//       dispatch({ type: UPDATED_GUEST, payload: res.data });
+//       dispatch({ type: REMOVED_GUEST, payload: res.data });
 //     })
 //     .catch(err => {
 //       dispatch({
-//         type: UPDATE_GUEST_ERROR,
+//         type: REMOVE_GUEST_ERROR,
 //         payload: err.response.data.message
 //       });
 //     });
