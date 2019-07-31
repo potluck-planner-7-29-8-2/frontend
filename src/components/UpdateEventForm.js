@@ -3,6 +3,8 @@ import { useStateValue } from "../hooks/useStateValue";
 import { updateEvent } from "../actions";
 import { Icon, Input } from "semantic-ui-react";
 import { getEvent } from "../actions";
+import moment from "moment";
+
 
 const UpdateEventForm = props => {
   const [editEvent, setEvent] = useState({
@@ -20,7 +22,8 @@ const UpdateEventForm = props => {
 
   useEffect(() => {
     getEvent(dispatch, eventID);
-    setEvent(event.data);
+    const date = moment().format('MM/DD/YYYY', event.data.date);
+    setEvent({...event.data, date: date});
   }, [dispatch, eventID]);
 
   const eventInputHandler = e => {
@@ -33,6 +36,7 @@ const UpdateEventForm = props => {
     <div>
       <h2>Event Name: {editEvent.event_name}</h2>
       <ul>
+        <li>Date: {editEvent.date}</li>
         <li>Address: {editEvent.address}</li>
         <li>City: {editEvent.city}</li>
         <li>State: {editEvent.state}</li>

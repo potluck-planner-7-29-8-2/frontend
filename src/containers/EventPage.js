@@ -25,7 +25,22 @@ const EventPage = ({ match, history }) => {
   const recipeChangeHandler = e => {
     setRecipe({ recipe_name: e.target.value });
   };
-console.log(event)
+
+  useEffect(() => {
+    const guests = event.data.guests;
+    event.data.recipes.forEach(recipe => {
+      let includes = false;
+      guests.forEach(guest => {
+        if (guest.user_id === recipe.user_id) {
+          includes = true;
+        }
+      });
+      if (includes === false) {
+        claimRecipe(dispatch, eventID, { recipe_name: recipe.recipe_name, user_id: null });
+      }
+    });
+  }, [event.data.guests]);
+  console.log(event);
   if (user_id === event.data.organizer_id) {
     //First case if for organizer, Second case is for guest
     return (
@@ -65,7 +80,7 @@ console.log(event)
                       <button
                         onClick={() =>
                           removeGuest(dispatch, eventID, {
-                            data:{ user_id: guest.user_id }
+                            data: { user_id: guest.user_id }
                           })
                         }
                       >
@@ -90,7 +105,7 @@ console.log(event)
                   return (
                     <li>
                       {recipe.recipe_name} :{" "}
-                      {recipe.full_name ? recipe.full_name : "unclaimed"}{" "}
+                      {recipe.full_name ? recipe.full_name : ""}{" "}
                       {/* Toggling between the name and unclaimed */}
                       <button
                         onClick={e => {
@@ -126,6 +141,7 @@ console.log(event)
               <form
                 onSubmit={e => {
                   addRecipe(dispatch, eventID, createRecipe); //Creates recipe
+                  setRecipe({ recipe_name: "" });
                   e.preventDefault();
                 }}
               >
@@ -162,9 +178,11 @@ console.log(event)
               {event.data.guests.map(guest => {
                 //Mapping over guests to display
                 if (guest.attending) {
-                  return <li key={guest.full_name}>Attending: {guest.full_name} </li>;
+                  return (
+                    <li key={guest.full_name}>Attending: {guest.full_name} </li>
+                  );
                 } else {
-                  return <li>Invited: {guest.full_name}</li>;;
+                  return <li>Invited: {guest.full_name}</li>;
                 }
               })}
             </ul>
