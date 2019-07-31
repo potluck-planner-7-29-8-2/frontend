@@ -1,7 +1,9 @@
 import React, { useEffect } from "react";
 import { NavLink, withRouter } from "react-router-dom";
 import { useStateValue } from "../hooks/useStateValue";
+import { useLocalStorage } from '../hooks/useLocalStorage';
 import { getUsers } from "./../actions/usersActions";
+import { changeAttendance, removeGuest } from '../actions/specificEventActions';
 import moment from "moment";
 
 const EventCard = props => {
@@ -16,10 +18,11 @@ const EventCard = props => {
   } = props.event;
   const { url } = props.match;
   const [{ users }, dispatch] = useStateValue();
+  const [user_id] = useLocalStorage("user_id");
 
   useEffect(() => {
     getUsers(dispatch);
-  }, [dispatch]);
+  }, [props.event, dispatch]);
 
   let username;
   users.data.forEach(user => {
@@ -27,7 +30,7 @@ const EventCard = props => {
       username = user.username;
     }
   });
-
+  
   return (
     <div className="EventCard">
       <NavLink to={`${url}/event/${event_id}`}>
@@ -40,8 +43,29 @@ const EventCard = props => {
       <div className="card-location">
         Location: {city}, {state}
       </div>
+      {props.event.attending ? <button onClick={() => removeGuest(dispatch, event_id, {data:{'user_id' : user_id}})}>Leave Event</button> : <button onClick={() => {
+        changeAttendance(dispatch, event_id, user_id, {'attending' : true})
+        console.log(event_id)
+        }}>Accept Invite</button>}
+      {props.event.attending ? null : <button onClick={() => removeGuest(dispatch, event_id, {data: {'user_id' : user_id}})}>Decline</button>}
     </div>
   );
 };
 
 export default withRouter(EventCard);
+
+// export const removeGuest = (dispatch, id, guest) => {
+//   dispatch({ type: REMOVING_GUEST });
+//   axiosWithAuth()
+//     .delete(`/events/${id}/guests`, guest)
+//     .then(res => {
+//       dispatch({ type: REMOVED_GUEST, payload: res.data });
+//     })
+//     .catch(err => {
+//       dispatch({
+//         type: REMOVE_GUEST_ERROR,
+//         payload: err.response.data.message
+//       });
+//     });
+// };
+
