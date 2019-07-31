@@ -25,7 +25,6 @@ const EventPage = ({ match, history }) => {
   const recipeChangeHandler = e => {
     setRecipe({ recipe_name: e.target.value });
   };
-
   if (user_id === event.data.organizer_id) {
     //First case if for organizer, Second case is for guest
     return (

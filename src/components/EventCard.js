@@ -1,7 +1,9 @@
 import React, { useEffect } from "react";
 import { NavLink, withRouter } from "react-router-dom";
 import { useStateValue } from "../hooks/useStateValue";
+import { useLocalStorage } from '../hooks/useLocalStorage';
 import { getUsers } from "./../actions/usersActions";
+import { changeAttendance } from '../actions/specificEventActions';
 import moment from "moment";
 
 const EventCard = props => {
@@ -16,6 +18,7 @@ const EventCard = props => {
   } = props.event;
   const { url } = props.match;
   const [{ users }, dispatch] = useStateValue();
+  const [user_id] = useLocalStorage("user_id");
 
   useEffect(() => {
     getUsers(dispatch);
@@ -27,7 +30,7 @@ const EventCard = props => {
       username = user.username;
     }
   });
-
+  
   return (
     <div className="EventCard">
       <NavLink to={`${url}/event/${event_id}`}>
@@ -40,8 +43,30 @@ const EventCard = props => {
       <div className="card-location">
         Location: {city}, {state}
       </div>
+      {props.event.attending ? <button>Leave Event</button> : <button onClick={() => {
+        changeAttendance(dispatch, event_id, user_id,  {'attending' : true})
+        console.log(event_id)
+        }}>Accept Invite</button>}
+      <button></button>
     </div>
   );
 };
 
 export default withRouter(EventCard);
+
+// // //just pass {'attending' : true||false}
+// export const changeAttendance = (dispatch, id, user_id, isAttending) => {
+//   dispatch({ type: UPDATING_GUEST });
+//   axiosWithAuth()
+//     .put(`/events/${id}/guests/${user_id}`, isAttending)
+//     .then(res => {
+//       dispatch({ type: UPDATED_GUEST, payload: res.data });
+//     })
+//     .catch(err => {
+//       dispatch({
+//         type: UPDATE_GUEST_ERROR,
+//         payload: err.response.data.message
+//       });
+//     });
+// };
+
