@@ -5,6 +5,7 @@ import { useLocalStorage } from "../hooks/useLocalStorage";
 import { getUsers } from "./../actions/usersActions";
 import { deleteEvent } from "../actions/generalEventsActions";
 import { Icon } from "semantic-ui-react";
+import { changeAttendance, removeGuest } from "../actions/specificEventActions";
 import moment from "moment";
 import {
   StyledEventCard,
@@ -31,7 +32,8 @@ const EventCard = props => {
 
   useEffect(() => {
     getUsers(dispatch);
-  }, [dispatch]);
+  }, [props.event, dispatch]);
+
   let username;
   users.data.forEach(user => {
     if (user.user_id === organizer_id) {
@@ -55,6 +57,36 @@ const EventCard = props => {
               }}
             >
               <i className="trash alternate icon" />
+            </button>
+          )}
+
+          {props.event.attending ? (
+            <button
+              onClick={() =>
+                removeGuest(dispatch, event_id, { data: { user_id: user_id } })
+              }
+            >
+              Leave Event
+            </button>
+          ) : (
+            <button
+              onClick={() => {
+                changeAttendance(dispatch, event_id, user_id, {
+                  attending: true
+                });
+                console.log(event_id);
+              }}
+            >
+              Accept Invite
+            </button>
+          )}
+          {props.event.attending ? null : (
+            <button
+              onClick={() =>
+                removeGuest(dispatch, event_id, { data: { user_id: user_id } })
+              }
+            >
+              Decline
             </button>
           )}
         </CardButtons>

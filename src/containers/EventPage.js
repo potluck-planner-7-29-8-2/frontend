@@ -25,7 +25,7 @@ const EventPage = ({ match, history }) => {
   const recipeChangeHandler = e => {
     setRecipe({ recipe_name: e.target.value });
   };
-
+console.log(event)
   if (user_id === event.data.organizer_id) {
     //First case if for organizer, Second case is for guest
     return (
@@ -61,11 +61,11 @@ const EventPage = ({ match, history }) => {
                 if (guest.attending) {
                   return (
                     <li>
-                      {guest.full_name}{" "}
+                      Attending: {guest.full_name}{" "}
                       <button
                         onClick={() =>
                           removeGuest(dispatch, eventID, {
-                            data: { user_id: guest.user_id }
+                            data:{ user_id: guest.user_id }
                           })
                         }
                       >
@@ -74,7 +74,7 @@ const EventPage = ({ match, history }) => {
                     </li>
                   );
                 } else {
-                  return <li>No guests attending</li>;
+                  return <li>Invited: {guest.full_name}</li>;
                 }
               })}
             </ul>
@@ -162,9 +162,9 @@ const EventPage = ({ match, history }) => {
               {event.data.guests.map(guest => {
                 //Mapping over guests to display
                 if (guest.attending) {
-                  return <li key={guest.full_name}>{guest.full_name} </li>;
+                  return <li key={guest.full_name}>Attending: {guest.full_name} </li>;
                 } else {
-                  return <li key={event.data.event_id}>No guests attending</li>;
+                  return <li>Invited: {guest.full_name}</li>;;
                 }
               })}
             </ul>
