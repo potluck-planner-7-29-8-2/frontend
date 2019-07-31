@@ -13,6 +13,7 @@ const Guests = props => {
 
   const userCompare = toCompare => {
     let searchGuests = users.data;
+    console.log(users)
     searchGuests = searchGuests.filter(
       user => user.full_name.toLowerCase().includes(toCompare.toLowerCase())
     );
