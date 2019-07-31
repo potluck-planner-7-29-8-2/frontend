@@ -78,7 +78,7 @@ const EventPage = ({ match, history }) => {
 
                 if (guest.attending) {
                   return (
-                    <li>
+                    <li key={guest.user_id}>
                       Attending: {guest.full_name}{" "}
                       {guest.user_id === event.data.organizer_id ? null : (
                         <button
@@ -95,7 +95,7 @@ const EventPage = ({ match, history }) => {
                   );
                 } else {
                   return (
-                    <li>
+                    <li key={guest.user_id}>
                       Invited: {guest.full_name}
                       <button
                         onClick={() =>
@@ -121,7 +121,7 @@ const EventPage = ({ match, history }) => {
                 event.data.recipes.map(recipe => {
                   //Determine if Recipes is an array or string and return value
                   return (
-                    <li>
+                    <li key={recipe.recipe_name}>
                       {recipe.recipe_name} :{" "}
                       {recipe.full_name ? recipe.full_name : ""}{" "}
                       {/* Toggling between the name and unclaimed */}
@@ -197,10 +197,10 @@ const EventPage = ({ match, history }) => {
                 //Mapping over guests to display
                 if (guest.attending) {
                   return (
-                    <li key={guest.full_name}>Attending: {guest.full_name} </li>
+                    <li key={guest.user_id}>Attending: {guest.full_name} </li>
                   );
                 } else {
-                  return <li>Invited: {guest.full_name}</li>;
+                  return <li key={guest.user_id}>Invited: {guest.full_name}</li>;
                 }
               })}
             </ul>
@@ -214,7 +214,7 @@ const EventPage = ({ match, history }) => {
                 event.data.recipes.map(recipe => {
                   //Determine if Recipes is an array or string and return value
                   return (
-                    <li>
+                    <li key={recipe.recipe_name}>
                       {recipe.recipe_name} :{" "}
                       {recipe.full_name ? recipe.full_name : ""}{" "}
                       {/* Toggling between the name and unclaimed */}
