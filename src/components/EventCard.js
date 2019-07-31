@@ -44,7 +44,7 @@ const EventCard = props => {
         Location: {city}, {state}
       </div>
       {props.event.attending ? <button>Leave Event</button> : <button onClick={() => {
-        changeAttendance(dispatch, event_id, user_id,  {'attending' : true})
+        changeAttendance(dispatch, event_id, user_id, {data : {'attending' : true}})
         console.log(event_id)
         }}>Accept Invite</button>}
       <button></button>
