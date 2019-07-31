@@ -6,18 +6,18 @@ import { useLocalStorage } from "../hooks/useLocalStorage";
 import { addRecipe, removeGuest } from "../actions/specificEventActions";
 import { claimRecipe } from "../actions/specificEventActions";
 import { removeRecipe } from "../actions/specificEventActions";
+import { deleteEvent } from "../actions/generalEventsActions";
 import UpdateEventForm from "../components/UpdateEventForm";
 import Guests from "../components/Guests";
 import { NavLink } from "react-router-dom";
+import { OmitProps } from "antd/lib/transfer/renderListBody";
 
-
-const EventPage = ({ match }) => {
+const EventPage = ({ match, history }) => {
   let eventID = match.params.eventID;
   const { url } = match;
   const [{ event }, dispatch] = useStateValue();
   const [user_id] = useLocalStorage("user_id");
   const [createRecipe, setRecipe] = useState({ recipe_name: "" });
-
   useEffect(() => {
     getEvent(dispatch, eventID);
   }, [dispatch, eventID]);
@@ -25,7 +25,6 @@ const EventPage = ({ match }) => {
   const recipeChangeHandler = e => {
     setRecipe({ recipe_name: e.target.value });
   };
-
 
   if (user_id === event.data.organizer_id) {
     //First case if for organizer, Second case is for guest
@@ -44,6 +43,15 @@ const EventPage = ({ match }) => {
           <NavLink to={`${url}/update`}>
             <button>Edit Event</button>
           </NavLink>
+          <button
+            onClick={e => {
+              e.preventDefault();
+              deleteEvent(dispatch, eventID);
+              history.push("/dashboard");
+            }}
+          >
+            Delete Event
+          </button>
           <li>
             Guests:{" "}
             <ul>
@@ -51,7 +59,20 @@ const EventPage = ({ match }) => {
                 //Mapping over guests to display
                 console.log(guest);
                 if (guest.attending) {
-                  return <li>{guest.full_name} <button onClick={() => removeGuest(dispatch, eventID, {data: {'user_id' : guest.user_id}})}>Remove Guest</button></li>;
+                  return (
+                    <li>
+                      {guest.full_name}{" "}
+                      <button
+                        onClick={() =>
+                          removeGuest(dispatch, eventID, {
+                            data: { user_id: guest.user_id }
+                          })
+                        }
+                      >
+                        Remove Guest
+                      </button>
+                    </li>
+                  );
                 } else {
                   return <li>No guests attending</li>;
                 }
