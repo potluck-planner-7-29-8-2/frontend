@@ -12,7 +12,7 @@ export const StyledEventCard = styled.div`
     font-size: ${({ theme }) => theme.smallFont};
     font-family: ${({ theme }) => theme.poppinsFont};
     color: #555
-    background-color: #E5F5EB;
+    background-color: #E6EBEE;
     margin: 10px auto;`;
 
 export const CardTop = styled.div`
