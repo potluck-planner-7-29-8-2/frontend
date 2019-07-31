@@ -77,7 +77,7 @@ export const updateEvent = (dispatch, id, event) => {
   axiosWithAuth()
     .put(`/events/${id}`, event)
     .then(res => {
-      dispatch({ type: UPDATED_EVENT, payload: res.data });
+      dispatch({ type: UPDATED_EVENT, payload: {id, event} });
     })
     .catch(err => {
       dispatch({
