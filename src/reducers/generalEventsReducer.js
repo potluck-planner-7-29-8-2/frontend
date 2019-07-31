@@ -11,6 +11,7 @@ import {
   UPDATING_EVENT,
   UPDATED_EVENT,
   UPDATING_EVENT_ERROR,
+  UPDATE_SEARCH
 } from "../actions";
 
 /*
@@ -28,7 +29,8 @@ events: {
             state: '',
         }],
         errorMessage: '',
-        isEventsLoading: false
+        isEventsLoading: false,
+        searchTerm: ''
     },
 */
 
@@ -82,10 +84,14 @@ export const eventsReducer = (state, { type, payload }) => {
       };
     case DELETED_EVENT:
         let remainingEvents = state.data.filter(event => event.event_id!==Number(payload))
+        let error=''
+        if(remainingEvents.length===0)
+            error='Time to start creating events!'
       return {
         ...state,
         isEventsLoading: false,
-        data: remainingEvents
+        data: remainingEvents,
+        errorMessage: error
       };
     case DELETING_EVENT_ERROR:
       return {
@@ -112,6 +118,11 @@ export const eventsReducer = (state, { type, payload }) => {
         isEventsLoading: false,
         errorMessage: payload
       };
+    case UPDATE_SEARCH:
+        return {
+            ...state,
+            searchTerm: payload
+        }
     default:
       return state;
   }
