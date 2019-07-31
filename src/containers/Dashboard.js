@@ -7,7 +7,6 @@ import Header from '../components/Header'
 import EventPage from '../containers/EventPage'
 import AddEventForm from '../components/AddEventForm'
 import EventList from '../components/EventList'
-import Guests from '../components/Guests';
 import UpdateEventForm from '../components/UpdateEventForm';
 
 const Dashboard = (props) => {

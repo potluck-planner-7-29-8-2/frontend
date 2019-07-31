@@ -3,8 +3,7 @@ import { NavLink, withRouter } from "react-router-dom";
 import { useStateValue } from "../hooks/useStateValue";
 import { useLocalStorage } from "../hooks/useLocalStorage";
 import { getUsers } from "./../actions/usersActions";
-import { deleteEvent } from "../actions/generalEventsActions";
-import { Icon } from "semantic-ui-react";
+import { deleteEvent, getEvents } from "../actions/generalEventsActions";
 import { changeAttendance, removeGuest } from "../actions/specificEventActions";
 import moment from "moment";
 import {
@@ -68,7 +67,7 @@ const EventCard = props => {
                 onClick={() =>
                   removeGuest(dispatch, event_id, {
                     data: { user_id: user_id }
-                  })
+                  }).then(res => getEvents(dispatch, user_id))
                 }
               >
                 Leave Event
@@ -79,17 +78,16 @@ const EventCard = props => {
                   onClick={() => {
                     changeAttendance(dispatch, event_id, user_id, {
                       attending: true
-                    });
-                    console.log(event_id);
+                    }).then(res => getEvents(dispatch, user_id))
                   }}
                 >
-                  <i class="check icon" />
+                  <i className="check icon" />
                 </button>
                 <button
                   onClick={() =>
                     removeGuest(dispatch, event_id, {
                       data: { user_id: user_id }
-                    })
+                    }).then(res => getEvents(dispatch, user_id))
                   }
                 >
                   Decline

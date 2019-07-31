@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useStateValue } from "../hooks/useStateValue";
 import { updateEvent } from "../actions";
-import { Icon, Input } from "semantic-ui-react";
+import { Input } from "semantic-ui-react";
 import { getEvent } from "../actions";
 import moment from "moment";
 

@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useStateValue } from "../hooks/useStateValue";
 import { addEvent } from "../actions";
 import { useLocalStorage } from "../hooks/useLocalStorage";
-import { Icon, Input } from "semantic-ui-react";
+import { Input } from "semantic-ui-react";
 
 
 const AddEventForm = props => {

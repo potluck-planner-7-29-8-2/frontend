@@ -16,7 +16,7 @@ const EventList = () => {
   return (
     <>
       <h1>Events</h1>
-      {errorMessage && <h2>{errorMessage}</h2>}
+      {errorMessage && data.length<1 && <h2>{errorMessage}</h2>}
       {data.length > 0 &&
         data.map(event => <EventCard event={event} key={event.event_id} />)}
     </>
