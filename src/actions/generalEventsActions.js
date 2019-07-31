@@ -16,6 +16,7 @@ export const UPDATING_EVENT = "UPDATING_EVENT";
 export const UPDATED_EVENT = "UPDATED_EVENT";
 export const UPDATING_EVENT_ERROR = "UPDATING_EVENT_ERROR";
 
+export const UPDATE_SEARCH='UPDATE_SEARCH'
 //need to pass in the id of the user currently logged in
 export const getEvents = (dispatch, id) => {
   dispatch({ type: GETTING_EVENTS });
