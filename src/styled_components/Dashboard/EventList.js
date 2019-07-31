@@ -13,4 +13,9 @@ export const EventListContainer = styled.div`
     font-family: ${({ theme }) => theme.poppinsFont};
     color: ${({ theme }) => theme.darkBlue};
   }
+
+  @media (max-width: 500px) {
+    flex-direction: column;
+    flex-wrap: nowrap;
+  }
 `;
