@@ -28,14 +28,18 @@ const EventPage = ({ match, history }) => {
 
   useEffect(() => {
     const guests = event.data.guests;
-    guests.forEach(guest => {
-      event.data.recipes.forEach(recipe => {
-        if(guest.user_id === recipe.user_id && guest.attending === false){
-          claimRecipe(dispatch, eventID, {recipe_name : recipe.recipe_name, user_id : null})
+    event.data.recipes.forEach(recipe => {
+      let includes = false;
+      guests.forEach(guest => {
+        if (guest.user_id === recipe.user_id) {
+          includes = true;
         }
-      })
-    })
-  }, [event.data.guests])
+      });
+      if (includes === false) {
+        claimRecipe(dispatch, eventID, { recipe_name: recipe.recipe_name, user_id: null });
+      }
+    });
+  }, [event.data.guests]);
   console.log(event);
   if (user_id === event.data.organizer_id) {
     //First case if for organizer, Second case is for guest
@@ -137,7 +141,7 @@ const EventPage = ({ match, history }) => {
               <form
                 onSubmit={e => {
                   addRecipe(dispatch, eventID, createRecipe); //Creates recipe
-                  setRecipe({recipe_name: ''});
+                  setRecipe({ recipe_name: "" });
                   e.preventDefault();
                 }}
               >

@@ -4,6 +4,7 @@ import { addEvent } from "../actions";
 import { useLocalStorage } from "../hooks/useLocalStorage";
 import { Icon, Input } from "semantic-ui-react";
 
+
 const AddEventForm = props => {
   const [event, setEvent] = useState({
     event_name: "",
@@ -17,7 +18,6 @@ const AddEventForm = props => {
 
   const [, dispatch] = useStateValue();
   const [user_id] = useLocalStorage("user_id");
-
   const eventInputHandler = e => {
     const name = e.target.name;
     const value = e.target.value;
