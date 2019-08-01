@@ -1,6 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useStateValue } from "../hooks/useStateValue";
 import { addGuest } from "../actions/specificEventActions";
+import { getUsers } from "../actions";
+import {List, Label, Icon, Button } from 'semantic-ui-react';
 const Guests = props => {
   const [userSearch, setUserSearch] = useState("");
   const [displayedUsers, setDisplayedUsers] = useState([]);
@@ -20,6 +22,11 @@ const Guests = props => {
     setDisplayedUsers(searchGuests);
   };
 
+  useEffect(() => {
+    getUsers(dispatch)
+  }, [userSearch]);
+
+
 
 
   return (
@@ -32,30 +39,34 @@ const Guests = props => {
       >
         <input
           value={userSearch}
+          style={{lineHeight: '2rem'}}
           placeholder="Search users"
           onChange={event => searchHandler(event)}
         />
+        <Button color='twitter'>Submit</Button>
       </form>
-      <ul>
+      <List>
         {displayedUsers.map(user => {
           return (
-            <li key={user.user_id}>
-              {user.full_name}
-              <button
-                onClick={e => {
+            <List.Item>
+            <Label key={user.user_id} size="massive">
+              <Icon name='user' /> {user.full_name} &nbsp;
+           
+              <Icon name='plus' size='large' onClick={e => {
                   e.preventDefault();
                   addGuest(dispatch, props.eventID, {
                     user_id: user.user_id,
                     attending: false
                   });
-                }}
-              >
-                Invite
-              </button>
-            </li>
+                }} /> <br />
+                   {user.username}
+              </Label>
+              </List.Item>
+           
+          
           );
         })}
-      </ul>
+      </List>
     </div>
   );
 };
