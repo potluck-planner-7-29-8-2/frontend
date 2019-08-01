@@ -55,6 +55,5 @@ const SearchInput = styled.input`
 
   @media ${device.mobileL} {
     width: 250px;
-    border: 1px solid blue;
   }
 `;
