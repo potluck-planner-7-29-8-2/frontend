@@ -54,6 +54,10 @@ export const CardButtons = styled.div`
     outline: none;
     background-color: ${({ theme }) => theme.blue};
     border-radius: 5px;
+
+    &:hover {
+      background: ${({ theme }) => theme.darkBlue};
+    }
   }
 `;
 

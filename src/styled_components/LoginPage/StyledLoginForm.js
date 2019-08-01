@@ -10,10 +10,10 @@ export const StyledLoginForm = styled.form`
     }
 
     .errorMsg{
-        color: red;
         width: 100%;
-        font-size: 2rem;
-       text-align: center;
+        color: #dd2c00;
+        font-size: ${({ theme }) => theme.tinyFont};
+        text-align: center;
     }
 
     input {

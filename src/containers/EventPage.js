@@ -129,7 +129,6 @@ const EventPage = ({ match, history }) => {
                         key={guest.user_id}
                         style={{ fontSize: "2rem" }}
                       >
-                        {guest.full_name} - Attending &nbsp;
                         {guest.user_id === event.data.organizer_id ? null : (
                           <Icon
                             size="small"
@@ -141,6 +140,8 @@ const EventPage = ({ match, history }) => {
                             }
                           />
                         )}
+                        &nbsp;
+                        {guest.full_name} - Attending
                       </List.Item>
                     );
                   } else {
@@ -149,7 +150,7 @@ const EventPage = ({ match, history }) => {
                         key={guest.user_id}
                         style={{ fontSize: "2rem" }}
                       >
-                        {guest.full_name} - Invited &nbsp;
+                        {" "}
                         <Icon
                           size="small"
                           name="trash alternate"
@@ -159,6 +160,8 @@ const EventPage = ({ match, history }) => {
                             })
                           }
                         />
+                        &nbsp;
+                        {guest.full_name} - Invited
                       </List.Item>
                     );
                   }

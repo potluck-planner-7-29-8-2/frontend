@@ -31,9 +31,7 @@ const LoginForm = props => {
         loginAction(dispatch, user);
       }}
     >
-      <div className="errorMsg">
-        {login.errorMessage !== "" && login.errorMessage}
-      </div>
+      <div className="errorMsg">{login.errorMessage && login.errorMessage}</div>
       <div className="form-group row">
         <input
           type="text"
