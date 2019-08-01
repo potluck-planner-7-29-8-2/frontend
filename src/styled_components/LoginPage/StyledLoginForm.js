@@ -12,6 +12,7 @@ export const StyledLoginForm = styled.form`
     .errorMsg{
         color: red;
         width: 100%;
+        font-size: 2rem;
        text-align: center;
     }
 
