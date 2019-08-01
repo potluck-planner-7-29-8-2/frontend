@@ -10,10 +10,18 @@ import { deleteEvent } from "../actions/generalEventsActions";
 import Guests from "../components/Guests";
 import { NavLink } from "react-router-dom";
 import moment from "moment";
-import headerImg from '../brooke-lark-nTZOILVZuOg-unsplash.jpg';
-import guestHeaderImg from '../priscilla-du-preez-W3SEyZODn8U-unsplash.jpg';
+import headerImg from "../brooke-lark-nTZOILVZuOg-unsplash.jpg";
+import guestHeaderImg from "../priscilla-du-preez-W3SEyZODn8U-unsplash.jpg";
 
-import { Header, Icon, Container, Button, List, Card, Image } from "semantic-ui-react";
+import {
+  Header,
+  Icon,
+  Container,
+  Button,
+  List,
+  Card,
+  Image
+} from "semantic-ui-react";
 
 const EventPage = ({ match, history }) => {
   let eventID = match.params.eventID;
@@ -48,22 +56,28 @@ const EventPage = ({ match, history }) => {
       });
     }
   }, [event.data.guests]);
-  
-  const eventTime = moment(event.data.time, 'HH:mm:ss a').format('LT');
+
+  const eventTime = moment(event.data.time, "HH:mm:ss a").format("LT");
 
   if (user_id === event.data.organizer_id) {
     //First case if for organizer, Second case is for guest
     return (
-      <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', fontFamily: "Poppins" }}>
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "center",
+          fontFamily: "Poppins"
+        }}
+      >
         <Container textAlign="center">
-          <Header as="h2" icon textAlign="center" style={{fontSize: '3rem'}}>
+          <Header as="h2" icon textAlign="center" style={{ fontSize: "3rem" }}>
             <Icon name="calendar check" />
             {event.data.event_name}
           </Header>
         </Container>
-        <Container textAlign='center'>
-       
-          <List style={{fontSize: '2rem'}}>
+        <Container textAlign="center">
+          <List style={{ fontSize: "2rem" }}>
             <List.Item>
               <List.Icon name="calendar" />
               {moment(event.data.date).format("LL")}
@@ -81,7 +95,9 @@ const EventPage = ({ match, history }) => {
               {event.data.description}
             </List.Item>
             <NavLink to={`${url}/update`}>
-              <Button size="huge" color="twitter" style={{marginTop: '20px'}}>Edit Event</Button>
+              <Button size="huge" color="twitter" style={{ marginTop: "20px" }}>
+                Edit Event
+              </Button>
             </NavLink>
             <Button
               color="twitter"
@@ -92,27 +108,31 @@ const EventPage = ({ match, history }) => {
                 history.push("/dashboard");
               }}
             >
-              <Icon  name="trash alternate" />
+              <Icon name="trash alternate" />
             </Button>
           </List>
-         
         </Container>
-        <Card.Group centered style={{margin: '30px'}}>
-  
-            <Card style={{padding: '20px'}}>
-              <Card.Header textAlign='center' style={{fontSize: '2.5rem'}}><Image src={guestHeaderImg} size='large'/>Guests</Card.Header>
-              <Card.Content>
-              <List style={{margin: 'auto'}}>
+        <Card.Group centered style={{ margin: "30px" }}>
+          <Card style={{ padding: "20px" }}>
+            <Card.Header textAlign="center" style={{ fontSize: "2.5rem" }}>
+              <Image src={guestHeaderImg} size="large" />
+              Guests
+            </Card.Header>
+            <Card.Content>
+              <List style={{ margin: "auto" }}>
                 {event.data.guests.map(guest => {
                   //Mapping over guests to display
 
                   if (guest.attending) {
                     return (
-                      <List.Item key={guest.user_id} style={{fontSize: '2rem'}}>
-                        {guest.full_name} - Attending{" "} &nbsp;
+                      <List.Item
+                        key={guest.user_id}
+                        style={{ fontSize: "2rem" }}
+                      >
+                        {guest.full_name} - Attending &nbsp;
                         {guest.user_id === event.data.organizer_id ? null : (
                           <Icon
-                          size='small'
+                            size="small"
                             name="trash alternate"
                             onClick={() =>
                               removeGuest(dispatch, eventID, {
@@ -125,10 +145,13 @@ const EventPage = ({ match, history }) => {
                     );
                   } else {
                     return (
-                      <List.Item key={guest.user_id} style={{fontSize: '2rem'}}>
+                      <List.Item
+                        key={guest.user_id}
+                        style={{ fontSize: "2rem" }}
+                      >
                         {guest.full_name} - Invited &nbsp;
                         <Icon
-                        size='small'
+                          size="small"
                           name="trash alternate"
                           onClick={() =>
                             removeGuest(dispatch, eventID, {
@@ -141,12 +164,18 @@ const EventPage = ({ match, history }) => {
                   }
                 })}
               </List>
-              </Card.Content>
-            </Card>
-            <Card style={{padding: '20px'}}>
-              <Card.Header textAlign='center' style={{fontSize: '2.5rem'}}><Image src={headerImg} style={{height: '166.66px', width: '250px'}}/>Choose a Dish</Card.Header>
-              <Card.Content>
-              <List style={{margin: 'auto'}}>
+            </Card.Content>
+          </Card>
+          <Card style={{ padding: "20px" }}>
+            <Card.Header textAlign="center" style={{ fontSize: "2.5rem" }}>
+              <Image
+                src={headerImg}
+                style={{ height: "166.66px", width: "250px" }}
+              />
+              Choose a Dish
+            </Card.Header>
+            <Card.Content>
+              <List style={{ margin: "auto" }}>
                 {" "}
                 {typeof event.data.recipes === "string" ? (
                   <List.Item>{event.data.recipes}</List.Item>
@@ -154,41 +183,42 @@ const EventPage = ({ match, history }) => {
                   event.data.recipes.map(recipe => {
                     //Determine if Recipes is an array or string and return value
                     return (
-                      <List.Item key={recipe.recipe_name} style={{fontSize: '2rem'}}>
+                      <List.Item
+                        key={recipe.recipe_name}
+                        style={{ fontSize: "2rem" }}
+                      >
                         <div>
-                          
-                            {recipe.recipe_name} -{" "}
-                            {recipe.full_name ? recipe.full_name : ""}
-                          
+                          <Icon
+                            size="small"
+                            name={recipe.full_name ? "times" : "check"}
+                            onClick={e => {
+                              e.preventDefault();
+                              recipe.full_name
+                                ? claimRecipe(dispatch, eventID, {
+                                    //Determine if a full_name is associated with recipe and return value, toggle between null and name to claim
+                                    recipe_name: recipe.recipe_name,
+                                    user_id: null
+                                  })
+                                : claimRecipe(dispatch, eventID, {
+                                    recipe_name: recipe.recipe_name,
+                                    user_id: user_id
+                                  });
+                            }}
+                          />
+                          &nbsp;
+                          <Icon
+                            name="trash alternate"
+                            size="small"
+                            onClick={event => {
+                              event.preventDefault();
+                              removeRecipe(dispatch, parseInt(eventID), {
+                                data: { recipe_name: recipe.recipe_name }
+                              });
+                            }}
+                          />
+                          {recipe.recipe_name} -{" "}
+                          {recipe.full_name ? recipe.full_name : ""}
                         </div>
-                        {/* Toggling between the name and unclaimed */}
-                        <Icon
-                          size="small"
-                          name={recipe.full_name ? "times" : "check"}
-                          onClick={e => {
-                            e.preventDefault();
-                            recipe.full_name
-                              ? claimRecipe(dispatch, eventID, {
-                                  //Determine if a full_name is associated with recipe and return value, toggle between null and name to claim
-                                  recipe_name: recipe.recipe_name,
-                                  user_id: null
-                                })
-                              : claimRecipe(dispatch, eventID, {
-                                  recipe_name: recipe.recipe_name,
-                                  user_id: user_id
-                                });
-                          }}
-                        />
-                        <Icon
-                          name="trash alternate"
-                          size="small"
-                          onClick={event => {
-                            event.preventDefault();
-                            removeRecipe(dispatch, parseInt(eventID), {
-                              data: { recipe_name: recipe.recipe_name }
-                            });
-                          }}
-                        />
                       </List.Item>
                     );
                   })
@@ -202,18 +232,22 @@ const EventPage = ({ match, history }) => {
                 >
                   <input
                     type="text"
-                    style={{lineHeight: '2rem'}}
+                    style={{ lineHeight: "2rem" }}
                     value={createRecipe.recipe_name}
                     placeholder="Add Dish"
                     onChange={e => recipeChangeHandler(e)}
                   />
-                  <Button  size='large' color='twitter' style={{marginTop: '10px'}} >
+                  <Button
+                    size="large"
+                    color="twitter"
+                    style={{ marginTop: "10px" }}
+                  >
                     Add Dish
                   </Button>
                 </form>
               </List>
-              </Card.Content>
-            </Card>
+            </Card.Content>
+          </Card>
         </Card.Group>
 
         <Container textAlign="center">
@@ -223,16 +257,22 @@ const EventPage = ({ match, history }) => {
     );
   } else {
     return (
-      <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', fontFamily: "Poppins" }}>
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "center",
+          fontFamily: "Poppins"
+        }}
+      >
         <Container textAlign="center">
-          <Header as="h2" icon textAlign="center" style={{fontSize: '3rem'}}>
+          <Header as="h2" icon textAlign="center" style={{ fontSize: "3rem" }}>
             <Icon name="calendar check" />
             {event.data.event_name}
           </Header>
         </Container>
-        <Container textAlign='center'>
-       
-          <List style={{fontSize: '2rem'}}>
+        <Container textAlign="center">
+          <List style={{ fontSize: "2rem" }}>
             <List.Item>
               <List.Icon name="calendar" />
               {moment(event.data.date).format("LL")}
@@ -250,38 +290,51 @@ const EventPage = ({ match, history }) => {
               {event.data.description}
             </List.Item>
           </List>
-         
         </Container>
-        <Card.Group centered style={{margin: '30px'}}>
-  
-            <Card style={{padding: '20px'}}>
-              <Card.Header textAlign='center' style={{fontSize: '2.5rem'}}><Image src={guestHeaderImg} size='large'/>Guests</Card.Header>
-              <Card.Content>
-              <List style={{margin: 'auto'}}>
+        <Card.Group centered style={{ margin: "30px" }}>
+          <Card style={{ padding: "20px" }}>
+            <Card.Header textAlign="center" style={{ fontSize: "2.5rem" }}>
+              <Image src={guestHeaderImg} size="large" />
+              Guests
+            </Card.Header>
+            <Card.Content>
+              <List style={{ margin: "auto" }}>
                 {event.data.guests.map(guest => {
                   //Mapping over guests to display
 
                   if (guest.attending) {
                     return (
-                      <List.Item key={guest.user_id} style={{fontSize: '2rem'}}>
+                      <List.Item
+                        key={guest.user_id}
+                        style={{ fontSize: "2rem" }}
+                      >
                         {guest.full_name} - Attending{" "}
                       </List.Item>
                     );
                   } else {
                     return (
-                      <List.Item key={guest.user_id} style={{fontSize: '2rem'}}>
+                      <List.Item
+                        key={guest.user_id}
+                        style={{ fontSize: "2rem" }}
+                      >
                         {guest.full_name} - Invited
                       </List.Item>
                     );
                   }
                 })}
               </List>
-              </Card.Content>
-            </Card>
-            <Card style={{padding: '20px'}}>
-              <Card.Header textAlign='center' style={{fontSize: '2.5rem'}}><Image src={headerImg} style={{height: '166.66px', width: '250px'}}/>Choose a Dish</Card.Header>
-              <Card.Content>
-              <List style={{margin: 'auto'}}>
+            </Card.Content>
+          </Card>
+          <Card style={{ padding: "20px" }}>
+            <Card.Header textAlign="center" style={{ fontSize: "2.5rem" }}>
+              <Image
+                src={headerImg}
+                style={{ height: "166.66px", width: "250px" }}
+              />
+              Choose a Dish
+            </Card.Header>
+            <Card.Content>
+              <List style={{ margin: "auto" }}>
                 {" "}
                 {typeof event.data.recipes === "string" ? (
                   <List.Item>{event.data.recipes}</List.Item>
@@ -289,46 +342,45 @@ const EventPage = ({ match, history }) => {
                   event.data.recipes.map(recipe => {
                     //Determine if Recipes is an array or string and return value
                     return (
-                      <List.Item key={recipe.recipe_name} style={{fontSize: '2rem'}}>
+                      <List.Item
+                        key={recipe.recipe_name}
+                        style={{ fontSize: "2rem" }}
+                      >
                         <div>
-                          
-                            {recipe.recipe_name} -{" "}
-                            {recipe.full_name ? recipe.full_name : ""}
-                          
+                          {recipe.recipe_name} -{" "}
+                          {recipe.full_name ? recipe.full_name : ""}
                         </div>
                         {/* Toggling between the name and unclaimed */}
-                        {!recipe.full_name || recipe.user_id === user_id ? <Icon
-                          size="small"
-                          name={recipe.full_name ? "times" : "check"}
-                          onClick={e => {
-                            e.preventDefault();
-                            recipe.full_name
-                              ? claimRecipe(dispatch, eventID, {
-                                  //Determine if a full_name is associated with recipe and return value, toggle between null and name to claim
-                                  recipe_name: recipe.recipe_name,
-                                  user_id: null
-                                })
-                              : claimRecipe(dispatch, eventID, {
-                                  recipe_name: recipe.recipe_name,
-                                  user_id: user_id
-                                });
-                          }}
-                        /> : null}
+                        {!recipe.full_name || recipe.user_id === user_id ? (
+                          <Icon
+                            size="small"
+                            name={recipe.full_name ? "times" : "check"}
+                            onClick={e => {
+                              e.preventDefault();
+                              recipe.full_name
+                                ? claimRecipe(dispatch, eventID, {
+                                    //Determine if a full_name is associated with recipe and return value, toggle between null and name to claim
+                                    recipe_name: recipe.recipe_name,
+                                    user_id: null
+                                  })
+                                : claimRecipe(dispatch, eventID, {
+                                    recipe_name: recipe.recipe_name,
+                                    user_id: user_id
+                                  });
+                            }}
+                          />
+                        ) : null}
                       </List.Item>
                     );
                   })
                 )}
-               
               </List>
-              </Card.Content>
-            </Card>
+            </Card.Content>
+          </Card>
         </Card.Group>
       </div>
-    )
-    
+    );
   }
 };
 
 export default withRouter(EventPage);
-
-
