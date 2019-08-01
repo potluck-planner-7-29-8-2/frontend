@@ -58,4 +58,8 @@ export const HeaderNavLinks = styled.div`
     margin: 10px 0;
     font-size: 3rem;
   }
+
+  @media ${device.mobileS} {
+    width: 100%;
+  }
 `;
