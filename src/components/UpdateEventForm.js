@@ -11,6 +11,7 @@ import {
 } from "../styled_components";
 
 const UpdateEventForm = props => {
+  const today = moment(new Date()).format("YYYY-MM-DD");
   const [editEvent, setEvent] = useState({
     event_name: "",
     date: "",
@@ -77,6 +78,7 @@ const UpdateEventForm = props => {
           required
           name="date"
           type="date"
+          min={today}
           value={editEvent.date}
           onChange={event => eventInputHandler(event)}
         />
