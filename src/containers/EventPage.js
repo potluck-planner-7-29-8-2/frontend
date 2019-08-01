@@ -48,6 +48,8 @@ const EventPage = ({ match, history }) => {
       });
     }
   }, [event.data.guests]);
+  
+  const eventTime = moment(event.data.time, 'HH:mm:ss a').format('LT');
 
   if (user_id === event.data.organizer_id) {
     //First case if for organizer, Second case is for guest
@@ -72,7 +74,7 @@ const EventPage = ({ match, history }) => {
             </List.Item>
             <List.Item>
               <List.Icon name="outline clock" />
-              {event.data.time}
+              {`${eventTime}`}
             </List.Item>
             <List.Item>
               <List.Icon name="newspaper outline" />
@@ -239,26 +241,12 @@ const EventPage = ({ match, history }) => {
             </List.Item>
             <List.Item>
               <List.Icon name="outline clock" />
-              {event.data.time}
+              {`${eventTime}`}
             </List.Item>
             <List.Item>
               <List.Icon name="newspaper outline" />
               {event.data.description}
             </List.Item>
-            <NavLink to={`${url}/update`}>
-              <Button color="twitter" style={{marginTop: '20px'}}>Edit Event</Button>
-            </NavLink>
-            <Button
-              color="twitter"
-              icon
-              onClick={e => {
-                e.preventDefault();
-                deleteEvent(dispatch, eventID);
-                history.push("/dashboard");
-              }}
-            >
-              <Icon name="trash alternate" />
-            </Button>
           </List>
          
         </Container>
@@ -275,30 +263,12 @@ const EventPage = ({ match, history }) => {
                     return (
                       <List.Item key={guest.user_id} style={{fontSize: '2rem'}}>
                         {guest.full_name} - Attending{" "}
-                        {guest.user_id === event.data.organizer_id ? null : (
-                          <Icon
-                            name="trash alternate"
-                            onClick={() =>
-                              removeGuest(dispatch, eventID, {
-                                data: { user_id: guest.user_id }
-                              })
-                            }
-                          />
-                        )}
                       </List.Item>
                     );
                   } else {
                     return (
                       <List.Item key={guest.user_id} style={{fontSize: '2rem'}}>
                         {guest.full_name} - Invited
-                        <Icon
-                          name="trash alternate"
-                          onClick={() =>
-                            removeGuest(dispatch, eventID, {
-                              data: { user_id: guest.user_id }
-                            })
-                          }
-                        />
                       </List.Item>
                     );
                   }
