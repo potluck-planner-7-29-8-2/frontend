@@ -46,8 +46,10 @@ export const SignUpContainer = styled(LoginContainer)`
   }
 
   .sign_up_error {
+    width: 100%;
     color: #dd2c00;
     font-size: ${({ theme }) => theme.tinyFont};
+    text-align: center;
   }
 
   @media ${device.mobileL} {
