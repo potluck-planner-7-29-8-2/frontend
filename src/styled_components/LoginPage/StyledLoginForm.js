@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled from "styled-components";
 
 export const StyledLoginForm = styled.form`
     width: 280px
@@ -9,11 +9,17 @@ export const StyledLoginForm = styled.form`
         margin-bottom: 37px;
     }
 
+    .errorMsg{
+        color: red;
+        width: 100%;
+       text-align: center;
+    }
+
     input {
         color: #555;
         line-height: 1.2;
-        font-size: ${({theme}) => theme.smallFont};
-        font-family: ${({theme}) => theme.poppinsFont};
+        font-size: ${({ theme }) => theme.smallFont};
+        font-family: ${({ theme }) => theme.poppinsFont};
         height: 45px;
         padding: 0 5px;
         outline: none;
@@ -25,7 +31,7 @@ export const StyledLoginForm = styled.form`
         }
 
         &:focus {
-            color: ${({theme}) => theme.blue};
+            color: ${({ theme }) => theme.blue};
 
             ::placeholder{
                 opacity: 0;
@@ -33,4 +39,4 @@ export const StyledLoginForm = styled.form`
         }
 
     }
-`
+`;
