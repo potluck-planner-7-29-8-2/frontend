@@ -57,7 +57,7 @@ export const StyledCardHeader = styled.div`
 `;
 
 export const LeaveButton = styled.button`
-  font-size: ${({ theme }) => theme.smallFont};
+  font-size: 1.5rem;
   font-family: ${({ theme }) => theme.poppinsFont};
   color: #fff;
   passing: 0 20px;

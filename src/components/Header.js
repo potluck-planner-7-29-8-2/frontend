@@ -17,8 +17,8 @@ const Header = () => {
         <img src={logo} alt="logo" /> Potluck Planner
       </HeaderTitle>
       <HeaderNavLinks>
-        <NavLink to="/dashboard/addEvent">Add New Event</NavLink>
         <NavLink to="/dashboard">Home</NavLink>
+        <NavLink to="/dashboard/addEvent">Add New Event</NavLink>
         <NavLink to="/" onClick={() => logout(dispatch)}>
           Log Out
         </NavLink>
