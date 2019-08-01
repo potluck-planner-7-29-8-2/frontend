@@ -22,11 +22,18 @@ export const SignUpContainer = styled(LoginContainer)`
 
     @media ${device.mobileL} {
       width: 100%;
+      padding: 0;
+      order: 2;
     }
   }
 
   .image {
     padding-right: 15px;
+
+    @media ${device.mobileL} {
+      flex-direction: column-reverse;
+    }
+
     img {
       max-width: 100%;
     }

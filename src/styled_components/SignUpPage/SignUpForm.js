@@ -18,8 +18,8 @@ export const StyledSignUpForm = styled.form`
   height: 100%;
 
   @media ${device.mobileL} {
-    border: 1px solid blue;
     width: 100%;
+    align-items: center;
   }
 
   .signup_input_and_label {
