@@ -6,13 +6,15 @@ import { getUsers } from "./../actions/usersActions";
 import { deleteEvent, getEvents } from "../actions/generalEventsActions";
 import { changeAttendance, removeGuest } from "../actions/specificEventActions";
 import moment from "moment";
+import { Popup } from "semantic-ui-react";
 import {
   StyledEventCard,
   StyledCardHeader,
   CardTop,
   CardDetails,
   CardCol,
-  CardButtons
+  CardButtons,
+  LeaveButton
 } from "../styled_components/Dashboard/EventCard";
 
 const EventCard = props => {
@@ -32,7 +34,7 @@ const EventCard = props => {
   useEffect(() => {
     getUsers(dispatch);
   }, [props.event, dispatch]);
-  
+
   let username;
   users.data.forEach(user => {
     if (user.user_id === organizer_id) {
@@ -57,14 +59,18 @@ const EventCard = props => {
               }}
               alt="Delete"
             >
-              <i className="trash alternate icon" />
+              <Popup
+                content="Delete Event"
+                trigger={<i className="trash alternate icon" />}
+                size="large"
+              />
             </button>
           )}
 
           {/*if a user isnt the organizer, show option to accept/decline. If accept, show option to leave */}
           {user_id !== organizer_id ? (
             props.event.attending ? (
-              <button
+              <LeaveButton
                 onClick={() =>
                   removeGuest(dispatch, event_id, {
                     data: { user_id: user_id }
@@ -73,7 +79,7 @@ const EventCard = props => {
                 alt="Leave"
               >
                 Leave Event
-              </button>
+              </LeaveButton>
             ) : (
               <div>
                 <button
@@ -84,7 +90,11 @@ const EventCard = props => {
                   }}
                   alt="Accept"
                 >
-                  <i className="check icon" />
+                  <Popup
+                    content="Accept"
+                    trigger={<i className="check icon" />}
+                    size="large"
+                  />
                 </button>
                 <button
                   onClick={() =>
@@ -94,7 +104,11 @@ const EventCard = props => {
                   }
                   alt="Decline"
                 >
-                  <i className="close icon" />
+                  <Popup
+                    content="Decline"
+                    trigger={<i className="close icon" />}
+                    size="large"
+                  />
                 </button>
               </div>
             )
@@ -103,14 +117,21 @@ const EventCard = props => {
       </CardTop>
       <CardDetails>
         <CardCol>
-          <div className="card-organizer">Organized By: {username}</div>
+          <div className="card-organizer">
+            <span className="card-field">Organized By:</span> {username}
+          </div>
           <div className="card-location">
-            Location: {city}, {state}
+            <span className="card-field">Location:</span> {city}, {state}
           </div>
         </CardCol>
         <CardCol>
-          <div className="card-date">Date: {moment(date).format("LL")}</div>
-          <div className="card-time">Time: {time}</div>
+          <div className="card-date">
+            <span className="card-field">Date:</span>{" "}
+            {moment(date).format("LL")}
+          </div>
+          <div className="card-time">
+            <span className="card-field">Time:</span> {time}
+          </div>
         </CardCol>
       </CardDetails>
     </StyledEventCard>
