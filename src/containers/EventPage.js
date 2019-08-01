@@ -48,9 +48,8 @@ const EventPage = ({ match, history }) => {
       });
     }
   }, [event.data.guests]);
-
-  const date = moment(event.data.time, 'hh:mm a')
-  console.log(event.data.time)
+  
+  const eventTime = moment(event.data.time, 'HH:mm:ss a').format('LT');
 
   if (user_id === event.data.organizer_id) {
     //First case if for organizer, Second case is for guest
@@ -75,7 +74,7 @@ const EventPage = ({ match, history }) => {
             </List.Item>
             <List.Item>
               <List.Icon name="outline clock" />
-              {moment(event.data.time).format('LT')}
+              {`${eventTime}`}
             </List.Item>
             <List.Item>
               <List.Icon name="newspaper outline" />
@@ -242,7 +241,7 @@ const EventPage = ({ match, history }) => {
             </List.Item>
             <List.Item>
               <List.Icon name="outline clock" />
-              {moment(event.data.time).format("LT")}
+              {`${eventTime}`}
             </List.Item>
             <List.Item>
               <List.Icon name="newspaper outline" />
