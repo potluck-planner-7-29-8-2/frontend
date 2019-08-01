@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { device } from "../device";
 
 export const UpdateContainer = styled.div`
   display: flex;
@@ -7,6 +8,10 @@ export const UpdateContainer = styled.div`
   justify-content: space-evenly;
   align-items: center;
   margin: 0 auto;
+
+  @media ${device.mobileL} {
+    width: 100%;
+  }
 `;
 
 export const UpdateLeftColumn = styled.div`
@@ -25,5 +30,9 @@ export const UpdateLeftColumn = styled.div`
     span {
       text-decoration: underline;
     }
+  }
+
+  @media ${device.mobileL} {
+    display: none;
   }
 `;

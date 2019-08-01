@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { device } from "../device";
 
 export const HeaderDiv = styled.div`
   height: 125px;
@@ -17,10 +18,10 @@ export const HeaderDiv = styled.div`
     width: 100px;
   }
 
-  @media (max-width: 600px) {
-    width: 100vw;
+  @media ${device.mobileL} {
     flex-direction: column;
     height: 100%;
+    width: 100%;
   }
 `;
 
@@ -31,10 +32,16 @@ export const HeaderTitle = styled.h1`
   align-items: center;
   width: 500px;
 
-  @media (max-width: 600px) {
+  @media ${device.mobileL} {
+    font-size: 4rem;
+    width: 100%;
     flex-direction: column;
     justify-content: space-between;
     height: 175px;
+  }
+
+  @media ${device.mobileS} {
+    font-size: 3.8rem;
   }
 `;
 
@@ -43,12 +50,16 @@ export const HeaderNavLinks = styled.div`
   display: flex;
   justify-content: space-between;
 
-  @media (max-width: 600px) {
+  @media ${device.mobileL} {
     flex-direction: column;
     justify-content: space-around;
     align-items: center;
     height: 150px;
-    margin: 10px;
+    margin: 10px 0;
     font-size: 3rem;
+  }
+
+  @media ${device.mobileS} {
+    width: 100%;
   }
 `;
