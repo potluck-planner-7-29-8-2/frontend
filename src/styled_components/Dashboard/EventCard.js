@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { device } from "../device";
 
 export const StyledEventCard = styled.div`
     width: 500px
@@ -20,8 +21,12 @@ export const StyledEventCard = styled.div`
       font-weight: 900;
     }  
     
-    @media (max-width: 600px) {
-      max-width: 425px;
+    @media ${device.mobileL} {
+      max-width: 100%;
+    }
+
+    @media ${device.mobileS} {
+      font-size: 1.5rem;
     }
     `;
 
@@ -55,6 +60,10 @@ export const CardButtons = styled.div`
 export const StyledCardHeader = styled.div`
   font-size: 3rem;
   text-align: center;
+
+  @media ${device.mobileS} {
+    font-size: 2.5rem;
+  }
 `;
 
 export const LeaveButton = styled.button`
@@ -72,5 +81,9 @@ export const LeaveButton = styled.button`
 
   &:hover {
     background: ${({ theme }) => theme.darkBlue};
+  }
+
+  @media ${device.mobileS} {
+    font-size: 1.2rem;
   }
 `;
