@@ -81,18 +81,18 @@ const EventPage = ({ match, history }) => {
               {event.data.description}
             </List.Item>
             <NavLink to={`${url}/update`}>
-              <Button color="twitter" style={{marginTop: '20px'}}>Edit Event</Button>
+              <Button size="huge" color="twitter" style={{marginTop: '20px'}}>Edit Event</Button>
             </NavLink>
             <Button
               color="twitter"
-              icon
+              size="huge"
               onClick={e => {
                 e.preventDefault();
                 deleteEvent(dispatch, eventID);
                 history.push("/dashboard");
               }}
             >
-              <Icon name="trash alternate" />
+              <Icon  name="trash alternate" />
             </Button>
           </List>
          
@@ -109,9 +109,10 @@ const EventPage = ({ match, history }) => {
                   if (guest.attending) {
                     return (
                       <List.Item key={guest.user_id} style={{fontSize: '2rem'}}>
-                        {guest.full_name} - Attending{" "}
+                        {guest.full_name} - Attending{" "} &nbsp;
                         {guest.user_id === event.data.organizer_id ? null : (
                           <Icon
+                          size='small'
                             name="trash alternate"
                             onClick={() =>
                               removeGuest(dispatch, eventID, {
@@ -125,8 +126,9 @@ const EventPage = ({ match, history }) => {
                   } else {
                     return (
                       <List.Item key={guest.user_id} style={{fontSize: '2rem'}}>
-                        {guest.full_name} - Invited
+                        {guest.full_name} - Invited &nbsp;
                         <Icon
+                        size='small'
                           name="trash alternate"
                           onClick={() =>
                             removeGuest(dispatch, eventID, {
@@ -161,7 +163,7 @@ const EventPage = ({ match, history }) => {
                         </div>
                         {/* Toggling between the name and unclaimed */}
                         <Icon
-                          size="large"
+                          size="small"
                           name={recipe.full_name ? "times" : "check"}
                           onClick={e => {
                             e.preventDefault();
@@ -179,7 +181,7 @@ const EventPage = ({ match, history }) => {
                         />
                         <Icon
                           name="trash alternate"
-                          size="large"
+                          size="small"
                           onClick={event => {
                             event.preventDefault();
                             removeRecipe(dispatch, parseInt(eventID), {
@@ -205,7 +207,7 @@ const EventPage = ({ match, history }) => {
                     placeholder="Add Dish"
                     onChange={e => recipeChangeHandler(e)}
                   />
-                  <Button size="mini" color='twitter' style={{marginTop: '10px', fontSize: '1rem'}} >
+                  <Button  size='large' color='twitter' style={{marginTop: '10px'}} >
                     Add Dish
                   </Button>
                 </form>
@@ -296,7 +298,7 @@ const EventPage = ({ match, history }) => {
                         </div>
                         {/* Toggling between the name and unclaimed */}
                         {!recipe.full_name || recipe.user_id === user_id ? <Icon
-                          size="large"
+                          size="small"
                           name={recipe.full_name ? "times" : "check"}
                           onClick={e => {
                             e.preventDefault();
