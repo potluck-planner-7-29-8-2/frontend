@@ -13,7 +13,8 @@ import {
   CardTop,
   CardDetails,
   CardCol,
-  CardButtons
+  CardButtons,
+  LeaveButton
 } from "../styled_components/Dashboard/EventCard";
 
 const EventCard = props => {
@@ -33,7 +34,7 @@ const EventCard = props => {
   useEffect(() => {
     getUsers(dispatch);
   }, [props.event, dispatch]);
-  
+
   let username;
   users.data.forEach(user => {
     if (user.user_id === organizer_id) {
@@ -69,7 +70,7 @@ const EventCard = props => {
           {/*if a user isnt the organizer, show option to accept/decline. If accept, show option to leave */}
           {user_id !== organizer_id ? (
             props.event.attending ? (
-              <button
+              <LeaveButton
                 onClick={() =>
                   removeGuest(dispatch, event_id, {
                     data: { user_id: user_id }
@@ -78,7 +79,7 @@ const EventCard = props => {
                 alt="Leave"
               >
                 Leave Event
-              </button>
+              </LeaveButton>
             ) : (
               <div>
                 <button

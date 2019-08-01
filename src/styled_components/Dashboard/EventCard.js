@@ -15,7 +15,6 @@ export const StyledEventCard = styled.div`
     background-color: #E6EBEE;
     margin: 10px auto;
 
-
     .card-field {
       font-weight: 900;
     }  
@@ -47,10 +46,30 @@ export const CardButtons = styled.div`
 
   button {
     outline: none;
+    background-color: ${({ theme }) => theme.blue};
+    border-radius: 5px;
   }
 `;
 
 export const StyledCardHeader = styled.div`
   font-size: 3rem;
   text-align: center;
+`;
+
+export const LeaveButton = styled.button`
+  font-size: ${({ theme }) => theme.smallFont};
+  font-family: ${({ theme }) => theme.poppinsFont};
+  color: #fff;
+  passing: 0 20px;
+  height: 35px;
+  width: 100%;
+  background: ${({ theme }) => theme.blue};
+  outline: none;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+
+  &:hover {
+    background: ${({ theme }) => theme.darkBlue};
+  }
 `;
