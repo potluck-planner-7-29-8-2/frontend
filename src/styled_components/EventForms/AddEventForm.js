@@ -7,7 +7,9 @@ export const StyledEventForm = styled.form`
   flex-direction: column;
   justify-content: space-evenly;
   height: 650px;
-  font-family: ${({ theme }) => theme.poppinsFont} legend {
+  font-family: ${({ theme }) => theme.poppinsFont};
+
+  legend {
     font-size: ${({ theme }) => theme.largeFont};
     text-align: center;
     color: ${({ theme }) => theme.darkBlue};

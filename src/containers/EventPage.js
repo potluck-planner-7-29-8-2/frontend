@@ -92,27 +92,39 @@ const EventPage = ({ match, history }) => {
           </List>
         </Container>
         <Card.Group>
-        <div
-          style={{
-            margin: "auto",
-            display: "flex",
-            justifyContent: "space-around",
-            width: "75%"
-          }}
-        >
-          
+          <div
+            style={{
+              margin: "auto",
+              display: "flex",
+              justifyContent: "space-around",
+              width: "75%"
+            }}
+          >
             <Card>
-      
+              <List>
+                {event.data.guests.map(guest => {
+                  //Mapping over guests to display
 
-            <List>
-              {event.data.guests.map(guest => {
-                //Mapping over guests to display
-
-                if (guest.attending) {
-                  return (
-                    <List.Item key={guest.user_id} size="tiny">
-                      {guest.full_name} - Attending{" "}
-                      {guest.user_id === event.data.organizer_id ? null : (
+                  if (guest.attending) {
+                    return (
+                      <List.Item key={guest.user_id} size="tiny">
+                        {guest.full_name} - Attending{" "}
+                        {guest.user_id === event.data.organizer_id ? null : (
+                          <Icon
+                            name="trash alternate"
+                            onClick={() =>
+                              removeGuest(dispatch, eventID, {
+                                data: { user_id: guest.user_id }
+                              })
+                            }
+                          />
+                        )}
+                      </List.Item>
+                    );
+                  } else {
+                    return (
+                      <List.Item key={guest.user_id}>
+                        {guest.full_name} - Invited
                         <Icon
                           name="trash alternate"
                           onClick={() =>
@@ -121,96 +133,81 @@ const EventPage = ({ match, history }) => {
                             })
                           }
                         />
-                      )}
-                    </List.Item>
-                  );
-                } else {
-                  return (
-                    <List.Item key={guest.user_id}>
-                      {guest.full_name} - Invited
-                      <Icon
-                        name="trash alternate"
-                        onClick={() =>
-                          removeGuest(dispatch, eventID, {
-                            data: { user_id: guest.user_id }
-                          })
-                        }
-                      />
-                      ) } >
-                    </List.Item>
-                  );
-                }
-              })}
-            </List>
-          </Card>
-          <Card>
-     
-            <List>
-              
-                  {" "}
-                  <h2>Food to bring:</h2>
-                  {typeof event.data.recipes === "string" ? (
-                    <List.Item>{event.data.recipes}</List.Item>
-                  ) : (
-                    event.data.recipes.map(recipe => {
-                      //Determine if Recipes is an array or string and return value
-                      return (
-                        <List.Item key={recipe.recipe_name}>
-                          <div><h3>{recipe.recipe_name} - {recipe.full_name ? recipe.full_name : ""}</h3>
-                           </div>
-                          {/* Toggling between the name and unclaimed */}
-                          <Icon size='large' name={recipe.full_name ? 'times' : 'check'}
-                            onClick={e => {
-                              e.preventDefault();
-                              recipe.full_name
-                                ? claimRecipe(dispatch, eventID, {
-                                    //Determine if a full_name is associated with recipe and return value, toggle between null and name to claim
-                                    recipe_name: recipe.recipe_name,
-                                    user_id: null
-                                  })
-                                : claimRecipe(dispatch, eventID, {
-                                    recipe_name: recipe.recipe_name,
-                                    user_id: user_id
-                                  });
-                            }}
-                          >
-                          </Icon>
-                          <Icon name='trash alternate'
-                          size='large'
-                            onClick={event => {
-                              event.preventDefault();
-                              removeRecipe(dispatch, parseInt(eventID), {
-                                data: { recipe_name: recipe.recipe_name }
-                              });
-                            }}
-                          >
-                          </Icon>
-                        </List.Item>
-                      );
-                    })
-                  )}
-                  <form
-                    onSubmit={e => {
-                      addRecipe(dispatch, eventID, createRecipe); //Creates recipe
-                      setRecipe({ recipe_name: "" });
-                      e.preventDefault();
-                    }}
-                  >
-                    <input
-                      type="text"
-                      value={createRecipe.recipe_name}
-                      placeholder="Recipe"
-                      onChange={e => recipeChangeHandler(e)}
-                    />
-                    <Button size="mini" primary>
-                      Add Recipe
-                    </Button>
-                  </form>
-                
-                  </List>
-          </Card>
-       
-        </div>
+                      </List.Item>
+                    );
+                  }
+                })}
+              </List>
+            </Card>
+            <Card>
+              <List>
+                {" "}
+                <h2>Food to bring:</h2>
+                {typeof event.data.recipes === "string" ? (
+                  <List.Item>{event.data.recipes}</List.Item>
+                ) : (
+                  event.data.recipes.map(recipe => {
+                    //Determine if Recipes is an array or string and return value
+                    return (
+                      <List.Item key={recipe.recipe_name}>
+                        <div>
+                          <h3>
+                            {recipe.recipe_name} -{" "}
+                            {recipe.full_name ? recipe.full_name : ""}
+                          </h3>
+                        </div>
+                        {/* Toggling between the name and unclaimed */}
+                        <Icon
+                          size="large"
+                          name={recipe.full_name ? "times" : "check"}
+                          onClick={e => {
+                            e.preventDefault();
+                            recipe.full_name
+                              ? claimRecipe(dispatch, eventID, {
+                                  //Determine if a full_name is associated with recipe and return value, toggle between null and name to claim
+                                  recipe_name: recipe.recipe_name,
+                                  user_id: null
+                                })
+                              : claimRecipe(dispatch, eventID, {
+                                  recipe_name: recipe.recipe_name,
+                                  user_id: user_id
+                                });
+                          }}
+                        />
+                        <Icon
+                          name="trash alternate"
+                          size="large"
+                          onClick={event => {
+                            event.preventDefault();
+                            removeRecipe(dispatch, parseInt(eventID), {
+                              data: { recipe_name: recipe.recipe_name }
+                            });
+                          }}
+                        />
+                      </List.Item>
+                    );
+                  })
+                )}
+                <form
+                  onSubmit={e => {
+                    addRecipe(dispatch, eventID, createRecipe); //Creates recipe
+                    setRecipe({ recipe_name: "" });
+                    e.preventDefault();
+                  }}
+                >
+                  <input
+                    type="text"
+                    value={createRecipe.recipe_name}
+                    placeholder="Recipe"
+                    onChange={e => recipeChangeHandler(e)}
+                  />
+                  <Button size="mini" primary>
+                    Add Recipe
+                  </Button>
+                </form>
+              </List>
+            </Card>
+          </div>
         </Card.Group>
 
         <Container textAlign="center">
