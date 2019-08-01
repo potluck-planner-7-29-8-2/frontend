@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { device } from "../device";
 
 export const EventListContainer = styled.div`
   width: 1200px;
@@ -14,8 +15,8 @@ export const EventListContainer = styled.div`
     color: ${({ theme }) => theme.darkBlue};
   }
 
-  @media (max-width: 600px) {
-    width: 500px;
+  @media ${device.mobileL} {
+    width: 95%;
     flex-direction: column;
   }
 `;
