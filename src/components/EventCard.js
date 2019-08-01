@@ -121,12 +121,17 @@ const EventCard = props => {
             <span className="card-field">Organized By:</span> {username}
           </div>
           <div className="card-location">
-            Location: {city}, {state}
+            <span className="card-field">Location:</span> {city}, {state}
           </div>
         </CardCol>
         <CardCol>
-          <div className="card-date">Date: {moment(date).format("LL")}</div>
-          <div className="card-time">Time: {time}</div>
+          <div className="card-date">
+            <span className="card-field">Date:</span>{" "}
+            {moment(date).format("LL")}
+          </div>
+          <div className="card-time">
+            <span className="card-field">Time:</span> {time}
+          </div>
         </CardCol>
       </CardDetails>
     </StyledEventCard>

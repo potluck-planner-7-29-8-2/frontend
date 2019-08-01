@@ -15,11 +15,12 @@ export const StyledEventCard = styled.div`
     background-color: #E6EBEE;
     margin: 10px auto;
 
+
     .card-field {
       font-weight: 900;
     }  
     
-    @media (max-width: 500px) {
+    @media (max-width: 600px) {
       max-width: 425px;
     }
     `;

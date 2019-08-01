@@ -20,7 +20,7 @@ export const HeaderDiv = styled.div`
   @media (max-width: 600px) {
     width: 100vw;
     flex-direction: column;
-    height: 200%;
+    height: 100%;
   }
 `;
 
@@ -33,20 +33,21 @@ export const HeaderTitle = styled.h1`
 
   @media (max-width: 600px) {
     flex-direction: column;
+    justify-content: space-between;
+    height: 175px;
   }
 `;
 
 export const HeaderNavLinks = styled.div`
-  width: 400px;
+  width: 350px;
   display: flex;
   justify-content: space-between;
 
   @media (max-width: 600px) {
     flex-direction: column;
     justify-content: space-around;
-    border: 1px solid blue;
+    align-items: center;
     height: 150px;
-    width: 50%;
     margin: 10px;
     font-size: 3rem;
   }

@@ -14,8 +14,8 @@ export const EventListContainer = styled.div`
     color: ${({ theme }) => theme.darkBlue};
   }
 
-  @media (max-width: 500px) {
+  @media (max-width: 600px) {
+    width: 500px;
     flex-direction: column;
-    flex-wrap: nowrap;
   }
 `;
