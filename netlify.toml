@@ -1,0 +1,8 @@
+[build]
+base = 'FRONTEND/'
+publish = 'FRONTEND/build/'
+
+[[redirects]]
+from = '/*'
+to = '/index.html'
+status = 200

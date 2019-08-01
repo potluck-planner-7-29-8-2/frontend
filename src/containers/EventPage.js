@@ -91,21 +91,19 @@ const EventPage = ({ match, history }) => {
             </Button>
           </List>
         </Container>
+        <Card.Group>
         <div
           style={{
             margin: "auto",
             display: "flex",
-            justifyContent: "space-between",
+            justifyContent: "space-around",
             width: "75%"
           }}
         >
-          <div
-            style={{
-              display: "flex",
-              justifyContent: "space-around",
-              width: "50%"
-            }}
-          >
+          
+            <Card>
+      
+
             <List>
               {event.data.guests.map(guest => {
                 //Mapping over guests to display
@@ -144,14 +142,9 @@ const EventPage = ({ match, history }) => {
                 }
               })}
             </List>
-          </div>
-          <div
-            style={{
-              display: "flex",
-              justifyContent: "space-around",
-              width: "50%"
-            }}
-          >
+          </Card>
+          <Card>
+     
             <List>
               
                   {" "}
@@ -215,8 +208,10 @@ const EventPage = ({ match, history }) => {
                   </form>
                 
                   </List>
-          </div>
+          </Card>
+       
         </div>
+        </Card.Group>
 
         <Container textAlign="center">
           <Guests eventID={eventID} />
