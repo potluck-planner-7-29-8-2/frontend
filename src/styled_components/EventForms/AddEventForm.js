@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { device } from "../device";
 
 export const StyledEventForm = styled.form`
   width: 800px;
@@ -31,6 +32,10 @@ export const StyledEventForm = styled.form`
       background: ${({ theme }) => theme.darkBlue};
     }
   }
+
+  @media ${device.mobileL} {
+    width: 100%;
+  }
 `;
 
 export const StyledInput = styled.input`
@@ -59,5 +64,9 @@ export const StyledInput = styled.input`
   }
   &:valid {
     background: rgb(232, 240, 254);
+  }
+
+  @media ${device.mobileL} {
+    width: 90%;
   }
 `;
