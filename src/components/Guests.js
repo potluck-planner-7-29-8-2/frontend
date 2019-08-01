@@ -39,27 +39,25 @@ const Guests = props => {
       >
         <input
           value={userSearch}
-          style={{lineHeight: '2rem'}}
+          style={{lineHeight: '3rem'}}
           placeholder="Search users"
           onChange={event => searchHandler(event)}
         />
-        <Button color='twitter'>Submit</Button>
+        <Button size='huge' color='twitter'>Submit</Button>
       </form>
       <List>
         {displayedUsers.map(user => {
           return (
             <List.Item>
-            <Label key={user.user_id} size="massive">
-              <Icon name='user' /> {user.full_name} &nbsp;
-           
-              <Icon name='plus' size='large' onClick={e => {
+            <Label key={user.user_id} size="massive" onClick={e => {
                   e.preventDefault();
                   addGuest(dispatch, props.eventID, {
                     user_id: user.user_id,
                     attending: false
                   });
-                }} /> <br />
-                   {user.username}
+                }}>
+              <Icon name='user' /> {user.full_name} <br /> 
+                  <p style={{color: '#c2bfb8'}}> {user.username}</p>
               </Label>
               </List.Item>
            
