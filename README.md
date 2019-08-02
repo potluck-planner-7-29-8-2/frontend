@@ -14,13 +14,13 @@ Potluck Planner is an app that serves as an all in one solution to coordinating 
 
 ## Team
 
-| Members       | GitHub                        |
-| ------------- | ----------------------------- |
-| Ang Xu        | Backend Developer             |
-| Ethan Hickey  | Front End Framework Developer |
-| Tommy Coleman | Front End Developer           |
-| May Ng        | Front End Developer           |
-| Devin Dias    | Web UI Developer              |
+| Members       | Role                          | GitHub                            |
+| ------------- | ----------------------------- | --------------------------------- |
+| Ang Xu        | Backend Developer             | https://github.com/Labyrinth65    |
+| Ethan Hickey  | Front End Framework Developer | https://github.com/ehickey08      |
+| Tommy Coleman | Front End Developer           | https://github.com/tommycoleman87 |
+| May Ng        | Front End Developer           | https://github.com/mngmay         |
+| Devin Dias    | Web UI Developer              | https://github.com/devin5         |
 
 ## Front-End Technologies Used
 
