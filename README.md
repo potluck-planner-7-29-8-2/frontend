@@ -26,6 +26,6 @@ Potluck Planner is an app that serves as an all in one solution to coordinating 
 
 - [React](https://reactjs.org/) - This app was built using React
 - [Semantic-UI](https://semantic-ui.com/) - Component library
-- [Styled Components](https://www.styled-components.com/) - Custome styling components library
+- [Styled Components](https://www.styled-components.com/) - Custom styling components library
 - [Moment Timezone](https://momentjs.com/timezone/) - Formatting Date & Time
-- [axios](https://www.axios.com/) - Makking HTTP requests to custom heroku API
+- [axios](https://www.axios.com/) - Making HTTP requests to custom heroku API
