@@ -14,7 +14,7 @@ const Header = () => {
   return (
     <HeaderDiv>
       <HeaderTitle>
-        <img src={logo} alt="logo" /> Potluck Planner
+        <a href='https://potluck-planner-7-29-8-2.github.io/Web_UI/aboutus.html'><img src={logo} alt="logo" /></a> Potluck Planner
       </HeaderTitle>
       <HeaderNavLinks>
         <NavLink to="/dashboard">Home</NavLink>
@@ -22,6 +22,7 @@ const Header = () => {
         <NavLink to="/" onClick={() => logout(dispatch)}>
           Log Out
         </NavLink>
+        
       </HeaderNavLinks>
     </HeaderDiv>
   );
