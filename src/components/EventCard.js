@@ -47,13 +47,10 @@ const EventCard = props => {
         </NavLink>
 
         <CardButtons>
-          {/*if a user is the organizer, only show delete button*/}
-          {user_id === organizer_id && (
+          {/*organizers see delete, guests see option to accept, decline, or leave*/}
+          {user_id === organizer_id ? (
             <OrganizerButtons event={props.event} dispatch={dispatch} />
-          )}
-
-          {/*if a user isnt the organizer, show option to accept/decline. If accept, show option to leave */}
-          {user_id !== organizer_id && (
+          ) : (
             <GuestButtons
               event={props.event}
               dispatch={dispatch}
